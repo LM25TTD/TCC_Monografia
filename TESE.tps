@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=788
-NormalPos.bottom=250
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=TESE.tex
 
 [Frame0_View0,0]
 TopLine=0
-Cursor=262
+Cursor=406
 
 [SessionInfo]
 FrameCount=1
