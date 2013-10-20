@@ -22,6 +22,9 @@
 \usepackage{setspace}
 \usepackage{amsmath}
 \usepackage{lscape}
+\usepackage[backend=biber]{biblatex}
+
+\addbibresource{tex_parts/tese.bib}
 
 \renewcommand{\topfraction}{1}
 \renewcommand{\bottomfraction}{1}
@@ -291,9 +294,8 @@ também aqueles que trilharam comigo este caminho:
 %\input{tex_parts/CAP7.TEX}
 
 % incluir referencias
-\bibliography{tex_parts/tese}
-\bibliographystyle{apa}
 
+\printbibliography
 
 %\include{anexos}
 

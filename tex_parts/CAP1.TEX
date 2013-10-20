@@ -1,58 +1,64 @@
-\chapter {Como Escrever Uma monografia}
-\label{cap:como escrever uma monografia}
+\chapter {Introdu\c{c}\~{a}o}
+\label{cap:introducao}
 
-\section{Ao Candidato}
+\section{Descri\c{c}\~{a}o do Problema}
 
-O texto abaixo foi livremente adaptado de \cite{COMER2010} para ajudar os alunos a escreverem suas monografias. 
+A quantidade de roubos e furtos de veículos no Brasil vem avançando de forma 
+significativa durante os últimos anos, aumentando proporcionalmente ao número 
+de automóveis em circulação. Informações das secretarias estaduais de 
+segurança pública do Detran e do Denatran, mostram que as cidades do Rio de Janeiro, São Paulo e Salvador são as que ocupam, respectivamente, os três primeiros lugares em número de roubos e furtos no país.
 
-Se você está se preparando para escrever uma monografia em uma área experimental da Engenharia da Computação. 
-A menos que você tenha escrito muitos documentos formais antes, você tem uma surpresa: isso é difícil!
+Segundo a reportagem de \textcite{borges:2011}, em média, 150 carros são 
+roubados ou furtados por dia no Rio de Janeiro, quatro por dia em São Paulo e 
+2,8 por dia em Salvador. Para a polícia, os grupos que comandam o esquema de
+roubo e furto articulam as ações de dentro de presídios e possuem ramificações
+em vários estados. 
 
-Existem dois caminhos possíveis para o sucesso:
+A principal utilidade dos automóveis sinistrados é a transformação em dublês (ou clones), passando por alterações no chassi, placas e outros dados para venda ilegal em outros estados, é claro que parte destes serve para a prática de crimes, como o transporte de quadrilhas durante assaltos e o transporte de drogas.
 
-\begin{itemize}
-	\item Planejamento
-	
-	Poucas pessoas pegam esse caminho. As poucas que pegam, deixam a universidade tão rápido, 
-	que eles malmente são notados. Se você quer fazer a impressão final e ter uma longa carreira como um 
-	estudante de graduação, não escolha este caminho.
-	
-	\item Perseverança
-	
-	Tudo que você tem que fazer é sobreviver à sua banca julgadora. 
-	A boa notícia é que eles são bem mais velhos que você, assim você pode adivinhar quem vai eventualmente 
-	``expirar''  primeiro (morrer).
-	A má notícia é que é que eles são mais experientes nesse jogo (afinal, eles perseveraram na frente da banca deles, não!?).
-	
-\end{itemize}
-	
-Aqui estão algumas linhas-guia que podem ajudá-lo quando você finalmente levar a sério escrever. 
-A lista segue infinitamente; você provavelmente não vai querer ler isso tudo de uma vez. Mas, por favor, leia isso antes de 
-escrever qualquer coisa.
+O maior problema relacionado ao crime é o risco de vida que os ocupantes do veículo são expostos, principalmente quando se há uma tentativa reação contra os criminosos, que ocorre pela incerteza se o bem perdido será recuperado pelas autoridades e em boas condições.
+
+Diante deste cenário, é necessária uma solução que permita a geolocalização em tempo real contando com mecanismos de bloqueio que podem ser controlados remotamente, o que geraria tranquilidade aos que sofrerem roubo/furto de dos seus veículos, eliminando a ânsia de reação em um primeiro momento.
 
 \hfill
 
-\section{A Idéia Geral}	
+\section{Trabalhos Relacionados}	
 
-\begin{enumerate}
-	
-	\item Uma monografia é um documento formal onde o aluno descreve a realização de um trabalho técnico onde usou as técnicas e conceitos aprendidos durante o curso de 	graduação.
+Durante o levantamento bibliográfico realizado para obtenção de trabalhos correlatos, foram encontrados três projetos de relevância na categoria de alarme automotivo inteligente, alguns utilizando inclusive comunicação remota inter-dispositivos e hardware open-source.
 
-	\item Em geral, toda afirmação em uma monografia deve ser embasada ou por uma referência em literatura científica publicada ou por um trabalho original.
-	Acima de tudo, uma monografia não repete os detalhes do pensamento crítico e análises encontradas nas fontes publicadas; usa o resultado como fato e 
-	referencia o leitor às fontes para mais detalhes. 
+\textcite{ivan:2007} descreve um projeto de sistema de alarme automotivo 
+cuja principal funcionalidade é a detecção de um evento sonoro no interior do veículo e, realizando as conversões necessárias, sinaliza a um micro controlador o evento ocorrido. O micro controlador por sua vez está programado para acionar um dispositivo que realiza uma chamada telefônica destinada ao aparelho celular do proprietário do veículo de modo a alertá-lo sobre a anomalia, o objetivo geral é a detecção do choro de uma criança ou barulho de um animal esquecido dentro do veículo. 
 
-	\item Cada sentença em uma monografia deve ser completa e correta gramaticalmente. Além do mais, a monografia deve satisfazer estritamente as 
-	regras da gramática formal (e.x., sem contrações, sem coloquialismo, sem pronúncias erradas, sem jargão técnico indefinido, sem piadas escondidas e sem gírias,
-	mesmo quando tais termos ou frases são de comum uso na língua falada). Realmente, a escrita de uma monografia deve ser um cristal limpo.
-	Sombras de significados importam; a terminologia e a prosa devem fazer uma fina distinção. As palavras devem carregar exatamente o sentido pretendido, nada mais e nada 	menos.
+Em toda extensão do trabalho verificou-se uma abordagem bastante prática, com 
+experimentos e construção de circuitos, além da exibição do funcionamento do 
+protótipo, além disso, foi realizado um fundamental teórico bastante sucinto 
+que se focou principalmente nos tipos de microfone. O ponto negativo ficou 
+por conta da ausência de modelagem do problema, não existem diagramas UML ou 
+similares que representem as funcionalidades, projeto de classes e sequência, 
+que são essenciais para qualidade do projeto.
 
-	\item Cada afirmação em uma monografia deve ser correta e defensível no sentido lógico e científico. Acima de tudo, as discussões em uma monografia devem satisfazer
-	a maioria das estritas regras de lógica aplicada à matemática e Engenharia.                       
+Em sua monografia, \textcite{leandro:2010} propõe um sistema de segurança veicular para ser integrado a um alarme já existente no veículo, este sistema objetiva além de avisar ao proprietário via SMS/GPRS quando o alarme comum for acionado, detectar quando algum objeto, criança ou animal de estimação for esquecido sobre o banco verificando a presença do peso sobre este. 
 
-\end{enumerate}
+O autor promove uma explanação sobre a motivação do trabalho baseado em dados jornalísticos e casos verídicos de esquecimento de crianças pelos pais e quais as consequências biológicas trazidas a um indivíduo se exposto às condições ambientais semelhantes a de um carro fechado exposto ao sol.
 
-\section{O que se Deve Aprender do Exercício}
+O projeto se baseia na plataforma Arduino, utilizando a filisofia de hardware 
+livre, modularização de componentes e desenvolvimento simplificado de protótipos 
+para posterior produtização, o autor optou pela utilização de uma placa Arduino 
+Mega com módulo externo. 
+
+Foram disponibilizados os passos realizados no projeto, um modelo esquemático de testes além de anexar o código fonte aplicado na placa controladora todavia há a ausência de esquemas de modelagem, principalmente baseados em UML, além da falta do esquema eletrônico geral, o que facilitaria bastante a análise das limitações e aplicação de possíveis melhorias em projetos futuros.
+
+O trabalho de \textcite{alfonso:2006} se refere à criação de um sistema de autenticação, onde o usuário recebe uma mensagem desafio em um módulo portátil e a responde, para assim poder utilizar o veículo (funcionamento do motor e partes elétricas). Uma das funções deste dispositivo é o desligamento do veículo caso a central não detecte que o módulo portátil nas proximidades do veículo, se assemelhando às técnicas utilizadas nos alarmes veiculares mais modernos.
+
+Por modularizar os componentes e estes se comunicarem utilizando radiofrequência,
+se fez necessária a utilização de criptografia para que as mensagens trocadas não 
+fossem interceptadas, interpretadas e posteriormente injetadas, em uma tentativa 
+de fraudar o sistema. 
+
+Apesar de descrever textualmente de modo detalhado cada módulo desenvolvido, no decorrer o trabalho não traz modelagem de requisitos e de projeto baseada em UML, apenas diagramas resultantes da fase de implementação, além disso, uma interface mais amigável com o usuário seria muito bem vinda, neste ponto, o desenvolvimento de trabalhos futuros substituindo o módulo portátil por um smartphone seria promissor.
+
+
+\section{Contribui\c{c}\~{o}es}
 
 \begin{enumerate}
 
