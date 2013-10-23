@@ -1,59 +1,67 @@
-﻿\chapter{Manual do Trabalho de Conclusão de Curso - TCC - I e II}
-\label{cap:manual TCC}
+﻿\chapter{Fundamenta\c{c}\~{a}o Te\'{o}rica}
+\label{cap:fundamentacao teorica}
 
 
-\section{Trabalho de Conclusão de Curso (TCC)}
+\section{Sistema Embarcado}
 
-O TCC é o último e mais importante trabalho de disciplina a ser desenvolvido pelo aluno, individualmente, 
-no Curso de Graduação de Engenharia da Computação. O aluno, orientado por um professor, terá oportunidade de demonstrar e por em prática 
-os conhecimentos adquiridos durante o curso, além de aperfeiçoar e comprovar o aprendizado teórico e metodologias que lhe foram ensinadas.
+Segundo \textcite{Wolf:2001} um sistema de computação embarcado é qualquer dispositivo que inclui um computador programável, o qual não é direcionado para resolver problemas de propósito geral, mas sim uma situação ou necessidade específica, operando geralmente com recursos limitados e executando algoritmos para resposta em tempo real.
 
-O TCC consiste em duas etapas a serem realizadas em semestres distintos:
+A diferenciação de um sistema embarcado de um sistema de propósito geral se dá por algumas características:
+\begin{itemize}
+	\item \emph{Tempo real}: a resposta do sistema deve ser dada em um tempo limite. Caso a resposta venha fora do limite de tempo aceitável, o sistema pode ser tornar instável, parar de funcionar ou realizar ações fora do previsto gerando danos catastróficos. 
+	\item \emph{Diferentes taxas de entrada de dados}: um sistema embarcado pode receber diversas entradas de dados com velocidades diferentes, ele deve tratar esta situação e oferecer uma saída sincronizada e sem perdas.
+	\item \emph{Custo de produção}: todos os componentes de hardware devem ser escolhidos para minimizar o custo de produção, por isso, um projeto cuidadosamente elaborado se faz necessário.
+	\item \emph{Consumo de energia}: conjunto hardware/software dever ser projetado de maneira tal que o consumo de recursos energéticos seja sempre o mínimo possível. Um elevado consumo influi tanto no custo de produção  quanto no custo de operação.
+\end{itemize}
 
-	\begin{enumerate}
-		\item \textbf{TCC}-I: Elaboração e defesa da monografia.
-		O aluno deve documentar, na forma de monografia, toda a fundamentação teórica e modelagem (se aplicável), de acordo com o tema proposto.
-		
-		\item \textbf{TCC}-II: Após aprovação do TCC-I o aluno deverá concluir a monografia ao implementar a modelagem proposta ou outro instrumento que possibilite a 			avaliação do trabalho face aos objetivos definidos. A defesa inclui a documentação finalizada e demonstração do que foi desenvolvido (implementação).
-	\end{enumerate}
-	
-O TCC, do curso de Engenharia da Computação, corresponde a um total de quatro (04) créditos, a serem efetivados mediante matrícula, sendo que dois (02) créditos serão cumpridos na disciplina TCC-I e dois (02) créditos na disciplina  TCC-II. 
+Um exemplo de sistema embarcado a se considerar é um roteador wireless conforme a figura 2.1, pois possui as seguintes características:
+
+\begin{itemize}
+	\item É um computador de propósito específico: realiza funcões de roteamento, controle de conexões, controle do sinal de rádio e implementa seviços da camada física a camada de rede (modelo OSI);
+	\item Opera em tempo real: todos os pacotes que passam pelo roteador deve ser processados em tempo hábil, caso contrário a comunicação entre dispositivos que estão conectados a ele se torna impraticável;
+	\item Custo de produção resuzido: São utilizados processadores de custo reduzido, quantidade de memória limitada e outros componentes de menor custo a fim de reduzir o preço total e facilitar a produção em massa.
+	\item Baixo consumo de energia: O conjunto hardware/software opera com baixíssimo consumo de energia a fim de não impactar na conta de energia do consumidor, afinal é um produto que funciona, em geral, 24 horas por dia.
+\end{itemize}
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/embarcado_exemplo.jpg}
+			\caption{Um roteador wireless é um sistema embarcado}
+			\label{1}
+	\end{figure}
 
 
-\subsection{Do Professor da Disciplina}
+\hfill
 
-O TCC funciona como uma disciplina e, portanto, possui um professor responsável, o qual encaminha para avaliação os trabalhos finais (TCC-I e TCC-II) e controla as notas finais. 
+\section{Projeto de Sistemas Embarcados}
 
-Compete ao professor da disciplina:
+Modelos para projeto de sistemas embarcados têm sido propostos ao longo dos anos, como é caso do Embedded UML. De acordo com \textcite{Martin:2001}, autor do modelo, este é um profile UML que representa a síntese de várias ideias discutidas pela comunidade que adota UML no projeto de aplicações de tempo real. 
 
-	\begin{itemize}
-		\item Estabelecer reunião inicial com os alunos e professores para expor as normas do TCC e dar-lhes ciência desse documento
+Foram selecionadas as melhores práticas de análise e especificação de requisitos para sistemas os quais necessitam que hardware e software sejam co-projetados, introduzido um conceito de mapeamento da plataforma para gerar uma implementação otimizada de hardware e software, uma vez que conforme \textcite{Wolf:2001}, o custo de produção e o consumo de recursos energéticos deve ser o mínimo possível.
 
-		\item Divulgar e fazer cumprir as normas referentes ao TCC
-		
-		\item Divulgar o calendário referente às atividades do TCC
+Esta metodologia fornece uma abordagem que permite o desenvolvimento de ferramentas de análise automatizada, simulação, síntese e geração de código equanto se define um padrão UML para embarcados.
 
-		\item Penalizar o aluno pelo não cumprimento dos prazos determinados no calendário de atividades do TCC; (0,2 pts, na média final, por dia de atraso na entrega 		da proposta e monografia)
-		
-		\item Divulgar aos alunos a relação de professores e suas respectivas linhas de pesquisa para exercerem a atividade de orientação
-		
-		\item Coordenar a formação das duplas orientador/orientando
+O próprio \textcite{Martin:2001}, propõe em um segundo artigo, após utilizar UML para modelagem de sistemas embarcados, novas extensões UML que cobrem lacunas não atendidas pela linguagem, como suporte a modelagem de hardware baseada em VHDL (que é uma abordagem dependente de plataforma).
 
-		\intem Coordenar o processo de substituição orientador/orientando
-		
-		\item Coordenar o processo de constituição das bancas e definir o cronograma de apresentação dos trabalhos
-		
-		\item Encaminhar aos membros da banca o respectivo trabalho para avaliação
-		
-		\item Convidar, quando possível, um avaliador externo para integrar a banca
-		
-		\item Providenciar os documentos necessários ao processo de avaliação
+É claro que na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sitema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
 
-		\item Providenciar as declarações aos professores participantes da banca, bem como do orientador
-		
-		\item Encaminhar uma cópia definitiva do trabalho (TCC-II) à Biblioteca
-		
-	\end{itemize}
+\textcite{Wolf:2001} propõe uma abstração em alto nível dos principais passos no projeto de sistemas embarcados, são estes do topo à base:
+
+\begin{itemize}
+	\item \emph{Requisitos}: onde são obtidas informações sobre o que se desenvolver no sistema, obter os requisitos esperados pelo cliente/usuário e extrair apenas o que for importante para o projeto levando requisitos funcionais e não funcionais são levados em conta.
+	\item \emph{Especificação}: etapa onde se realiza a mapeamento dos requisitos funcionais de um sistema embarcado, quais funções ele deve fornecer ao usuário. Os Casos de Uso da UML são um meio de documentar os requisitos.
+	\item \emph{Projeto Arquitetural}: nesta etapa é feita a quebra do sistema em componentes de alto nível e como eles se integram e se comunicam. A UML oferece o Diagrama de Componentes para esta finalidade.
+	\item \emph{Projeto de componentes de hardware e software}: para cada componente definido, são mapeados seus atributos e métodos, levando a uma abordagem utilizando Orientação a Objetos. O Diagrama de Classes da UML permite fazer este tipo de representação.
+	 \item \emph{Integração do sistema}: após a construção de cada componente de hardware e implementação dos componentes de software, estes são integrados seguindo o projeto.
+\end{itemize}
+\textcite{Marwedel:2001}  inclui etapas de teste dentro das etapas de projeto, designando o fluxo como modelo-V. As etapas de teste são: 
+
+\begin{itemize}
+	\item \emph{Testes unitários}: Teste individual para cada unidade mínima funcional do sistema, com isto é possível verificar o comportamento de cada parte e, em caso de defeitos, corrigi-los antes de qualquer integração, poupando tempo de desenvolvimento uma vez que seria dispendioso, depois do sistema pronto, rastrear e econtrar o problema.
+	\item \emph{Testes de integração}: Verificação da comunicação entre os diferentes componentes quanto interligados. Esta etapa é válida pois mesmo que os componentes funcionem individualmente e separados, sempre que se integram partes um novo comportamento é gerado, o que pode levar a erros inesperados.
+	\item \emph{Aceitação e Uso}: Verifica se o comportamento do sistema está dentro do esperado nas especificações, é um teste do sistema completo e em funcionamento, parar confirmação que todos os requisitos elicitados estão sendo atendidos.
+\end{itemize}
+
 
 
 \subsection{Professor Orientador}
