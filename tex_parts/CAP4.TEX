@@ -1,9 +1,61 @@
-\chapter{Título do Quarto Capítulo}
-\label{cap:titulo do quarto capitulo}
+\chapter{Resultados e Discussões}
+\label{cap:resultados e discussoes}
 
-Vivamus ultricies tincidunt lacus ut pharetra. Sed fringilla hendrerit tempus. Suspendisse potenti. Cras hendrerit tortor ac est condimentum pellentesque. Morbi pretium lectus nec sapien laoreet eu malesuada diam adipiscing. Aliquam nisl ipsum, fermentum ut aliquam nec, varius sit amet nisi. Pellentesque interdum cursus malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam malesuada bibendum tortor, ut bibendum lorem varius eu. In eros orci, volutpat ut facilisis sit amet, commodo quis nulla.
+\section{Módulo Web (WebManager) - Testes de Carga}
 
-Sed lectus metus, mollis nec vulputate id, imperdiet eget urna. Nam ut dolor at metus venenatis suscipit et in ligula. In hac habitasse platea dictumst. Mauris scelerisque dolor sed nisl mattis accumsan. Aliquam vulputate placerat feugiat. Pellentesque faucibus neque mi. Etiam porttitor varius tempus. Mauris varius porttitor posuere. Pellentesque iaculis imperdiet lobortis. Sed vulputate purus nec felis rutrum molestie.
+A fim de validar o comportamento do aplicação Web durante um alto número de requisições, caso que ocorre quando muitos módulos embarcados enviam requests HTTP no mesmo espaço de tempo (simulando uma situação de crescimento da plataforma), a ferramenta para testes de performance Apache JMeter foi utilizada para gerar o tráfego e o software VisualVM serviu para coletar métricas da aplicação como consumo de memória e uso da CPU.
+
+Uma quantidade de 200 módulos concorrendo aos recursos do serviro foi aplicada, gerando resultados satisfatórios, com o consumo de memória em picos de 750 MB com gráfico de comportamento serrilhado, ou seja, liberação de memória não utilizada e ausência de leaks, além disso o consumo máximo de CPU ficou em torno de 30 \%, uma margem segura. A figura 16 mosta o comportamento serrilhado do gráfico de consumo de memória, demonstrando a ausência de leaks e atuação correta do Garbage Collector.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15.00cm\textwidth]{figures/teste_heap.png}
+	\caption{Gráfico do consumo de memória heap}
+	\label{Figura 16}
+\end{figure}
+
+O consumo de CPU mesmo com a ação do Garbage Collector ficou em margens coerentes de acordo com o gráfico da figura 17.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15.00cm\textwidth]{figures/teste_cpu.png}
+	\caption{Gráfico do uso de CPU}
+	\label{Figura 17}
+\end{figure}
+
+\section{Resultados}
+
+Os testes do protótipo incluem aplicação do módulo veicular em um automóvel para validar seu comportamento. Foi utilizado um veículo da marca Fiat modelo Palio Fire ano 2002, no qual o módulo embarcado foi acoplado no circuito de alimentação da bomba de combustível para efetuar o corte de alimentação no caso da solicitação de bloqueio, resultando no desligamento do veículo. Os testes de rastreamento com automotor em movimento, bloqueio e desbloqueio foram realizados com sucesso e registrados em vídeo. A figura 18 mostra o protótipo integrado ao circuito elétrico do automóvel de testes.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=12.00cm\textwidth]{figures/integracao.jpg}
+	\caption{Integração do protótipo}
+	\label{Figura 18}
+\end{figure}
+
+Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seções de coleta mostram um espaço aproximado de um minuto entre as inserções na base de dados, tempo previsto pois os parâmetros de delay setados no firmware do módulo embarcado foram calculados para resultar neste intervalo. A figura 19 mostra as linhas inseridas no banco de dados durante o período de testes.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=12.00cm\textwidth]{figures/dados_coletados.png}
+	\caption{Dados coletados}
+	\label{Figura 19}
+\end{figure}
+
+\vspace{200pt}
+
+
+\section{Próximos Passos}
+
+\begin{itemize}
+	\item Finalizar a implementação da UI.
+	\item Verificar a possibilidade de implementação de caminho feito pelo veículo.
+	\item Verificar possibilidade de comunicação assíncrona entre módulo e webmanager.
+	\item Melhorar eficiência do uso do módulo GSM.	
+\end{itemize}
+
+
 
 
 \section{Algoritmos}
@@ -13,29 +65,41 @@ Sed lectus metus, mollis nec vulputate id, imperdiet eget urna. Nam ut dolor at 
 \fontsize{9pt}{9pt}\selectfont
       \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/arquivo.cpp}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded.cpp}
    \end{boxit}
-   \caption{\it Código C++}
-   \label{code:meu_codigo}
+   \caption{\it Código do Módulo Embarcado Parte 1}
+   \label{code:embedded}
 \end{codigo}
-
-
-Nunc at fringilla dui. Pellentesque id tortor eu libero auctor rhoncus id vel velit. Duis auctor laoreet turpis, sed commodo tellus sollicitudin sit amet. Phasellus quis purus consectetur turpis hendrerit pretium eget in velit. Cras dignissim est vel mi malesuada a imperdiet velit condimentum. Vivamus ultrices diam non urna aliquet hendrerit. Sed lobortis, mauris quis egestas ullamcorper, nunc nulla auctor nulla, eu rutrum velit velit in nulla. Etiam lectus augue, pellentesque et porta at, pharetra id lectus. Duis eleifend eleifend mauris, nec mollis mauris vehicula nec. Nam sed ipsum ut massa lacinia vestibulum. Duis vitae sapien a lectus aliquam luctus eget sit amet nunc. Etiam a ipsum auctor tortor condimentum consectetur. Aliquam vestibulum libero sit amet nulla auctor aliquet. Sed laoreet imperdiet tellus non vulputate. Vivamus tristique ipsum vel metus venenatis in laoreet tortor hendrerit. Suspendisse potenti. Aenean tincidunt molestie libero sit amet porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
 \fontsize{9pt}{9pt}\selectfont
-     \begin{boxit}  % coloca o código dentro de um Box
+      \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/calculadora.erl}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded2.cpp}
    \end{boxit}
-   \caption{\it Código Erlang}
-   \label{code:funcoes}
+   \caption{\it Código do Módulo Embarcado Parte 2}
+   \label{code:embedded2}
 \end{codigo}
 
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded3.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 3}
+   \label{code:embedded3}
+\end{codigo}
 
-Cras nec quam mi, ut mattis ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla auctor dictum. Nam hendrerit sapien sed massa consequat rutrum. Nullam congue, augue sed commodo malesuada, lectus nulla mollis magna, eget semper risus nisl eget elit. Duis vitae hendrerit massa. In a odio nunc, sit amet mollis dolor. In accumsan suscipit dui, a vestibulum diam condimentum ullamcorper. Etiam ut quam arcu, ac tristique ante. Vestibulum imperdiet elit non ante tristique accumsan. Donec vulputate fringilla tempor. Proin porttitor nisi nisi. Fusce vel ullamcorper orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-
-Vivamus ultricies tincidunt lacus ut pharetra. Sed fringilla hendrerit tempus. Suspendisse potenti. Cras hendrerit tortor ac est condimentum pellentesque. Morbi pretium lectus nec sapien laoreet eu malesuada diam adipiscing. Aliquam nisl ipsum, fermentum ut aliquam nec, varius sit amet nisi. Pellentesque interdum cursus malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam malesuada bibendum tortor, ut bibendum lorem varius eu. In eros orci, volutpat ut facilisis sit amet, commodo quis nulla.
-
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded4.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 4}
+   \label{code:embedded4}
+\end{codigo}

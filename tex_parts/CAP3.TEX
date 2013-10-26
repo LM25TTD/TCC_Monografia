@@ -1,91 +1,261 @@
-\chapter{Título do Terceiro Capítulo}
-\label{cap:titulo do terceiro capitulo}
+\chapter{Desenvolvimento do Protótipo}
+\label{cap:desenvolvimento do prototipo}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis risus, pulvinar quis pellentesque vel, sodales a lorem. Nulla eget ante a odio pretium consequat id at odio. Maecenas mauris dolor, laoreet eu consequat sed, mollis sed sapien. Integer dolor nisl, malesuada consectetur vestibulum id, faucibus ac elit. Donec leo justo, consectetur ut suscipit vel, rutrum ac mauris. Sed ut augue tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer ac diam sed urna tristique lobortis sit amet non justo. Pellentesque laoreet ipsum neque. Nullam sit amet lorem purus. Cras in placerat dolor.
+\section{Modelo Conceitual}
+Nesta fase é necessário fechar o escopo do projeto, capturar os requisitos e principais comportamentos 
+esperados. No cenário de operação, cada automóvel a ser verificado possui um módulo embarcado instalado 
+e responsável por enviar sua localização geográfica atual obtida de um GPS. Estes dados são enviados a 
+um servidor web por meio de rede GPRS de uma operadora de telefonia móvel, o servidor web captura as 
+informações e organiza em uma base de dados. 
 
-Phasellus fringilla nulla eget nunc adipiscing in volutpat enim bibendum. Aliquam et ante at ipsum molestie sodales. Pellentesque mattis venenatis metus, at tristique diam ullamcorper a. Nulla non risus et libero accumsan facilisis id ac justo. Ut eleifend placerat velit quis vehicula. Donec a sapien justo, pellentesque ultricies neque. Aenean consequat, tortor ac porta porta, nisl ante condimentum magna, non dictum est sem vel sapien. Vivamus vel arcu a nunc lacinia volutpat et dignissim tellus. Aenean augue massa, ultricies ut blandit non, porta a risus. Aenean dapibus, turpis sit amet eleifend laoreet, nulla erat volutpat est, ut pulvinar metus sem nec erat. Phasellus ullamcorper ante eu est venenatis at egestas nulla mollis. Donec libero lacus, venenatis ac suscipit ac, ultricies posuere sapien. Nam fermentum dapibus pulvinar. Aenean non libero quis orci semper pulvinar. Pellentesque sed augue vitae tellus molestie vulputate.
+Na outra ponta do sistema está o usuário, portanto deve ser oferecida uma interface para que ele possa
+localizar seus veículos e opcionalmente realizar o desligamento remoto dos mesmos. Todo acesso de usuário 
+será feito via navegador Web. A Figura 1 mostra o modelo conceitual do sistema.
 
-Mauris quis nunc justo, porttitor eleifend metus. Pellentesque at turpis at ante consequat lacinia aliquam sit amet erat. Duis nec dolor mauris. Praesent tristique neque vitae diam cursus adipiscing. Pellentesque malesuada velit sed magna convallis sodales ac vitae libero. Curabitur sagittis ullamcorper est ac mollis. Aenean metus lectus, iaculis id tincidunt quis, tincidunt ut dolor. Integer porttitor tincidunt augue sed condimentum. Mauris pellentesque vestibulum justo, vel pellentesque tellus suscipit in. Nulla eget sem augue. Vestibulum in sapien nec nibh accumsan ultricies. Aliquam varius consectetur lorem sed luctus. Nullam id ipsum ut ante tristique tempor. Donec vel arcu turpis, in volutpat magna. In hac habitasse platea dictumst. Phasellus eget sagittis neque. Suspendisse dictum ornare sapien, ut ullamcorper magna pharetra faucibus.
-
-
-\begin{table}[!h]
-\begin{tabular}{|r|c|c|}
-\hline
-& Chessboard top view & Chessboard perspective view\\
-\hline
-Selection whit side moviments & 6.02\stackrel{+}{-}5.22 & 7.01\stackrel{+}{-}6.84\\
-\hline
-Selection whith indepth moviments & 6.29\stackrel{+}{-}4.99 & 12.22\stackrel{+}{-}11.33\\
-\hline
-Manipulation with side moviments & 4.66\stackrel{+}{-}4.94 & 3.47\stackrel{+}{-}2.20\\
-\hline
-Manipulation with indepth moviments & 5.71\stackrel{+}{-}4.55 & 5.37\stackrel{+}{-}3.28\\
-\hline
-\end{tabular}
-\caption{Variáveis consideráveis na avaliação de técnicas de interação}
-\end{table}
-
-
-\\
-
-\begin{table}
- \begin{center}
-  \begin{tabular}{|l||c|c|c|c|}
-    \hline
-    \multicolumn{5}{|c|}{2003} \\ \hline \hline
-    \multicolumn{1}{|c||}{Fase} & Março     & Abril     & Maio     & Junho   \\ \hline
-    1    & $\bullet$ &           &          &         \\
-    2    &           & $\bullet$ & $\bullet$&         \\ 
-    3    &           &           & $\bullet$& $\bullet$ \\
-    \hline
-    \hline
-   \end{tabular}
-   \caption{Exemplo de cronograma usando \textit{bullet}}
-  \end{center}
- \label{tab3}
-\end{table}
-
-
-Curabitur aliquam purus vitae velit elementum sollicitudin eget at turpis. Mauris nec mauris ac tortor elementum ultrices. Ut nec nisl arcu. Nullam non nunc ante. Donec ac mauris ut nulla vulputate lobortis. In ac quam tellus. Vivamus viverra tortor quis lectus dictum malesuada. Sed posuere, nunc sed aliquam pharetra, felis massa venenatis justo, sed mattis massa magna quis quam. Donec et velit ac orci aliquet blandit. Integer sit amet dolor ac sem pretium tincidunt. Nam volutpat convallis elementum. Ut accumsan arcu et ipsum accumsan tincidunt.
-
-Cras nec quam mi, ut mattis ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla auctor dictum. Nam hendrerit sapien sed massa consequat rutrum. Nullam congue, augue sed commodo malesuada, lectus nulla mollis magna, eget semper risus nisl eget elit. Duis vitae hendrerit massa. In a odio nunc, sit amet mollis dolor. In accumsan suscipit dui, a vestibulum diam condimentum ullamcorper. Etiam ut quam arcu, ac tristique ante. Vestibulum imperdiet elit non ante tristique accumsan. Donec vulputate fringilla tempor. Proin porttitor nisi nisi. Fusce vel ullamcorper orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-
-
-\begin{figure}[!htp]
+\begin{figure}[!htb]
 \centering
-\includegraphics[!htp]{figures/Fig_6_8Holt.jpg}
-\caption{Uma típica figura}
+\includegraphics[width=9.5cm,height=4.0cm]{figures/1_conceitual.png}
+\caption{Visão de operação do sistema e os elementos envolvidos}
+\label{Figura 1}
+\end{figure}
+
+\section{Especificação de Requisitos}
+Foram identificados dois atores do sistema (agentes externos): um “usuário comum” e um “administrador”. 
+Os requisitos são especificados sob a forma de casos de uso UML. A figura 2 retrata os casos de uso de
+cada ator identificado.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=15.16cm]{figures/2_uc.png}
+\caption{Casos de uso do sistema}
+\label{Figura 2}
+\end{figure}
+
+\section{Arquitetura do Sistema}
+Os blocos iniciais do projeto juntamente com os casos de uso e suas descrições nos permitem fazer 
+uma quebra do sistema em componentes independentes para arquitetura de sistemas de tempo real de 
+acordo com \textcite{Mendes:2002}. A Figura 3 mostra o diagrama de componentes da UML gerado nesta 
+etapa.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=14.00cm,height=5.5cm]{figures/4_arquitetural.png}
+\caption{Arquitetura do Sistema}
+\label{Figura 3}
 \end{figure}
 
 
-Donec arcu erat, eleifend in volutpat a, sodales ut leo. Nam vulputate ornare nisl, eget lobortis magna posuere a. Praesent sit amet est est, sit amet sollicitudin nibh. Nam sagittis nulla fermentum elit aliquet aliquet. Proin at sem vitae velit interdum viverra nec at diam. Aenean arcu dui, eleifend ut gravida ac, ornare placerat urna. Suspendisse aliquam condimentum metus nec faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo ipsum, sollicitudin consectetur mi. Duis erat eros, tempor in consequat in, scelerisque eget ante. Praesent placerat vulputate rhoncus. Ut et ante risus, et molestie felis.
+\section{Módulo Veicular Embarcado - Modelagem}
+A principal vantagem em modelar os componentes de hardware com o digrama de classes é observada
+no momento de escrever funções ou bibliotecas para comunicação entre componentes, pois como o 
+mapeamento de métodos necessários já está feito, o desenvolvimento é focado apenas nestes,
+evitando a criação de códogo não utilizado. No caso deste projeto, o componente GSM fornece 
+uma gama de funcionalidade que não são utilizadas, como funções de chamada de voz, mensagem SMS
+e outras, portanto não foi despendido tempo com sua implementação. A Figura 4 mostra o projeto
+do módulo veicular embarcado.
 
-
-\begin{figure}[!htp]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale = .5]{figures/graficos-online-gratis.png}
-\caption{Uma típica figura}
+\includegraphics[width=14.00cm,height=5.5cm]{figures/5_mod_veicular.png}
+\caption{Classes do Módulo Veicular}
+\label{Figura 4}
 \end{figure}
 
+\section{Módulo Veicular Embarcado - Hardware}
+Após a análise do diagrama de classes, foram identificados os componentes de hardware,
+são estes:
+\begin{itemize}
+	\item Módulo GPS.
+	\item Módulo GSM.
+	\item Módulo de I/O.
+\end{itemize}
+Para implementação em hardware foi escolhida a plataforma Arduino, pois
+traz a filosofia do hardware open-source com seus diagramas disponíveis 
+livremente na Internet e uma comunidade ativa no desenvolvimento de soluções.
 
-Vivamus ultricies tincidunt lacus ut pharetra. Sed fringilla hendrerit tempus. Suspendisse potenti. Cras hendrerit tortor ac est condimentum pellentesque. Morbi pretium lectus nec sapien laoreet eu malesuada diam adipiscing. Aliquam nisl ipsum, fermentum ut aliquam nec, varius sit amet nisi. Pellentesque interdum cursus malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam malesuada bibendum tortor, ut bibendum lorem varius eu. In eros orci, volutpat ut facilisis sit amet, commodo quis nulla.
+Como placa microcontroladora, o Arduino Uno foi selecionado, pois oferece
+poder de processamento suficiente para o projeto, preço acessível e dimensões
+físicas propícias para integração veicular. A placa traz um microcontrolador
+Atmega 328 da Atmel, que possui 32 kbytes de memória flash, 2 kbytes de memória
+RAM, pinos de I/O digital e analógicos, comunicação serial e opera a um clock de
+16 MHz. A figura 5 mostra um exemplar da placa Arduino Uno.
 
-
-\begin{figure}[!htp]
+\begin{figure}[!htb]
 \centering
-\includegraphics[scale = .5]{figures/graf-fig1.png}
-\caption{Uma típica figura}
+\includegraphics[width=3.00cm\textwidth]{figures/arduinoUno.jpg}
+\caption{Placa Arduino Uno}
+\label{Figura 5}
 \end{figure}
 
+A plataforma Arduino oferece diversos módulos de hardware plugáveis
+para as mais diversas funções, que são chamados de Shields. Estes módulos
+objetivam ser plug-and-play, ou seja, procuram poupar o máximo o trabalho
+de soldagem e aplicação de componentes discretos.
 
+Para função de hardware GPS, o Shield GPS Sparkfun foi escolhido, este shield
+traz um módulo GPS EM 406 com precisão de 5 metros na medida de posição, comunicável
+por interface serial RS 232 ou TTL. A figura 6 mostra o shield GPS juntamente com o 
+módulo GPS EM 406.
 
-Sed lectus metus, mollis nec vulputate id, imperdiet eget urna. Nam ut dolor at metus venenatis suscipit et in ligula. In hac habitasse platea dictumst. Mauris scelerisque dolor sed nisl mattis accumsan. Aliquam vulputate placerat feugiat. Pellentesque faucibus neque mi. Etiam porttitor varius tempus. Mauris varius porttitor posuere. Pellentesque iaculis imperdiet lobortis. Sed vulputate purus nec felis rutrum molestie. 
-
-
-\begin{figure}[!htp]
+\begin{figure}[!htb]
 \centering
-\includegraphics[!htp]{figures/grafico.png}
-\caption{Uma típica figura}
+\includegraphics[width=7.00cm\textwidth]{figures/6_gps.png}
+\caption{GPS Shield e Módulo EM 406}
+\label{Figura 6}
 \end{figure}
 
+Para comunicação com o servidor, se fez necessária uma alternativa que utilizasse
+envio de dados sobre a rede de celular, pois esta rede possui altíssima cobertura
+em área urbana, foco do projeto. A troca de dados se dá sobre o protocolo GPRS, que
+especifica um máximo de 80 kbps para download e 20 kpbs para upload de dados.
+
+Uma das soluções em shield para Arduino é o Cellular Shield Sparkfun, que traz um
+módulo SendTrue SM5100B como interface com a rede. As especificações do módulo incluem:
+
+\begin{itemize}
+			\item Quad-Band 850/900/1800/1900 MHz
+			\item Controle via comandos AT
+			\item Alimentação: 3,2 a 4,2V
+			\item Baixo consumo: 350,0mA (\textit{consumo médio em transmissão})
+			\item Temperatura de operação: -10 a 85 graus Celsius.
+\end{itemize}
+
+A figura 7 mostra o Cellular Shield Sparkfun com módulo SM5100B que foi aplicado
+no projeto. O shield foi utilizado com antena quad-band que não está contemplada
+na figura.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=4.00cm\textwidth]{figures/gsm.jpg}
+	\caption{Cellular Shield com SM5100B}
+	\label{Figura 7}
+\end{figure}
+
+O módulo SM5100B não possui uma biblioteca do fabricante com funções pré-definidas para sua 
+operação, mas é operável por meio de comandos AT especificados em suas referências. Entretanto,
+o uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória,
+torna bastante complexo o controle de estados e a recuperação de erros. Para contornar esta questão,
+foi implementada uma classe de comunicação com o módulo, que é uma subclasse de SoftwareSerial, que por
+sua vez é uma classe de comunicação serial RS 232 com controle via software. A figura 8 mostra o diagrama
+da classe de comunicação e a herança de SoftwareSerial.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=9.00cm\textwidth]{figures/lib_gsm.png}
+	\caption{Classe de comunicação com SM5100B}
+	\label{Figura 8}
+\end{figure}
+
+Um dos requisitos funcionais do projeto prevê o bloqueio remoto de um veículo por meio do desligamento 
+do motor. Após um estudo dos circuitos elétricos veiculares e pesquisa sobre métodos de bloqueio mais
+utilizados, chgou-se à conclusão que a melhor alternativa é a interrupção da alimentação elétrica
+da bomba de cmbustível, esta estratégia é utilizada pelos módulos de alarme mais confiáveis do mercado
+para implementar o desligamento do veículo.
+
+Como a bomba de combustível opera em um circuito que gera corrente entre 5 e 10 ampéres, foi preciso
+utilizar um componente que trabalhe com esta faixa de carga. Um relê foi a solução aplicada, mais epecificamente
+o circuito normalmente fechado do relê, cuja carga suportada é de 10 A. Para acionamento do relê, um circuito
+auxiliar que utiliza o sinal de uma das saídas digitais do Arduino Uno foi usado, assim, o sinal de baixa corrente
+da porta digital controla o acionamento da bobina de um relê, que aciona mecanicamente o circuito normalmente fechado
+ligado a bomba de combustível, interrompendo a alimentação da mesma quando solicitado. A figura 9 mostra o módulo de
+I/O com relê integrado.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=5.00cm\textwidth]{figures/beefcake2.jpg}
+	\caption{Módulo de I/O com veículo}
+	\label{Figura 9}
+\end{figure}
+
+Após a seleção dos componentes, o módulo veicular foi montado. Os shields foram montados com facilidade já que
+existe uma conexão física padrão, apenas alguns ajustes foram necessários: no módulo GPS, os pinos de comunicação
+serial (TX e RX) coincidiram com os pinos do módulo GSM (pinos 2 e 3 digital da placa Aduino), para solucionar
+a questão, um jumper foi feito de modo a conectar a transmissão e recepção do GPS nos pinos 4 e 5 da placa Arduino.
+A figura 10 mostra o módulo embarcado montado.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=5.00cm\textwidth]{figures/prototipo_4.jpg}
+	\caption{Módulo veicular montado}
+	\label{Figura 10}
+\end{figure}
+
+O módulo veicular embarcado se comunica com o servidor web através de requisições HTTP POST, trazendo em seu
+payload dados estruturados no padrão JSON. O adoção do método POST se deu pois o permite um maior tamanho de
+mensagem, e como nesta mensagem são enviados dados autenticação, estes valores não seria gravados em texto
+plano nos logs, como acontece com o GET. A estrutura JSON traz os seguintes campos:
+
+\begin{itemize}
+	\item idModule: código serial do módulo usado como identificador único na base de dados do sistema web.
+	\item codAccess: usado como senha para validação da autenticidade do módulo.
+	\item latitude: latitude geográfica atual obtida pelo GPS.
+	\item longitude: longitude geográfica atual obtida pelo GPS.
+	\item alarm: valor representando se o alarme do veículo foi acionado, 0 se falso 1 se verdadeiro. Não utilizado no momento.
+\end{itemize}
+
+A figura 11 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observer o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=7.00cm\textwidth]{figures/requisicao_post.png}
+	\caption{Requisição HTTP feita pelo módulo veicular}
+	\label{Figura 11}
+\end{figure}
+
+\section{Módulo Web (WebManager) - Introdução}
+
+O módulo web, ou WebManager, é a aplicação que roda na internet responsável por receber e armezenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
+
+Um webservice é uma solução adotada na integração de sistemas que funcionam em diferentes arquiteturas de hardware, normalizando a troca de informações para um formato (linguagem) universal, em geral uma combinação de uso do protocolo HTTP e dados estruturados XML/JSON. 
+
+A técnica REST permite fazer mapeamentos de métodos diretamente em URL com correspondência aos métodos HTTP, por exemplo, uma método de uma classe Java pode ser mapeado para uma URL chamada via método GET.
+
+A implementação do WebManager como um todo foi feita utilizando a linguagem Java, por possuir um nível de maturidade muito alto para aplicações e serviços Web, contando com uma extensa gama de frameworks para os mais diversos fins, como mapeamento objeto-relacional, interface com o usuário,  webservices e outros.
+
+Como banco de dados, o PostgreSQL foi adotado  pois possui um sofisticado mecanismo de bloqueio, suporta tamanhos ilimitados de linhas, bancos de dados e tabelas (até 16TB), aceita vários tipos de sub-consultas, possui mais tipos de dados e conta com um bom mecanismo de FAILSAVE (Segurança contra falhas, por exemplo no desligamento repentino do sistema).
+
+\section{Módulo Web (WebManager) - Modelagem}
+
+A arquitetura da modelagam do WebManager foi baseada no Pattern MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
+
+O modelo MVC é consagrado, pois permite o desacoplamento das camadas de software facilitando a manutenção e diminuindo a repetição de código, as vantagens de sua utilização ficam bastante claras quando existe a necessidade da alteração de código, por exemplo, caso haja mudança nas regras de negócio de algum cálculo do sistema, apenas é necessária atualização do conteúdo da camada Control. Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework e DAO's) e Facade (agregando funções de diversas interfaces a uma interface centralizada que é exposta para os subsistemas), descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura 12 mostra o diagrama de classes obtido.
+
+\begin{landscape}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=20.00cm\textwidth]{figures/6_web_manager.png}
+	\caption{Modelo de classes do WebManager}
+	\label{Figura 12}
+\end{figure}
+\end{landscape}
+
+\section{Módulo Web (WebManager) - Desenvolvimento}
+A implementação em do código do WebManager contemplou primeiramente o webservice e as camadas de model e controllers, deixando a implementação da interface com o usuário como última etapa. A modelagem de banco de dados utilizando modelo entidade-relacionamento não foi necessária, uma vez que a camada Model contendo as entidades do sistema sofreu um mapeamento objeto-realcional (ORM) feito pelo framework Hibernate. Este mapeamento isenta o desenvolvedor de criar na maioria dos casos, cláusulas SQL, deixando-o apenas com o trabalho de manipular instâncias de classes e seus atributos. A camada de entidades é mostrada na figura 13.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15.00cm\textwidth]{figures/model.png}
+	\caption{Model - Entidades do sistema}
+	\label{Figura 13}
+\end{figure}
+
+O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento, ação esta que é exibida em um mapa da API Google Maps. A figura 14 mostra a tela de login do sistema e a figura 15 exibe a tela de rastreamento principal.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15.00cm\textwidth]{figures/webmanager_login.png}
+	\caption{Tela de Login do Sistema}
+	\label{Figura 14}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=15.00cm\textwidth]{figures/webmanager_rastrear.png}
+	\caption{Tela de Rastreamento}
+	\label{Figura 15}
+\end{figure}
+
+\hfill
 
