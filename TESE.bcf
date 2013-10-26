@@ -1964,9 +1964,10 @@
     <bcf:citekey order="10">Espinoza:2008</bcf:citekey>
     <bcf:citekey order="11">Wolf:2001</bcf:citekey>
     <bcf:citekey order="12">Marwedel:2001</bcf:citekey>
-    <bcf:citekey order="13">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="13">arduino_specs:2013</bcf:citekey>
     <bcf:citekey order="14">Mendes:2002</bcf:citekey>
-    <bcf:citekey order="15">Gamma:2000</bcf:citekey>
+    <bcf:citekey order="15">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="16">Gamma:2000</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>

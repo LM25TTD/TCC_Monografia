@@ -146,7 +146,7 @@ Uma possibilidade bastante interessante para projetos que utilizam a plataforma 
 
 Placas Arduinos e outras baseadas no projeto utilizam expansões de hardware chamadas shields. São placas de circuito impresso fixadas ao topo da placa microcontroladora através dos pinos de conexão e se comunicam com a unidade principal através dos canais de Entrada/Saída analógicos ou digitais, ou ainda, através do canal de comunicação serial.
 
-Caso não utilizem a mesma pinagem, pode-se empilhar diversos shields na mesma placa controladora. A idéia destas expansões é a de criar componentes com determinada especialização, muito similar ao conceito de framework em software. Existem shields para as mais diversas aplicações como:
+Caso não utilizem a mesma pinagem, pode-se empilhar diversos shields na mesma placa controladora. A idéia destas expansões é criar componentes com determinada especialização, muito similar ao conceito de framework em software. Existem shields para as mais diversas aplicações como:
 
 \begin{itemize}
 	\item Conectividade em rede Ethernet
@@ -160,3 +160,74 @@ Caso não utilizem a mesma pinagem, pode-se empilhar diversos shields na mesma p
 	\item Bluetooh
 	\item Sintetizador de Voz
 \end{itemize}
+
+A figura 2.3 mostra uma placa Arduino Uno conectada a dois shields para controle de motores. Pode-se observar a facilidade de conexão entre os componentes, uma vez que utilizam um layout de pinagem padronizado.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/arduino_with_shield.jpg}
+			\caption{Placa Arduino com shields conectados}
+			\label{1}
+\end{figure}
+
+\section {Placa Arduino Uno}
+
+Para realizar a implementação deste trabalho, optou-se por utilizar uma placa Arduino Uno, pois atendia todos os requisitos de hardware necessários sem haver superdimensionamento, seguindo a regra para projeto de sistemas embarcados, além disso seu layout permite a conexão da maioria dos shields disponíveis no mercado sem a necessidade de adaptação.
+
+A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel, botão de reset e conexão ICSP. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um bootloader\footnote{Bootloader é o gerenciador de inicialização do microcontrolador.} que captura automatiza este passo (\textcite{arduino_specs:2013}).
+
+A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. É observável que a placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\textwidth]{figures/arduinoUnoFront.jpg}
+			\caption{Placa Arduino Uno em detalhes}
+			\label{1}
+\end{figure}
+
+
+\subsection{Especificações Arduino Uno}
+
+A tabela 2.1 mostra um resumo das especificações operacionais da placa Arduino Uno.
+
+\begin{table}[!h]
+	\begin{tabular}{|r|c|}
+		\hline
+			Microcontrolador & ATmega328
+		\\
+		\hline
+			Voltagem de Operação (recomendada) & 7-12V
+		\\
+		\hline
+			Voltagem de Operação (limites) & 6-20V
+		\\
+		\hline
+			Pinos de E/S Digitais & 14 (onde 6 permitem saída PWM)
+		\\
+		\hline
+			Pinos de entrada analógicos & 6
+		\\
+		\hline
+			Corrente DC por pino de E/S & 40 mA
+		\\
+		\hline
+			Corrente DC para o pino 3.3V & 50 mA
+		\\
+		\hline
+			Armazenamento em Flash & 32 KB, onde 0.5 KB são usados pelo bootloader
+		\\
+		\hline
+			Memória RAM (SRAM) & 2 KB
+		\\
+		\hline
+			Memória EEPROM & 1 KB
+		\\
+		\hline
+			Frequência de clock & 16 MHz
+		\\
+\hline
+\end{tabular}
+\caption{Resumo das Especificações - Arduino Uno}
+\end{table}
+
+
