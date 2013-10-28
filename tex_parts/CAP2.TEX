@@ -176,7 +176,7 @@ Para realizar a implementação deste trabalho, optou-se por utilizar uma placa 
 
 A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel, botão de reset e conexão ICSP. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um bootloader\footnote{Bootloader é o gerenciador de inicialização do microcontrolador.} que captura automatiza este passo (\textcite{arduino_specs:2013}).
 
-A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. É observável que a placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S.
+A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. É observável que a placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S. Os pinos da placa são descritos com textos impressos na superfície.
 
 \begin{figure}[h!]
 			\centering
@@ -188,7 +188,7 @@ A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o mi
 
 \subsection{Especificações Arduino Uno}
 
-A tabela 2.1 mostra um resumo das especificações operacionais da placa Arduino Uno.
+A tabela 2.2 mostra um resumo das especificações operacionais da placa Arduino Uno.
 
 \begin{table}[!h]
 	\begin{tabular}{|r|c|}
@@ -230,4 +230,63 @@ A tabela 2.1 mostra um resumo das especificações operacionais da placa Arduino
 \caption{Resumo das Especificações - Arduino Uno}
 \end{table}
 
+\subsection{Alimentação da Placa Arduino Uno}
 
+Um Arduino Uno pode ser alimentado pela conexão USB ou uma fonte externa e a placa faz a seleção automática de fonte de entrada. Uma alimentação com tensão inferior a 7V pode fazer com que o pino de saída de 5V para o microcontrolador forneça uma tensão inferior a descrita causando instabilidade no funcioamento. Por outro lado, se colocada uma tensão de entrada maior que 12V, o regulador de voltagem pode sofrer superaquecimento, danificando a placa e diminuindo sua vida útil.
+
+No desenvolvimento deste trabalho foi utilizada, para testes em bancada, uma fonte regulada com saída de 12V e 1850mA de corrente máxima, retratada na figura 2.5.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\textwidth]{figures/fonteAlim.jpg}
+			\caption{Fonte de alimentação para testes em bancada}
+			\label{1}
+\end{figure}
+
+Para a aplicação em automóveis não se faz necessário o uso de regulação de voltagem já que os veículos utilizam uma voltagem padronizada de 12V, com variações até o máximo de 14V. Apenas é preciso encontrar um ponto de alimentação permanente dentre os cabos do painel e utilizar um cabo com terminal adequado para ligação com a placa Arduino Uno.
+
+Após passar pelos circuitos de alimentação da placa, existem alguns pinos que fornecem alimentação tanto para periféricos quanto para os shields, são estes:
+
+\begin{itemize}
+	\item \textbf{Pino 5V:} saída de tensão regulada e estabilizada em 5 volts para alimentar o microcontrolador e outros periféricos como shield, servo-motores de pequeno porte e relés.
+	\item \textbf{Pino 3V3:} saída de tensão regulada e estabilizada em 3.3 volts e suporta uma carga máxima de 50 mA. Utilizada principalmente pelo conversor USB-serial shields que trabalham com comunicação RS-232.
+	\item \textbf{GND:} pino terra, referencial 0 volts para os circuitos.
+	\item \textbf{VIN:} mesmo ponto da entrada de alimentação externa, refletindo o mesmo valor da tensão de alimentação do conector jack (barrel).
+\end{itemize}
+
+\subsection{Entrada e Saída}
+
+O Arduino Uno possui 14 pinos digitais que podem ser usados como entrada ou saída, operando a 5 volts e suportando 40mA de corrente máxima. Existem funções na biblioteca de programação padrão para facilitar a utlização destes pinos, são elas:
+
+\begin{itemize}
+	\item pinMode(): Configura o modo de operação do pino para entrada ou saída.
+	\item digitalWrite(): Em modo saída, manipula o estado do pino para HIGH (5V) ou LOW (0V).
+	\item digitalRead(): Em modo entrada, lê o estado do pino se está em HIGH ou LOW.
+\end{itemize}
+
+Dentre estes pinos, alguns possuem funções especiais como:
+
+\begin{itemize}
+	\item Serial: 0 (RX) e 1 (TX). Usados para receber (RX) e transmitir (TX) dados usando padrão serial TTL. São interconectados ao controlador USB.
+	\item Interupção externa: 2 e 3. Podem ser configurados para acionar uma função de interrupção em LOW, borda de subida, borda de descida ou mudança no valor, configurados na função attachInterrupt().
+	\item PWM: 3,5,6,9,10 e 11. Permitem saída PWM\footnote{Variação de Largura de Pulso: Técnica onde se utiliza um sinal digital para variar o valor da transferência de potência a uma carga de alimentação analógica, simulando, por exemplo uma variação na tensão de alimentação.} de 8 bits, simulando uma saída analógica através da função analogWrite().
+	\item SPI: 10 (SS), 11 (MOSI), 12 (MISO), 13 (SCK). Pinos para comunicação SPI\footnote{Interface de Periféricos Síncrona, padrão para comunicação entre periféricos no modo mestre-escravo}.
+	\item LED: 13. Este pino possui um diodo emissor de luz acoplador permitindo testes de entrada/saída com facilidade.
+\end{itemize} 
+
+\subsection{Programação}
+
+A programação do microcontrolador ATmega328 do Arduino Uno pode ser feita através da IDE Arduino, mostrada na figura 2.6. A linguagem de desenvolvimento é C/C++ com recursos exclusivos desenvolvidos com base na linguagem Wiring. O microcontrolador vem com um bootloader pré-gravado, o que permite o upload de novos códigos com o pressionar de um botão, sem uso de hardware para programação externa, como no caso de gravadores de flash.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\textwidth]{figures/ideArduino204.png}
+			\caption{IDE Arduino}
+			\label{1}
+\end{figure}
+
+É possível realizar a programação do microcontrolador por meio da interface ICSP (In-Circuit Serial Programming), entretanto esse estratégia não foi utilizada para este trabalho, mais informações consultar \textcite{arduino_icsp:2013}.
+
+Sempre que é feita uma gravação de rotina no controlador é feita uma reinicialização do circuito, forçando a sobrescrita de dados na memória RAM. A reinicialização também pode ser feita através do botão reset ou mesmo de um circuito interligado ao pino RESET controlado via software.
+
+\section{Tecnologia GPS}
