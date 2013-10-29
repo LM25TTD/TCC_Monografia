@@ -249,7 +249,7 @@ Após passar pelos circuitos de alimentação da placa, existem alguns pinos que
 
 \begin{itemize}
 	\item \textbf{Pino 5V:} saída de tensão regulada e estabilizada em 5 volts para alimentar o microcontrolador e outros periféricos como shield, servo-motores de pequeno porte e relés.
-	\item \textbf{Pino 3V3:} saída de tensão regulada e estabilizada em 3.3 volts e suporta uma carga máxima de 50 mA. Utilizada principalmente pelo conversor USB-serial shields que trabalham com comunicação RS-232.
+	\item \textbf{Pino 3V3:} saída de tensão regulada e estabilizada em 3.3 volts e suporta uma carga máxima de 50 mA. Utilizada principalmente pelo conversor USB-serial e shields que trabalham com comunicação serial TTL.
 	\item \textbf{GND:} pino terra, referencial 0 volts para os circuitos.
 	\item \textbf{VIN:} mesmo ponto da entrada de alimentação externa, refletindo o mesmo valor da tensão de alimentação do conector jack (barrel).
 \end{itemize}
@@ -290,3 +290,144 @@ A programação do microcontrolador ATmega328 do Arduino Uno pode ser feita atra
 Sempre que é feita uma gravação de rotina no controlador é feita uma reinicialização do circuito, forçando a sobrescrita de dados na memória RAM. A reinicialização também pode ser feita através do botão reset ou mesmo de um circuito interligado ao pino RESET controlado via software.
 
 \section{Tecnologia GPS}
+
+O termo GPS foi extraído da designação NAVigation System with Time and Ranging Global Positioning System - NAVSTAR GPS, sistema inicialmente voltado às operações miltares, auxiliando na navegação e é em síntese um sistema de rádio navegação que fornece as coordenadas bi ou tridimensionais de pontos no terreno, além da velocidade e direção do deslocamento entre pontos.
+
+De acordo com \textcite{gps_iniciantes:2003}, para o funcionamento do GPS, existe uma constelação composta por 24 satélites na orbita terrestre, distribuídos em 6 planos orbitais igualmente espaçados, com 4 satélites em cada plano a uma altitude de aproximadamente 20200 km. Os planos orbitais estão inclinados a $55\,^{\circ}$ em relação ao Equador e o período orbital é de aproximadamente 12 horas siderais. Com esta configuração fica garantido que no mínimo 4 satélites visíveis na superfície da Terra em qualque horário do dia. A figura 2.7 mostra uma idéia conceitual desta configuração.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/constelacaoGPS.png}
+			\caption{Modelo conceitual da constela\c{c}\~{a}o de sat\'{e}lites GPS}
+			\label{1}
+\end{figure}
+
+Além das atividades de navegação, o sistema GPS também auxiliar na realização de levantamentos geodésicos e topográficos, operando de forma ininterrupta, independente das condições meteorológicas mesmo que estas possam afetar na precisão dos dados.
+
+\subsection{Modelo de Posicionamento GPS}
+
+Para identificar a posição de pontos de interesse, o sistema GPS utiliza as coordenadas de seus satélites, que são referenciadas a um sistema geodésico, o mesmo utilzado no receptor GPS pera processar os dados recebidos e determinar as coordenadas do ponto referido. A figura 2.8 mostra este processo, onde o ponto é calculado através das referências de 5 satélites, o ponto P é obtido por triangularização das coordenadas.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3\textwidth]{figures/triangGPS.png}
+			\caption{Conceito para c\'{a}lculo da coordenada de um ponto via GPS}
+			\label{1}
+\end{figure}
+
+Um sistema GPS é composto por três elementos principais conforme a figura 2.9, são eles:
+
+\begin{itemize}
+	\item Estação de Controle: são distribuídas em torno da Terra, próximas da linha do Equador. Dentre suas funções, realizam o monitoramento e controle dos satélites, determinam o tempo GPS, prevêem as efemérides, calculam as correções dos relógios e atualizam as mensagens de navegação dos satélites.
+	\item Satélite GPS: propaga as mensagens GPS com suas respectivas coordenadas para que os receptores possam calcular sua posição.
+	\item Receptor: usuário do sistema, equipamento que se utiliza dos satélites para obter a posição de determinado ponto.	
+\end{itemize}
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\textwidth]{figures/elemGPS.png}
+			\caption{Elementos do sistema GPS}
+			\label{1}
+\end{figure}
+
+\section{Arduino GPS Shield Kit}
+
+Para adicionar o suporte a rastreamento via GPS em tempo real a este trabalho, um hardware que implemente tal funcionalidade se faz necessário. Neste âmbito, o conceito de shield da plataforma Arduino oferece um gama de componentes que atendem esta necessidade.
+
+Após realizar uma pesquisa de mercado, optou-se pelo uso do GPS Shield Retail Kit da fabricante Sparkfun (\textcite{gpsshield:2013}), que se mostrou financeiramente mais viável, além disso o fabricante disponibiliza um rico arcabouço documental, programas de exemplo e esquemáticos de hardware. A figura 2.10 mostra os elementos do kit GPS.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\textwidth]{figures/6_gps.png}
+			\caption{Kit GPS}
+			\label{1}
+\end{figure}
+
+O kit é composto de dois elementos principais, são eles:
+
+\begin{itemize}
+	\item Shield (ou placa base): É uma placa de circuito impresso com laoyut padrão Arduino Uno contendo reguladores de tensão para 3.3 volts, leds indicadores, chave liga/desliga, botão reset e um conector padronizado para diversos modelos de módulos GPS. Esta placa é a peça chave para integração entre o Arduino Uno e o módulo GPS, pois isenta o projetista de realizar qualquer solda ou conexão adicional (salvo casos em que se faz necessário mudar os pinos de comunicação serial), permitindo que este adicione ou remova a funcionalidade GPS ao seu projeto com extrema facilidade. A figura 2.11 mostra o esquemático do GPS Shield.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.8\textwidth]{figures/schemaGPS.png}
+			\caption{Esquema elétrico do GPS Shield}
+			\label{1}
+\end{figure}
+
+
+	\item Módulo receptor GPS USGlobalSat EM-406A: Realiza a função de captura das mensagens GPS e cálculo de posicionamento global. Possui todos os componentes integrados, inclusive antena, regulador de voltagem e LED de status. É conectado ao GPS Shield por meio de um cabo de 4 vias. A tabela 2.3 mostra os dados operacionais do módulo EM-406A.	
+\end{itemize}
+
+\begin{table}[!h]
+  \centering
+	\begin{tabular}{|r|c|}
+		\hline
+			Canais de recepção & 20
+		\\
+		\hline
+			Sensibilidade & -159 dBm
+		\\
+		\hline
+			Precisão & 10 metros, 5 metros com WAAS
+		\\
+		\hline
+		  Hot Start & 1 segundo
+		\\
+		\hline
+			Warm Start & 38 segundos
+		\\
+		\hline
+			Cold Start & 42 segundos
+		\\
+		\hline
+			Consumo & 70 mA em 4.5-6.5 volts
+		\\
+		\hline
+			Protocolo de Saída & NMEA 0183 e SiRF
+		\\
+		\hline
+			Dimensões & 30mm x 30mm x 10.5mm
+		\\
+		\hline
+		  Peso & 16 gramas
+		\\
+\hline
+\end{tabular}
+\caption{Especificações operacionais do módulo GPS EM-406A}
+\end{table}
+
+O módulo EM-406A trafega o formato de dados configurado de fábrica em sua resposta ao microcontrolador, este formato é definido no protocolo NMEA 0183 ACII versão 3.01. A mensagem segue a estrutura mostrada na figura 2.12 e cada seção dela é descrito na tabela 2.4.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.8\textwidth]{figures/gprmc.png}
+			\caption{Mensagem NMEA 0183}
+			\label{1}
+\end{figure}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|r|c|c|c|}
+     \hline
+		{\scriptsize \textbf{Campo}} &	{\scriptsize \textbf{Nome}} & {\scriptsize \textbf{Exemplo}} & {\scriptsize \textbf{Descrição}}\\
+		\hline
+		1 & {\scriptsize Tempo UTC} & {\scriptsize 060932.448} & {\scriptsize Horário UTC no formato hhmmss.sss}\\
+		\hline
+		2 & {\scriptsize Status} & {\scriptsize A} & {\scriptsize 'V' = GPS Aquecendo; 'A' = Dados Válidos}\\
+		\hline
+		3 & {\scriptsize Latitude} & {\scriptsize 2447.0959} & {\scriptsize Latitude no formato ddmm.mmmm}\\
+		\hline
+		4 & {\scriptsize Indicador N/S} & {\scriptsize N} & {\scriptsize Hemisfério, 'N' = Norte, 'S' = Sul}\\
+		\hline
+		5 & {\scriptsize Longitude} & {\scriptsize 12100.5204} & {\scriptsize Longitude no formato dddmm.mmmm} \\
+		\hline
+		6 & {\scriptsize Indicador E/W}  & {\scriptsize E} & {\scriptsize Hemisfério, 'E' = Leste, 'W' = Oeste} \\
+		\hline
+		7 & {\scriptsize Velocidade}  & {\scriptsize 000.0} & {\scriptsize Velocidade em nós (000.0 ~ 999.9)} \\
+		\hline
+		8 & {\scriptsize Data UTC} & {\scriptsize 211200} & {\scriptsize Data UTC de uma posição fixa no formato, ddmmyy}\\
+		\hline
+	\end{tabular}
+\caption{Descrições das seções da mensagem NMEA 0183}
+\end{table}
