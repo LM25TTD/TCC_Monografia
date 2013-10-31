@@ -172,7 +172,7 @@ A figura 2.3 mostra uma placa Arduino Uno conectada a dois shields para controle
 
 \section {Placa Arduino Uno}
 
-Para realizar a implementação deste trabalho, optou-se por utilizar uma placa Arduino Uno, pois atendia todos os requisitos de hardware necessários sem haver superdimensionamento, seguindo a regra para projeto de sistemas embarcados, além disso seu layout permite a conexão da maioria dos shields disponíveis no mercado sem a necessidade de adaptação.
+Para realizar a implementação deste trabalho, optou-se por utilizar uma placa Arduino Uno pois: projetos similares utilizaram esta placa sem problemas de sub ou super dimensionamento, ou seja, suas especificações atendem exatamente a necessidade do projeto ; seu layout permite a conexão da maioria dos shields disponíveis; existe documentação rica disponível na Internet.
 
 A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel, botão de reset e conexão ICSP. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um bootloader\footnote{Bootloader é o gerenciador de inicialização do microcontrolador.} que captura automatiza este passo (\textcite{arduino_specs:2013}).
 
@@ -431,3 +431,56 @@ O módulo EM-406A trafega o formato de dados configurado de fábrica em sua resp
 	\end{tabular}
 \caption{Descrições das seções da mensagem NMEA 0183}
 \end{table}
+
+\section {Comunicação Móvel}
+
+Segundo \textcite{inatel:1998}, "pode-se definir como comunicação móvel aquela onde existe a possibilidade de movimento relativo entre partes ou as partes sistêmicas envolvidas. Como exemplo temos a comunicação entre aeronaves, entre aeronaves e uma base terrena, entre veículos, a telefonia celular, a computação móvel, algumas classes de sistemas de telemetria e outros."
+
+Portanto, devido a característica de mobilidade deste trabalho, onde existe um elemento que se desloca no espaço e ao mesmo tempo necessita trocar dados com um sistema na Internet, este se classifica como um sistema de comunicação móvel. Para suprir as necessidades do projeto, os serviços de telefonia celular, mais especificamente serviços de internet móvel GPRS foram utilizados.
+
+\section {Tecnologia GPRS}
+
+O GPRS (General Packet Radio Service) é um serviço que foi criado para possibilitar o tráfego de dados por pacotes na rede GSM, possibilitando que a rede de telefonia celular possa ser ligada a Internet.
+
+Na especificação inicial do GSM, a comunicação era realizada através de comutação de circuitos, onde uma conexão entre dois pontos de rede era alocada de forma a estar sempre disponível; a comunicação é feita de forma ininterrupta, uma otimização para chamadas de voz.
+
+Porém a Internet é baseada na comutação de pacotes, e pela natura de circuitos da rede GSM inicial, a velocidade de acesso era muito pequena. Para corrigir esta questão, a tecnologia GPRS foi criada e implementada se comunicando o GSM, trazendo a comutação de pacotes para a rede celular. Neste tipo de comutação, o ponto de origem envia uma informação dentro de um pacote que leva o endereço de destino em seu cabeçalho, o pacote então é transmitido pela rede que é responsável por escolher o melhor caminho até o ponto final.
+
+Na figura 2.13 é ilustrada a comutação para dados de voz e dados por pacote. O elemento RTPC representa a rede para comunicação de voz, enquanto o elemento IP (Internet Protocol) representa os ponto de integração com a Internet.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.8\textwidth]{figures/gprs.jpg}
+			\caption{Comutação de circuito e de pacote nas redes GSM e GPRS}
+			\label{1}
+\end{figure}
+
+O endereçamento em GPRS é estabelecido em referência a o APN (Access Point Name) da rede. O APN define os serviços de comunicação com a Internet como email e acesso a World Wide Web. Para iniciar uma conexão GPRS, o usuário deve especificar o APN, e opcionalmente um nome de usuário e uma senha, todos estes dados são fornecidos pela operadora. 
+
+\section {Arduino Cellular Shield with SM5100B}
+
+Assim como a funcionalidade GPS, existe um kit shield que implementa o acesso ao serviço GPRS das operadoras de celular. Após pesquisa de referências, análise de preços e análise da facilidade de compra, optou-se pelo Cellular Shield com SM5100B do fabicante Sparkfun. O kit é composto pelos seguintes elementos:
+
+\begin{itemize}
+	\item Placa de circuito impresso layout padrão Arduino Uno com circuito regulador de tensão, socket para cartão SIM e conector para antena.
+	\item Módulo (ou modem) SM5100B da fabricante Spreadtrum, é um módulo miniaturizado, quad-band GSM 850/900/1800/1900 MHz de frequência de rede que implementa as funcionalidades de um celular como SMS, GSM/GPRS, TCP/IP e chamadas de Voz.
+	\item Antena quad-band.
+\end{itemize}
+
+O módulo se comunica com o microcontrolador através de comandos AT transmitidos por um canal de comunicação serial bidirecional (são utilizados dois pinos digitais do Arduino Uno para montar este canal). A lista de comandos AT está descrita no manual fornecido pelo fabricante, bom como seus parâmetros e respostas. Para funcionamento do kit, é necessário um cartão SIM devidamente habilitado e com plano de dados ativo para as funções GPRS.
+
+ A figura 2.14 mostra o kit acoplado a placa Arduino Uno. Devido a necessidade de ganho de sinal, foi utilizada uma antena quad-band de 1.5 dBi similar a mostrada na figura 2.15.
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/gsm.jpg}
+			\caption{Cellular Shield}
+			\label{1}
+\end{figure}
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/antena.jpg}
+			\caption{Antena quad-band com 1.5 dBi de ganho}
+			\label{1}
+\end{figure}
