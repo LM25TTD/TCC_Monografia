@@ -536,3 +536,54 @@ O W3C define duas categorias de Webservice:
 \end{itemize}
 
 \subsection{REST}
+
+A Transferência de Estado Representacional (Representational State Transfer) ou somente (REST) é uma técnica de engenharia de software para sistemas hipermídia distribuídos como a Web. O termo se originou no ano de 2000, em uma tese de doutorado (PhD) sobre a web escrita por Roy Fielding, um dos principais autores da especificação do protocolo HTTP.
+
+Na aquitetura REST se afirma que a web já fornece a escalabilidade como resultado de uma série de desenhos fundamentais:
+
+\begin{itemize}
+	\item Um protocolo cliente/servidor sem estado: cada mensagem HTTP contém toda a informação necessária para compreender uma requisição, como resultado, nem o cliente e nem o servidor necessitam gravar nenhum estado das comunicações. Na prática, muitas aplicações baseadas em HTTP utilizam cookies e outros mecanismos para manter o estado da sessão.
+	\item	Um conjunto de operações bem definidas que se aplicam a todos os recursos de informação: HTTP em si define um pequeno conjunto de operações, as mais importantes são POST, GET, PUT e DELETE. Com frequência estas operações são combinadas com operações CRUD para a persistência de dados, onde POST não se encaixa exatamente neste esquema.
+	\item	Uma sintaxe universal para identificar os recursos. No sistema REST, cada recurso é unicamente direcionado através da sua URI.
+	\item	O uso de hipermídia (links) tanto para a informação da aplicação como para as transições de estado da aplicação: a representação deste estado em um sistema REST são tipicamente HTML ou XML. Como resultado disto, é possível navegar com um recurso REST a muitos outros, simplesmente seguindo ligações sem requerer o uso de registros ou outra infraestrutura adicional.
+\end{itemize}
+
+Um conceito importante em REST é a existência de recursos (elementos de informação), que podem ser usados utilizando um identificador global (um Identificador Uniforme de Recurso) para manipular estes recursos, os componentes da rede (clientes e servidores) se comunicam através de uma interface padrão (HTTP) e trocam representações de recursos (XML, JSON ou outro).
+
+\subsection {RESTful Web APIs}
+
+Uma Web API REST é uma API implementada utilizando os princípios do HTTP e REST, sendo uma coleção de recursos com quatro aspectos principais:
+
+\begin{itemize}
+	\item Uma URI base para a API como: http://example.com/resources/
+	\item Um tipo de mídia par troca de dados, como XML, JSON ou qualquer outro tipo padronizado que segue o padrão hypertexto.
+	\item Um conjunto de operações deve ser suportado usando os métodos HTTP (GET, PUT, POST ou DELETE).
+	\ A API deve ser orientada a hypertexto.
+\end{itemize}
+
+A tabela 2.5 mostra como um seviço pode ser disponibilizado usando URIs e os métodos HTTP, sendo caracterizado como uma API RESTful.
+
+\begin{table}[!h]
+  \centering
+	\begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+		\hline
+			\textbf{Recurso} & \textbf{GET} & \textbf{PUT} & \textbf{POST} & \textbf{DELETE}
+		\\
+		\hline
+			\textbf{URI de coleções, como} \textit{http://example .com/resources}
+			& Lista as URIs e outros detalhes dos membros da coleção.
+			& Substitui a coleção inteira com outra coleção.
+		  & Cria uma nova entrada na coleção com URI designada automaticamente e retornada pela operação.
+			& Deleta a coleção inteira.
+		\\
+		\hline
+			\textbf{URI de elemento, como} \textit{http://example. com/resources /item17}
+			& Retorna uma representação do membro da coleção, expressada no formado apropriado (XML, JSON, etc).
+			& Substitui o elemento do endereço ou, se não existir, o cria.
+		  & Geralmente não usado. Trata o elemento como uma coleção e cria uma nova entrada nele.
+			& Deleta o elemento do endereço.
+		\\
+\hline
+\end{tabularx}
+\caption{Web API RESTful}
+\end{table}
