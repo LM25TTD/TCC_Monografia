@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=LaTeXView
 Document=TESE.tex
 
 [Frame0_View0,0]
-TopLine=307
-Cursor=9168
+TopLine=268
+Cursor=7780
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=LaTeXView
 Document=tex_parts\CAP2.TEX
 
 [Frame1_View0,0]
-TopLine=617
-Cursor=27316
+TopLine=728
+Cursor=33061
 
 [Frame2]
 Flags=0
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=BibTeXView
 Document=tex_parts\tese.bib
 
 [Frame2_View0,0]
-TopLine=16
-Cursor=978
+TopLine=28
+Cursor=1257
 
 [Frame3]
 Flags=0
@@ -65,7 +65,7 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=LaTeXView
 Document=tex_parts\CAP1.TEX
@@ -83,13 +83,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=LaTeXView
 Document=tex_parts\CAP4.TEX
 
 [Frame4_View0,0]
-TopLine=104
+TopLine=105
 Cursor=4927
 
 [Frame5]
@@ -101,7 +101,7 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=663
+NormalPos.right=668
 NormalPos.bottom=462
 Class=LaTeXView
 Document=tex_parts\CAP3.TEX

@@ -484,3 +484,55 @@ O módulo se comunica com o microcontrolador através de comandos AT transmitido
 			\caption{Antena quad-band com 1.5 dBi de ganho}
 			\label{1}
 \end{figure}
+
+\section{Controle de carga via Arduino Uno}
+
+Pela especificação da placa Arduino Uno observa-se que seus pinos digitais, quando configurados para saída, suportam apenas 40 mA de corrente máxima em 5 volts, isto é o suficiente para acionamento de leds, buzzers, sensores, ou seja, apenas cargas de pequeno porte.
+
+Dependendo da natureza do projeto, pode ser necessário o acionamento de dispositivos que consumam consumam corrente acima da saída máxima do microcontrolador e/ou operem em tensão diferente da plataforma. Para solucionar esta questão uma das alternativas é necessário utilizar um circuito auxiliar de chaveamento com relê, onde a saída do microncontrolador é utilizada apenas como sinal para acionamento.
+
+A figura 2.16 mostra o circuito de acionamento via relê (também conhecido como drive de acionamento), considerando que o relê do esquema possui uma bobina que opera com 5 volts, o funcionamento do circuito pode ser descrito com os seguintes passos: 
+
+\begin{itemize}
+	\item Os pontos descritos como RAW são alimentados com a saída de 5 volts do Arduino.
+	\item No pino 2 do conector JP2 é ligada uma saída digital do microcontrolador e quando esta é acionada (5V), o transistor 2N3904 (utilizado como chave) permite a passagem de corrente polarizando inversamente o diodo D1.
+	\item Com o diodo polarizado inversamente, a diferença de pontencial entre seus terminais se iguala a RAW, atingindo 5 volts.
+	\item Nota-se que a bobina do relê está ligada em paralelo com o diodo D1, com isto a mesma é alimentada com a voltagem referente à polarização inversa do diodo, neste exemplo 5 volts. Como o relê opera a esta voltagem, a bobina se magnetiza chaveando os ponto LOAD1 e LOAD2 da figura.
+	\item A corrente máxima que este circuito pode controlar depende da capacidade do relê. Valores de 5 a 20 ampéres são comuns.
+\end{itemize}
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/circRele.png}
+			\caption{Circuito de controle de cargas com relê}
+			\label{1}
+\end{figure}
+
+Neste trabalho foi utilizado uma placa pré-fabricada pelo fornecedor Sparkfun, conforme a figura 2.17 observa-se que o circuito conta com um pequeno LED sinalizador de estado e conectores para facilitar a instalação. O relê aplicado possui bobina que opera em 5 volts e possui duas malhas de chaveamento utilizáveis:
+
+\begin{itemize}
+	\item Malha normalmente aberta (NO) que suporta corrente máxima de 20 ampéres em 240 volts.
+	\item Malha normalmente fechada (NC) que suporta corrente máxima de 10 ampéres em 240 volts.
+\end{itemize}
+
+\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\textwidth]{figures/beefCake2.jpg}
+			\caption{Placa para controle de cargas por relê}
+			\label{1}
+\end{figure}
+
+\section{Webservice}
+
+Um webservice é um método de comunicação entre dispositivos sobre a Web. Pela definição da W3C é um sistema de software projetado para suportar a interoperabilidade de interação entre máquinas sobre uma rede, possuindo uma interface descrita em um formato processável (especificamente WSDL). Outros sistemas que interagem com um webservice tipicamente usando protocolo HTTP e dados estruturados representados em XML em conjunto com outros tecnologias Web.
+
+Essencialmente, um Webservice faz com que os recursos de uma aplicação estejam disponíveis sobre a rede de uma forma normalizada, onde cara recurso é identificado por um endereço universal único (URI) acessado pelo protocolo HTTP. Web Services é a tecnologia ideal para comunicação entre sistemas, sendo muito usado em aplicações Business to Business. A comunicação entre os serviços é padronizada possibilitando a independencia de plataforma e de linguagem de programação. Por exemplo, um sistema de reserva de passagens aéreas feito em Java e rodando em um servidor Linux pode acessar, com transparência, um serviço de reserva de hotel feito em .Net rodando em um servidor Microsoft.
+
+O W3C define duas categorias de Webservice:
+
+\begin{itemize}
+	\item REST-compliant Webservice: onde o principal propósito do serviço é manipular representações de recursos web em XML (ou similares) usando uma conjunto de operações sem estado.
+		\item Webservices arbitrários: onde um webservice expõe um conjunto de operações por meio de uma linguagem de definição de webservices (WSDL).
+\end{itemize}
+
+\subsection{REST}
