@@ -587,3 +587,44 @@ A tabela 2.5 mostra como um seviço pode ser disponibilizado usando URIs e os m�
 \end{tabularx}
 \caption{Web API RESTful}
 \end{table}
+
+\section {Padrões de Projeto}
+
+Um Padrão de Projeto de Software, ou Design Pattern, descreve uma solução geral reutilizável para um problema recorrente no desenvolvimento de sistemas, com paradigma orientado a objetos. Não é um código final, é uma descrição ou modelo de como resolver o problema do qual trata, que pode ser usada em muitas situações diferentes. Os Padrões de Projeto normalmente definem as relações e interações entre as classes ou objetos, sem especificar os detalhes das classes ou objetos envolvidos, ou seja, estão num nível de generalidade mais alto.
+
+Os padrões de projeto :
+
+\begin{itemize}
+	\item Visam facilitar a reutilização de soluções de design, isto é, soluções na fase de projeto do software.
+	\item Estabelecem um vocabulário comum de design, facilitando a comunicação, documentação e aprendizado dos sistemas de software.
+\end{itemize}
+
+\subsection{MVC}
+
+Model-view-controller (MVC) é um modelo de arquitetura de software que separa a representação da informação da interação do usuário com ele. O modelo (model) consiste nos dados da aplicação, regras de negócios, lógica e funções. Uma visão (view) pode ser qualquer saída de representação dos dados, como uma tabela ou um diagrama. É possível ter várias visões do mesmo dado, como um gráfico de barras para gerenciamento e uma visão tabular para contadores. O controlador (controller) faz a mediação da entrada, convertendo-a em comandos para o modelo ou visão. As ideias centrais por trás do MVC são a reusabilidade de código e separação de conceitos.
+
+Além de dividir a aplicação em três tipos de componentes, o design MVC define as interações entre eles.
+
+\begin{itemize}
+	\item Um controller pode enviar comandos para sua visão associada para alterar a apresentação da visão do modelo (por exemplo, percorrendo um documento). Ele também pode enviar comandos para o modelo para atualizar o estado do modelo (por exemplo, editando um documento).
+	\item Um model notifica suas visões e controladores associados quando há uma mudança em seu estado. Esta notificação permite que as visões produzam saídas atualizadas e que os controladores alterem o conjunto de comandos disponíveis. Uma implementação passiva do MVC monta estas notificações, devido a aplicação não necessitar delas ou a plataforma de software não suportá-las.
+	\item A visão (view) solicita do modelo a informação que ela necessita para gerar uma representação de saída. 
+\end{itemize}
+
+\subsection{Singleton}
+Singleton é um padrão de projeto onde se garante a existência de apenas uma instância de uma classe, mantendo um ponto global de acesso ao seu objeto. Alguns projetos necessitam que algumas classes tenham apenas uma instância. Por exemplo, em uma aplicação que precisa de uma infraestrutura de log de dados, pode-se implementar uma classe no padrão singleton. Desta forma existe apenas um objeto responsável pelo log em toda a aplicação que é acessível unicamente através da classe singleton.
+
+\subsection{Dao}
+
+DAO (Data Access Object) é um padrão para persistência de dados que permite separar regras de negócio das regras de acesso a banco de dados. Numa aplicação que utilize a arquitetura MVC, todas as funcionalidades de bancos de dados, tais como obter as conexões, mapear objetos Java para tipos de dados SQL ou executar comandos SQL, devem ser feitas por classes de DAO.
+
+\subsection{Factory Method}
+
+Factory Method, é um padrão de projeto que permite as classes delegar para subclasses decidirem ações. O factory method permite delegar a instanciação para as subclasses. O padrão Factory Method contém os seguintes elementos:
+
+\begin{itemize}
+	\item Creator — declara o factory method (método de fabricação) que retorna o objeto da classe abstrata. Este elemento também pode definir uma implementação básica que retorna um objeto de uma classe concreta básica;
+	\item ConcreteCreator — sobrescreve o factory method e retorna um objeto da classe concreta;
+	\item Product — define uma interface para os objetos criados pelo factory method;
+	\item ConcreteClass — uma implementação para a interface.
+\end{itemize}
