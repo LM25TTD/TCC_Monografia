@@ -1969,9 +1969,11 @@
     <bcf:citekey order="15">gps_iniciantes:2003</bcf:citekey>
     <bcf:citekey order="16">gpsshield:2013</bcf:citekey>
     <bcf:citekey order="17">inatel:1998</bcf:citekey>
-    <bcf:citekey order="18">Mendes:2002</bcf:citekey>
-    <bcf:citekey order="19">Mendes:2002</bcf:citekey>
-    <bcf:citekey order="20">Gamma:2000</bcf:citekey>
+    <bcf:citekey order="18">Wolf:2001</bcf:citekey>
+    <bcf:citekey order="19">jacobson:2005</bcf:citekey>
+    <bcf:citekey order="20">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="21">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="22">Gamma:2000</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>

@@ -2,44 +2,553 @@
 \label{cap:desenvolvimento do prototipo}
 
 \section{Modelo Conceitual}
-Nesta fase é necessário fechar o escopo do projeto, capturar os requisitos e principais comportamentos 
-esperados. No cenário de operação, cada automóvel a ser verificado possui um módulo embarcado instalado 
-e responsável por enviar sua localização geográfica atual obtida de um GPS. Estes dados são enviados a 
-um servidor web por meio de rede GPRS de uma operadora de telefonia móvel, o servidor web captura as 
-informações e organiza em uma base de dados. 
+Como ponto de partida é necessário definir o escopo do projeto partindo de uma idéia base, 
+contendo os elementos interativos iniciais do sistema e sua representação conceitual. O cenário de operação
+deste trabalho é composto por alguns elementos que emitem e consomem informação:
 
-Na outra ponta do sistema está o usuário, portanto deve ser oferecida uma interface para que ele possa
-localizar seus veículos e opcionalmente realizar o desligamento remoto dos mesmos. Todo acesso de usuário 
-será feito via navegador Web. A Figura 1 mostra o modelo conceitual do sistema.
+\begin{itemize}
+	\item Cada automóvel a ser verificado possui um módulo embarcado instalado e responsável por enviar sua 
+	localização geográfica atual, esta informação é obtida por meio da tecnologia GPS. 
+	\item  Os dados obtidos dados são enviados a um serviço Web. Após pesquisa de trabalho similares e soluções aplicadas,
+	foi decidido pelo uso da rede GPRS de uma operadora de telefonia móvel.
+  \item O serviço Web captura as informações e organiza em uma base de dados. 
+	\item O usuário fará acesso ao sistema por meio de uma aplicação Web que oferece uma interface 
+	de acesso às principais operações, como localizar seus veículos sobre uma API de mapas e opcionalmente 
+	realizar o desligamento remoto dos mesmos. 
+\end{itemize}
+
+A Figura 3.1 mostra o modelo conceitual abstraído do sistema.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=9.5cm,height=4.0cm]{figures/1_conceitual.png}
-\caption{Visão de operação do sistema e os elementos envolvidos}
-\label{Figura 1}
+\includegraphics[width=0.8\textwidth]{figures/1_conceitual.png}
+\caption{Visão conceitual do sistema}
+\label{1}
 \end{figure}
 
 \section{Especificação de Requisitos}
-Foram identificados dois atores do sistema (agentes externos): um “usuário comum” e um “administrador”. 
-Os requisitos são especificados sob a forma de casos de uso UML. A figura 2 retrata os casos de uso de
-cada ator identificado.
+Seguindo as recomendações de \textcite{Wolf:2001} para projeto de sistemas embarcados, é necessário
+capturar e descrever os requisitos, para realizar esta etapa, o Diagrama de Casos de Uso da UML se
+mostra ideal, além disso a descrição dos casos permite o entendimento do fluxo de dados criando uma base
+para descrição dos componentes para implementação.
+
+\subsection{Casos de Uso}
+
+Foram identificados dois atores do sistema (agentes externos): 
+
+\begin{itemize}
+	\item Ator "Usuário comum": Faz o uso final do sistema, realizando atividades como rastreamento e bloqueio
+	de veículos.
+	\item Ator "Administrador": Realiza operações de gerenciamento de usuário e módulos veiculares.
+\end{itemize}
+  
+A figura 3.2 retrata os casos de uso de cada ator identificado.
+
+%\vspace{50pt}
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=15.16cm]{figures/2_uc.png}
+\includegraphics[width=\textwidth]{figures/2_uc.png}
 \caption{Casos de uso do sistema}
-\label{Figura 2}
+\label{1}
 \end{figure}
+
+\subsection{Descrição dos Casos de Uso}
+
+Segundo \textcite{jacobson:2005}, podemos dizer que um caso de uso é um documento narrativo que descreve uma sequência de eventos de ator que usa um sistema para completar um processo, portanto, a descrição textual dos elementos da representação gráfica se faz necessária.
+
+As tabelas 3.1 a 3.8 descrevem os casos de uso da figura 3.2.
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter Usuário}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter Usuário\\\hline
+Sumário &
+Caso que descreve as etapas para manutenção de um usuário no sistema através da figura do Administrador, envolvendo as operação CRUD e associações com outros elementos do sistema.\\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+Usuário\\\hline
+Precondições &
+Usuário com CPF válido.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Usuários.
+
+3. Escolher opção de cadastrar novo usuário.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Buscar Usuário
+
+a. Selecionar os filtros de busca e os valores para cada um deste.
+
+b. O usuário ou lista de usuários compatíveis com os filtros são retornados.
+
+(3) Apagar Usuário
+
+a. Selecionar usuários que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna o nome dos usuários a serem apagados, solicitando confirmação.
+
+c. O administrador confirma a ação.
+
+(3) Atualizar dados do Usuário
+
+a. Selecionar usuário a sofrer o processo.
+
+b. Página de cadastro de usuário é preenchida com os dados atualmente persistidos.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido.
+\\\hline
+Pós-condições &
+Usuário estará cadastrado no sistema, podendo assim acessá-lo e executar as ações descritas em seus casos de uso. Em caso de remoção, os dados relacionados ao usuário removido também serão apagados.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de inserção de usuário, validação de valores dos campos, double-check para remoção de usuários.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+17/05/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter ModVeicular}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter ModVeicular\\\hline
+Sumário &
+Caso que descreve os processos de manutenção de um módulo veicular no sistema. O módulo veicular é um componente acoplado ao veículo que permite a este ser rastreado e bloqueado via web.\\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Existir módulo físico com a numeração serial única e válida.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Módulos Veiculares.
+
+3. Escolher opção de cadastrar novo módulo.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(2) Buscar Módulo Veicular
+
+a. Selecionar os filtros e os valores para cada um deste.
+
+b. O módulo ou lista de módulos veiculares compatíveis com os filtros são retornados.
+
+(2) Atualizar dados do Módulo Veicular
+
+a. Buscar módulo veicular.
+
+b. Selecionar módulo a sofrer o processo, a página de cadastro deve surgir preenchida com os valores atuais de cadastro deste.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(2) Remover módulo veicular
+
+a. Selecionar equipamentos que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna o número serial dos equipamentos a serem apagados, solicitando confirmação.
+
+c. O administrador confirma a ação.
+
+d. O sistema remove o(s) equipamento(s) desejados.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o administrador possa corrigir facilmente em caso de engano.
+
+b. Caso o equipamento a ser cadastrado já exista no banco de dados, o sistema informará esta situação com mensagem apropriada. \\\hline
+Pós-condições &
+Equipamento estará cadastrado no sistema pronto para sofrer interação.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de Inserção de Equipamento, validação de valores dos campos.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+14/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Associar Modulo-Usu\'{a}rio}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Associar Modulo-Usuário\\\hline
+Sumário &
+Descrição da associação entre o equipamento e seu dono (um usuário cadastrado), possibilitando operações-chave como rastreamento e bloqueio. \\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+Usuário\\\hline
+Precondições &
+Usuário e equipamentos envolvidos previamente cadastrados.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de Associação de Equipamentos, a lista de equipamentos livres é exibida.
+
+3. O administrador seleciona um equipamento, uma tela de pesquisa de usuários é mostrada.
+
+4. O usuário para associação é mostrado.
+
+5. O administrador deve confirmar a associação que é efetivada no sistema.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Caso executado a partir do cadastro de Usuário.
+
+a. A tela de pesquisa de usuários não é mostrada, uma vez que a associação será feita com o usuário que está sendo cadastrado. \\\hline
+Pós-condições &
+O usuário que se associou ao equipamento pode rastreá-lo, e bloquear veículo no qual ele está instalado.
+
+Equipamento não poderá ser associado a outro usuário sem que se remova a atual associação.\\\hline
+Requisitos não funcionais &
+Não definidos ainda\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+10/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Atualizar Pr\'{o}prio Cadastro}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Atualizar Próprio Cadastro\\\hline
+Sumário &
+Caso que descreve a atualização dos próprios dados, feita por um usuário acessando o sistema.\\\hline
+Ator primário &
+Usuário, Administrador\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+~
+\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página Meus Dados.
+
+3. O formulário é preenchido com os dados atualmente persistidos.
+
+4. O usuário altera os campos desejados e aciona opção salvar.
+
+5. O sistema valida os valores e os dados são persistidos.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o usuário possa corrigir facilmente em caso de engano.\\\hline
+Pós-condições &
+Modificação nos dados iniciais do Usuário.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de Inserção de Usuário, validação de valores dos campos.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+14/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter Ve\'{i}vulos}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter Veículos\\\hline
+Sumário &
+Caso que descreve as etapas para manutenção de veículos do usuário no sistema, envolvendo as operações CRUD.\\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Veículo com placa e código de chassi válido.\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Veículos.
+
+3. Escolher opção de cadastrar novo veículo.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Buscar Veículo
+
+a. Selecionar os filtros de busca e os valores para cada um deste.
+
+b. O veículo ou lista de veículos compatíveis com os filtros são retornados.
+
+(3) Apagar Veículo
+
+a. Selecionar os veículos que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna marca, modelo e placa dos veículos a serem apagados, solicitando confirmação.
+
+c. O usuário confirma a ação.
+
+(3) Atualizar dados do Veículo
+
+a. Após uma busca, selecionar o veículo a sofrer o processo.
+
+b. Página de cadastro de veículo é preenchida com os dados atualmente persistidos.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o usuário possa corrigir facilmente em caso de engano.
+
+b. Caso o veículo a ser cadastrado já exista no banco de dados, o sistema informará esta situação com mensagem apropriada. \\\hline
+Pós-condições &
+Veículo estará cadastrado no sistema, podendo ser associado a algum equipamento para quer o rastreio e/ou bloqueio sejam permitidos. Em caso de remoção, o módulo associado ao veículo será marcado como livre, somente podendo sofrer bloqueio e rastreamento caso seja associado a um novo.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de inserção de veículo, validação de valores dos campos, double-check para remoção de veículo.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+19/05/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Obter Posi\c{c}\~{a}o Atual}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Obter posição atual\\\hline
+Sumário &
+Caso que descreve a obtenção da posição atual de um veículo. \\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Usuário cadastrado e equipamentos associados a ele. \\\hline
+Fluxo Principal &
+1. Acessa página de rastreio.
+
+2. Selecionar o veículo desejado.
+
+3. O mapa é carregado na tela.
+
+4. A posição atual é exibida no mapa, representada por um ponto especial.\\\hline
+Fluxo Alternativo &
+(2) Erro na comunicação com o equipamento
+
+a. Em caso de falha na comunicação, o usuário é alertado com uma mensagem de indisponibilidade momentânea, porém incentivado a tentar novamente.
+
+(3) Erro no servidor de mapas
+
+a. O sistema deve informar o problema com os mapas, porém exibir os valores de longitude e latitude para que o usuário possa manualmente localizar o veículo.
+
+(4) Acionar função tipo de visão.
+
+a. Escolher entre visão de mapa ou visão de satélite.\\\hline
+Pós-condições &
+~
+\\\hline
+Requisitos não funcionais &
+~\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+15/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Setar Status de Bloqueio}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Setar Status de Bloqueio\\\hline
+Sumário &
+Este caso descreve como o usuário realiza o bloqueio ou desbloqueio do veículo através do sistema com o objetivo de facilitar a recuperação do automóvel. \\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Usuário cadastrado e equipamentos associados a ele. Veículo cadastrado e equipamento configurado.\\\hline
+Fluxo Principal &
+1. Acessar página de rastreio.
+
+2. Selecionar o veículo desejado.
+
+3. Acionar botão bloquear.
+
+4. O sistema exibe uma mensagem confirmando o bloqueio do veículo.\\\hline
+Fluxo Alternativo &
+(2) Erro na comunicação com o equipamento
+
+a. Em caso de falha na comunicação, o usuário é alertado com uma mensagem de indisponibilidade momentânea, porém incentivado a tentar novamente.
+
+(2) Desbloquear Veículo
+
+a. Selecionar o botão de desbloqueio, que só estará disponível se houve um bloqueio anterior.
+
+b. O sistema exibe uma mensagem confirmando o desbloqueio do veículo.
+
+(5) Falha na ação
+
+a. O usuário é alertado com uma mensagem de indisponibilidade momentânea, porém incentivado a tentar novamente.\\\hline
+Pós-condições &
+~\\\hline
+Requisitos não funcionais &
+~\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+15/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Listar Modulos}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Listar Modulos\\\hline
+Sumário &
+Caso que descreve os processos de manutenção dos módulos veiculares pertencentes ao usuário. \\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Usuário cadastrado e equipamentos associados a ele.\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página Meus Módulos ou nome correspondente.
+
+3. Todos os módulos pertencentes ao usuário são retornados, podendo associá-lo ou desassociá-lo de um veículo.
+
+4. Usuário filtra o resultado para encontrar o(s) módulo(s) desejado(s).\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Detalhar módulo
+
+a. Usuário filtra o resultado para encontrar o(s) módulo(s) desejado(s).
+
+b. Selecionar opção Detalhar Módulo.
+
+(3) Usuário sem módulo pertencente a ele.
+
+a. O sistema retornará mensagem informando que o usuário não possui módulos cadastrados.
+
+(4) Filtro sem correspondência
+
+a. Caso o usuário aplique um filtro no resultado que não encontre qualquer módulo correspondente, o sistema informará que não existem resultados para o filtro aplicado.\\\hline
+Pós-condições &
+Possibilidade de associar módulo a um veículo livre.\\\hline
+Requisitos não funcionais &
+~\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+15/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\newpage
 
 \section{Arquitetura do Sistema}
 Os blocos iniciais do projeto juntamente com os casos de uso e suas descrições nos permitem fazer 
 uma quebra do sistema em componentes independentes para arquitetura de sistemas de tempo real de 
-acordo com \textcite{Mendes:2002}. A Figura 3 mostra o diagrama de componentes da UML gerado nesta 
+acordo com \textcite{Mendes:2002}. A Figura 3.3 mostra o diagrama de componentes da UML gerado nesta 
 etapa.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=14.00cm,height=5.5cm]{figures/4_arquitetural.png}
+\includegraphics[width=\textwidth]{figures/4_arquitetural.png}
 \caption{Arquitetura do Sistema}
 \label{Figura 3}
 \end{figure}
