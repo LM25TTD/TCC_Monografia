@@ -1,0 +1,18 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{GPRS}]\begingroup General Packet Radio Service\nomeqref {0.0}
+		\nompageref{ix}
+  \item [{GPS}]\begingroup Global Positioning System\nomeqref {0.0}
+		\nompageref{ix}
+  \item [{GSM}]\begingroup Global System for Mobile\nomeqref {0.0}
+		\nompageref{ix}
+  \item [{NMEA}]\begingroup National Marine Electronics Association\nomeqref {0.0}
+		\nompageref{ix}
+  \item [{PWM}]\begingroup Pulse-Width Modulation\nomeqref {0.0}
+		\nompageref{ix}
+  \item [{UML}]\begingroup Unified Modeling Language\nomeqref {0.0}
+		\nompageref{ix}
+
+\end{thenomenclature}

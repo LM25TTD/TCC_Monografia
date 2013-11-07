@@ -28,6 +28,7 @@
 \usepackage{array}
 \usepackage{supertabular}
 \usepackage{hhline}
+\usepackage{nomencl}
 \usepackage[backend=biber]{biblatex}
 
 \addbibresource{tex_parts/tese.bib}
@@ -47,7 +48,7 @@
 %%% nome para ser usado no sumário
 
 \newcommand{\listofcodename}{Lista de C\'{o}digos}
-
+\makenomenclature
 
 %\documentstyle[12pt,comnome,psfig]{dcctese}
 \begin{document}
@@ -187,7 +188,7 @@ BANCA EXAMINADORA\\[12 pt]
 
 \noindent \hrulefill \hspace*{6cm} \\
 \noindent \textbf{Prof. Ricardo da Silva Barboza, Doutor}\\
-\textit{CENTRO UNIVERSIT\'{A}RIO DO NORTE}\\
+\textit{UNIVERSIDADE DO ESTADO DO AMAZONAS}\\
 
 \newpage
 
@@ -249,6 +250,10 @@ também aqueles que trilharam comigo este caminho:
 \renewcommand{\contentsname}{Sum\'{a}rio}
 \tableofcontents
 \listoftables
+\input{tex_parts/SIGLAS.TEX}
+\renewcommand{\nomname}{Lista de Abreviaturas e Siglas}
+\printnomenclature
+\cleardoublepage
 \newpage
 
 \listoffigures
@@ -303,6 +308,6 @@ também aqueles que trilharam comigo este caminho:
 
 \printbibliography
 
-%\include{anexos}
+\input{tex_parts/ANEXOS.TEX}
 
 \end{document}

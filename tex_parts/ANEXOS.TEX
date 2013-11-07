@@ -1,0 +1,381 @@
+\appendix
+\chapter{Anexos}
+\label{cap:anexos}
+
+\section{Descrição dos casos de uso}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter Usuário}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter Usuário\\\hline
+Sumário &
+Caso que descreve as etapas para manutenção de um usuário no sistema através da figura do Administrador, envolvendo as operação CRUD e associações com outros elementos do sistema.\\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+Usuário\\\hline
+Precondições &
+Usuário com CPF válido.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Usuários.
+
+3. Escolher opção de cadastrar novo usuário.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Buscar Usuário
+
+a. Selecionar os filtros de busca e os valores para cada um deste.
+
+b. O usuário ou lista de usuários compatíveis com os filtros são retornados.
+
+(3) Apagar Usuário
+
+a. Selecionar usuários que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna o nome dos usuários a serem apagados, solicitando confirmação.
+
+c. O administrador confirma a ação.
+
+(3) Atualizar dados do Usuário
+
+a. Selecionar usuário a sofrer o processo.
+
+b. Página de cadastro de usuário é preenchida com os dados atualmente persistidos.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido.
+\\\hline
+Pós-condições &
+Usuário estará cadastrado no sistema, podendo assim acessá-lo e executar as ações descritas em seus casos de uso. Em caso de remoção, os dados relacionados ao usuário removido também serão apagados.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de inserção de usuário, validação de valores dos campos, double-check para remoção de usuários.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+17/05/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter ModVeicular}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter ModVeicular\\\hline
+Sumário &
+Caso que descreve os processos de manutenção de um módulo veicular no sistema. O módulo veicular é um componente acoplado ao veículo que permite a este ser rastreado e bloqueado via web.\\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Existir módulo físico com a numeração serial única e válida.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Módulos Veiculares.
+
+3. Escolher opção de cadastrar novo módulo.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(2) Buscar Módulo Veicular
+
+a. Selecionar os filtros e os valores para cada um deste.
+
+b. O módulo ou lista de módulos veiculares compatíveis com os filtros são retornados.
+
+(2) Atualizar dados do Módulo Veicular
+
+a. Buscar módulo veicular.
+
+b. Selecionar módulo a sofrer o processo, a página de cadastro deve surgir preenchida com os valores atuais de cadastro deste.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(2) Remover módulo veicular
+
+a. Selecionar equipamentos que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna o número serial dos equipamentos a serem apagados, solicitando confirmação.
+
+c. O administrador confirma a ação.
+
+d. O sistema remove o(s) equipamento(s) desejados.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o administrador possa corrigir facilmente em caso de engano.
+
+b. Caso o equipamento a ser cadastrado já exista no banco de dados, o sistema informará esta situação com mensagem apropriada. \\\hline
+Pós-condições &
+Equipamento estará cadastrado no sistema pronto para sofrer interação.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de Inserção de Equipamento, validação de valores dos campos.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+14/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Associar Modulo-Usu\'{a}rio}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Associar Modulo-Usuário\\\hline
+Sumário &
+Descrição da associação entre o equipamento e seu dono (um usuário cadastrado), possibilitando operações-chave como rastreamento e bloqueio. \\\hline
+Ator primário &
+Administrador\\\hline
+Atores secundários &
+Usuário\\\hline
+Precondições &
+Usuário e equipamentos envolvidos previamente cadastrados.\\\hline
+Fluxo Principal &
+1. Administrador deve se autenticar no sistema web.
+
+2. Acessar página de Associação de Equipamentos, a lista de equipamentos livres é exibida.
+
+3. O administrador seleciona um equipamento, uma tela de pesquisa de usuários é mostrada.
+
+4. O usuário para associação é mostrado.
+
+5. O administrador deve confirmar a associação que é efetivada no sistema.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Caso executado a partir do cadastro de Usuário.
+
+a. A tela de pesquisa de usuários não é mostrada, uma vez que a associação será feita com o usuário que está sendo cadastrado. \\\hline
+Pós-condições &
+O usuário que se associou ao equipamento pode rastreá-lo, e bloquear veículo no qual ele está instalado.
+
+Equipamento não poderá ser associado a outro usuário sem que se remova a atual associação.\\\hline
+Requisitos não funcionais &
+Não definidos ainda\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+10/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Atualizar Pr\'{o}prio Cadastro}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Atualizar Próprio Cadastro\\\hline
+Sumário &
+Caso que descreve a atualização dos próprios dados, feita por um usuário acessando o sistema.\\\hline
+Ator primário &
+Usuário, Administrador\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+~
+\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página Meus Dados.
+
+3. O formulário é preenchido com os dados atualmente persistidos.
+
+4. O usuário altera os campos desejados e aciona opção salvar.
+
+5. O sistema valida os valores e os dados são persistidos.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o usuário possa corrigir facilmente em caso de engano.\\\hline
+Pós-condições &
+Modificação nos dados iniciais do Usuário.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de Inserção de Usuário, validação de valores dos campos.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+14/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Manter Ve\'{i}vulos}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Manter Veículos\\\hline
+Sumário &
+Caso que descreve as etapas para manutenção de veículos do usuário no sistema, envolvendo as operações CRUD.\\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Veículo com placa e código de chassi válido.\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página de gerenciamento de Veículos.
+
+3. Escolher opção de cadastrar novo veículo.
+
+4. Preencher os dados com informações válidas.
+
+5. Confirmar ação e finalizar processo.\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Buscar Veículo
+
+a. Selecionar os filtros de busca e os valores para cada um deste.
+
+b. O veículo ou lista de veículos compatíveis com os filtros são retornados.
+
+(3) Apagar Veículo
+
+a. Selecionar os veículos que se deseja remover através de um componente de seleção múltipla.
+
+b. O sistema retorna marca, modelo e placa dos veículos a serem apagados, solicitando confirmação.
+
+c. O usuário confirma a ação.
+
+(3) Atualizar dados do Veículo
+
+a. Após uma busca, selecionar o veículo a sofrer o processo.
+
+b. Página de cadastro de veículo é preenchida com os dados atualmente persistidos.
+
+c. Preencher os dados com informações válidas.
+
+d. Confirmar ação e finalizar processo.
+
+(5) Falha na validação dos dados
+
+a. O sistema retornará mensagem informando quais campos possuem valor inválido, para que o usuário possa corrigir facilmente em caso de engano.
+
+b. Caso o veículo a ser cadastrado já exista no banco de dados, o sistema informará esta situação com mensagem apropriada. \\\hline
+Pós-condições &
+Veículo estará cadastrado no sistema, podendo ser associado a algum equipamento para quer o rastreio e/ou bloqueio sejam permitidos. Em caso de remoção, o módulo associado ao veículo será marcado como livre, somente podendo sofrer bloqueio e rastreamento caso seja associado a um novo.\\\hline
+Requisitos não funcionais &
+Design minimalista e funcional da página de inserção de veículo, validação de valores dos campos, double-check para remoção de veículo.\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+19/05/2013\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\begin{flushleft}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\bottomcaption{Caso de Uso Listar Modulos}
+\begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
+\hline
+Nome do caso de uso &
+Listar Modulos\\\hline
+Sumário &
+Caso que descreve os processos de manutenção dos módulos veiculares pertencentes ao usuário. \\\hline
+Ator primário &
+Usuário\\\hline
+Atores secundários &
+~
+\\\hline
+Precondições &
+Usuário cadastrado e equipamentos associados a ele.\\\hline
+Fluxo Principal &
+1. Usuário deve se autenticar no sistema web.
+
+2. Acessar página Meus Módulos ou nome correspondente.
+
+3. Todos os módulos pertencentes ao usuário são retornados, podendo associá-lo ou desassociá-lo de um veículo.
+
+4. Usuário filtra o resultado para encontrar o(s) módulo(s) desejado(s).\\\hline
+Fluxo Alternativo &
+(1) Credenciais inválidas
+
+a. O sistema retorna uma mensagem de erro informando o ocorrido e impossibilitando acesso sem autenticação.
+
+(3) Detalhar módulo
+
+a. Usuário filtra o resultado para encontrar o(s) módulo(s) desejado(s).
+
+b. Selecionar opção Detalhar Módulo.
+
+(3) Usuário sem módulo pertencente a ele.
+
+a. O sistema retornará mensagem informando que o usuário não possui módulos cadastrados.
+
+(4) Filtro sem correspondência
+
+a. Caso o usuário aplique um filtro no resultado que não encontre qualquer módulo correspondente, o sistema informará que não existem resultados para o filtro aplicado.\\\hline
+Pós-condições &
+Possibilidade de associar módulo a um veículo livre.\\\hline
+Requisitos não funcionais &
+~\\\hline
+Autor &
+Leandro Bentes\\\hline
+Data &
+15/04/2013\\\hline
+\end{supertabular}
+\end{flushleft}
