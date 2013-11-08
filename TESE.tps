@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
+NormalPos.right=1130
+NormalPos.bottom=484
 Class=LaTeXView
-Document=tex_parts\CAP3.TEX
+Document=TESE.tex
 
 [Frame0_View0,0]
-TopLine=0
-Cursor=893
+TopLine=258
+Cursor=8327
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
+NormalPos.right=1130
+NormalPos.bottom=484
 Class=LaTeXView
-Document=tex_parts\CAP2.TEX
+Document=tex_parts\CAP3.TEX
 
 [Frame1_View0,0]
-TopLine=728
-Cursor=45773
+TopLine=218
+Cursor=10712
 
 [Frame2]
 Flags=0
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
+NormalPos.right=1130
+NormalPos.bottom=484
 Class=LaTeXView
-Document=TESE.tex
+Document=tex_parts\SIGLAS.TEX
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=82
+Cursor=295
 
 [Frame3]
 Flags=0
@@ -65,14 +65,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
-Class=BibTeXView
-Document=tex_parts\tese.bib
+NormalPos.right=1130
+NormalPos.bottom=484
+Class=LaTeXView
+Document=tex_parts\ANEXOS.TEX
 
 [Frame3_View0,0]
-TopLine=30
-Cursor=1257
+TopLine=0
+Cursor=9
 
 [Frame4]
 Flags=0
@@ -83,14 +83,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
-Class=LaTeXView
-Document=tex_parts\CAP1.TEX
+NormalPos.right=1130
+NormalPos.bottom=484
+Class=BibTeXView
+Document=tex_parts\tese.bib
 
 [Frame4_View0,0]
-TopLine=85
-Cursor=9053
+TopLine=165
+Cursor=5588
 
 [Frame5]
 Flags=0
@@ -101,17 +101,35 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1362
-NormalPos.bottom=478
+NormalPos.right=1130
+NormalPos.bottom=484
 Class=LaTeXView
 Document=tex_parts\CAP4.TEX
 
 [Frame5_View0,0]
-TopLine=83
-Cursor=4927
+TopLine=27
+Cursor=1554
+
+[Frame6]
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-1
+MaxPos.y=-1
+NormalPos.left=4
+NormalPos.top=26
+NormalPos.right=1130
+NormalPos.bottom=484
+Class=LaTeXView
+Document=tex_parts\CAP1.TEX
+
+[Frame6_View0,0]
+TopLine=90
+Cursor=9053
 
 [SessionInfo]
-FrameCount=6
+FrameCount=7
 ActiveFrame=0
 
 [Bookmarks]

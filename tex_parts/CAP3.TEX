@@ -234,77 +234,157 @@ o representa de forma estruturada lógica.
 \label{1}
 \end{figure}
 
-\section{Módulo Veicular Embarcado - Hardware}
-Após a análise do diagrama de classes, foram identificados os componentes de hardware,
-são estes:
-\begin{itemize}
-	\item Módulo GPS.
-	\item Módulo GSM.
-	\item Módulo de I/O.
-\end{itemize}
-Para implementação em hardware foi escolhida a plataforma Arduino, pois
-traz a filosofia do hardware open-source com seus diagramas disponíveis 
-livremente na Internet e uma comunidade ativa no desenvolvimento de soluções.
+Conforme se observa no desenho de classes, o módulo se resume a quatro classes, onde existe uma composição na classe principal ModuloVeicularHw, isto significa que esta é só existe juntamente com as outras da composição e se uma destas últimas for removida a principal deixará de existir. Ainda na classe principal são guardados os atributos de estado, conexão e posição atual, além de alguns atributos para verificação de erros.
 
-Como placa microcontroladora, o Arduino Uno foi selecionado, pois oferece
-poder de processamento suficiente para o projeto, preço acessível e dimensões
-físicas propícias para integração veicular. A placa traz um microcontrolador
-Atmega 328 da Atmel, que possui 32 kbytes de memória flash, 2 kbytes de memória
-RAM, pinos de I/O digital e analógicos, comunicação serial e opera a um clock de
-16 MHz. A figura 5 mostra um exemplar da placa Arduino Uno.
+A classe GSM possui como atributo principal um lista de comandos AT, utilizados para acionar as diversas funções de celular, estes comandos são strings definidas pelo fabricante e descritas no manual do produto. Nota-se que apenas métodos relacionados com a função GPRS e conexões de rede dados foram mapeados, pois só existe a necessidade de uso nesta modalidade.
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=3.00cm\textwidth]{figures/arduinoUno.jpg}
-\caption{Placa Arduino Uno}
-\label{Figura 5}
-\end{figure}
+No modelo da classe GPS, os atributos principais utilizados para obter posição geográfica atual são latitude e longitude, porém para o funcionamento do hardware
+dados de altitude, data, hora e número de satélites também são utilizados. Como comportamentos padrão existem: a obtenção da posição atual, velocidade, curso, satélites e data com hora.
 
-A plataforma Arduino oferece diversos módulos de hardware plugáveis
-para as mais diversas funções, que são chamados de Shields. Estes módulos
-objetivam ser plug-and-play, ou seja, procuram poupar o máximo o trabalho
-de soldagem e aplicação de componentes discretos.
+O componente IO Veículo apenas representa as ações de bloquear, desbloquear e estado do alarme (não utilizado neste projeto). Como atributos, o estado do alarme e estado de bloqueio são representados.
 
-Para função de hardware GPS, o Shield GPS Sparkfun foi escolhido, este shield
-traz um módulo GPS EM 406 com precisão de 5 metros na medida de posição, comunicável
-por interface serial RS 232 ou TTL. A figura 6 mostra o shield GPS juntamente com o 
-módulo GPS EM 406.
+\section{Hardware do módulo embarcado}
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=7.00cm\textwidth]{figures/6_gps.png}
-\caption{GPS Shield e Módulo EM 406}
-\label{Figura 6}
-\end{figure}
+Conforme abordado no capítulo 2, a plataforma de prototipagem Arduino foi escolhida para servir de base para implementação em hardware do módulo embarcado, sendo que a placa controladora Arduino Uno é o núcleo funcional do mesmo. 
 
-Para comunicação com o servidor, se fez necessária uma alternativa que utilizasse
-envio de dados sobre a rede de celular, pois esta rede possui altíssima cobertura
-em área urbana, foco do projeto. A troca de dados se dá sobre o protocolo GPRS, que
-especifica um máximo de 80 kbps para download e 20 kpbs para upload de dados.
-
-Uma das soluções em shield para Arduino é o Cellular Shield Sparkfun, que traz um
-módulo SendTrue SM5100B como interface com a rede. As especificações do módulo incluem:
+Baseado no modelo de classes da figura 3.4, é possível perceber que existe uma correspondência de um para um entre classe e hardware que implementa certa funcionalidade, assim sendo:
 
 \begin{itemize}
-			\item Quad-Band 850/900/1800/1900 MHz
-			\item Controle via comandos AT
-			\item Alimentação: 3,2 a 4,2V
-			\item Baixo consumo: 350,0mA (\textit{consumo médio em transmissão})
-			\item Temperatura de operação: -10 a 85 graus Celsius.
+	\item Classe ModuloVeicularHw: corresponde a placa controladora Arduino Uno.
+	\item Classe GSM: corresponde em hardware ao Shield GSM que está acoplado a placa controladora.
+	\item Classe GPS: corresponde ao Shield GPS com módulo GPS EM406 descrito no capítulo 2.
+	\item IO Veículo: correspondente ao módulo de relé para acionamento de cargas em conjunto com um pino digital da placa controladora para realizar leitura do estado do alarme do veículo.
 \end{itemize}
 
-A figura 7 mostra o Cellular Shield Sparkfun com módulo SM5100B que foi aplicado
-no projeto. O shield foi utilizado com antena quad-band que não está contemplada
-na figura.
+\subsection{Placa controladora}
+
+O processo de montagem se inicia com a placa microcontroladora que recebe os shields conforme o desenvolvimento do firmware. A figura 3.5 mostra o exemplar de Arduino Uno adquirido para montagem do protótipo.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=4.00cm\textwidth]{figures/gsm.jpg}
-	\caption{Cellular Shield com SM5100B}
-	\label{Figura 7}
+	\includegraphics[width=0.6\textwidth]{figures/arduinoUnoReal.jpg}
+	\caption{Exemplar Arduino Uno}
+	\label{1}
 \end{figure}
 
-O módulo SM5100B não possui uma biblioteca do fabricante com funções pré-definidas para sua 
+Por serem parte de uma plataforma orientada a prototipagem, os hardwares da família Arduino possuim algumas características para facilitar a integração entre módulos, placas de circuito impresso e componentes de outra natureza, é possível enumerar as principais:
+
+\begin{enumerate}
+	\item Layout padrão: os shields seguem o mesmo desenho da placa controladora Arduino Uno, com issso não existe desproporcionalidade de tamanho na integração.
+	\item Pinos para empilhamento: as placas possuem pinos passantes que permitem conectar nós de circuito a uma segunda placa empilhada sob a primeira. Os pinos são mostrados na figura 3.6.
+	
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/stackPins.jpg}
+	\caption{Pinos para empilhamento no Shield GSM}
+	\label{1}
+\end{figure}	
+
+	\item O kit Arduino traz um conjunto de jumpers com terminais do tipo pino, facilmente conectáveis aos soquetes da placa controladora.
+	\item Textos explicativos impressos sobre as placas descrevem a função de cada pino, diminuindo riscos de conexões erradas que podem levar à queima de componentes.
+	
+\end{enumerate}
+
+\subsection{Shield GSM}
+
+O próximo componente integrado é o Shield GSM, nesta etapa apenas é necessária a soldagem do pinos de empilhamento conforme a figura 3.6, e encaixar o conjunto sobre a placa controladora.
+
+Conforme obtido na documentação disponibilizada pelo fabricante, este shield utiliza alimentação dos pinos 5V e 3.3V, além disso faz uso dos pino digitais 2 e 3 para abertura de um canal serial com o microcontrolador, o restante dos pinos fica livre para uso. Existe um conector para antena padrão SMA, que recebe uma atena quad band afim de melhorar a recepção de sinal da rede GSM. A figura 3.7 mostra a integração realizada.
+ 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/arduinoAndGSM.jpg}
+\caption{Shield GSM integrado ao Arduino Uno}
+\label{1}
+\end{figure}
+
+\subsection{Shield GPS}
+
+A próxima etapa é a integração do Shield GPS no conjunto atual, para isto se procede a soldagem dos pinos de empilhamento da mesma forma que no passo anterior, porém foi percebido na análise documental que existe um pequeno empecilho que demanda uma adaptção no hardware.
+
+A questão é que o Shield GPS, assim como o GSM, também necessita de um canal serial com o microcontrolador. Em sua configuração padrão, este componente possui uma chave que permite alternar o canal serial entre os pares de pino 0-1 e 2-3, neste momento surge o problema:
+
+\begin{itemize}
+	\item Os pinos 0 e 1 formam o canal serial utilizado para programação e debug do microcontrolador via porta USB, portanto não é possível utilizá-lo nesta configuração.
+	\item Os pinos 2 e 3 são utilizados pelo Shield GSM e não se pode compartilhar o mesmo canal.
+\end{itemize}
+
+A solução aplicada foi alterar os pinos do canal serial para o par 4-5 que se encontra livre. O desenho do shield permite fazer isto facilmente: conforme a figura 3.8, existem dois pontos de solda no circuito com os textos "2" e "3", deve-se remover o pontos de solda desses locais e realizar um jumpeamento do ponto 2 para o pino 4 e do ponto 3 para o pino 5. A chave de seleção deve ser mantida na posição DLINE.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/gpsMod.jpg}
+\caption{Modificação no Shield GPS}
+\label{1}
+\end{figure}  
+
+Após a modificação se procede o empilhamento da placa normalmente, deixando o conjunto com o aspecto da figura 3.9.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/arduinoGSMGPS.jpg}
+\caption{Integração Arduino Uno, GSM e GPS}
+\label{1}
+\end{figure}
+
+\subsection{Circuito de I/O com Veículo}
+
+Um dos requisitos do sistema é a possibilidade de bloquear, ou seja, desligar o veículo e não permitir que o mesmo seja ligado novamente por meios normais. Após pesquisar sobre os métodos utilizados pelos alarmes automotivos para realizar este desligamento foi constatado que o mesmos comumente realizam uma intervenção sobre o circuito da bomba de combustível do veículo.
+
+O funcionamento desta técnica se baseia no princípio de malhas fechadas, a figura 3.10 representa o circuito de uma bomba de combustível automotiva: uma vez que a ignição fecha o circuito, a bomba fica alimentada e funciona normalmente.
+
+ \begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/circBomba.png}
+\caption{Circuito normal da bomba de combustível}
+\label{1}
+\end{figure}
+
+A intervenção se dá na inserção de uma nova chave, neste caso um relé normalmente fechado\footnote{Um relé normalmente fechado permite a passagem de corrente entre dois pontos e, quando acionado, desconecta estes dois ponto impedindo a condução e abrindo o circuito.} é colocado em série com a chave de ignição, no momento que o microcontrolador acionar o relé, o circuito é aberto e a bomba deixa de funcionar por falta de alimentação. A figura 3.11 mostra o circuito alterado e a chave representativa do relé se encontra aberta, indicando um bloqueio do veículo.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/circBombaFin.png}
+\caption{Circuito da bomba após intervenção}
+\label{1}
+\end{figure}
+
+A bomba de combustível de um automóvel possui uma corrente de operação de 5 a 6 ampéres, com pico de 10 ampéres, conforme relatado no capítulo 2, um microcontrolador necessita de um circuito externo, em geral feito com relés, para manipular esta carga. Para suprir esta necessidade foi adquirido um circuito com relé da fabricante Sparkfun. Detalhes deste componente se encontram no capítulo 2.
+
+A integração deste circuito ao conjunto montado até o momento é feita por meio de três jumpers:
+
+\begin{itemize}
+	\item Jumper ligado em 5 V para alimentação da bobina do relé.
+	\item Jumper ligado em GND (terra) também para a bobina;
+  \intem Jumper de controle ligado no pino digital 12 para sinalizar o acionamento ou desligamento do relé.
+\end{itemize}
+
+Uma intervenção no circuito de relé foi necessária pois por padrão o conector da placa está interligado à malha normalmente aberta, com isso foram soldados dois cabos diretamente à malha normalmente fechada conforme a figura 3.12.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/jmpNC.jpg}
+\caption{Fios interligados à malha normalmente fechada do relé}
+\label{1}
+\end{figure}
+
+Ao final jumper também foi adicionado interligando o pino digital 9 ao pino RST para fins de reboot automático do microcontrolador quando necessário. A figura 3.13 mostra o conjunto completo montado.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fullMount.jpg}
+\caption{Conjunto de hardware do módulo embarcado montado}
+\label{1}
+\end{figure}
+
+\section {Desenvolvimento do Firmware}
+
+\subsection{Interface com IO}
+
+\subsection{Interface com Shield GPS}
+
+\subsection{Criação da classe de comunicação com Shield GSM}
+O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua 
 operação, mas é operável por meio de comandos AT especificados em suas referências. Entretanto,
 o uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória,
 torna bastante complexo o controle de estados e a recuperação de erros. Para contornar esta questão,
@@ -319,39 +399,9 @@ da classe de comunicação e a herança de SoftwareSerial.
 	\label{Figura 8}
 \end{figure}
 
-Um dos requisitos funcionais do projeto prevê o bloqueio remoto de um veículo por meio do desligamento 
-do motor. Após um estudo dos circuitos elétricos veiculares e pesquisa sobre métodos de bloqueio mais
-utilizados, chgou-se à conclusão que a melhor alternativa é a interrupção da alimentação elétrica
-da bomba de cmbustível, esta estratégia é utilizada pelos módulos de alarme mais confiáveis do mercado
-para implementar o desligamento do veículo.
+\subsection{Estados do firmware}
 
-Como a bomba de combustível opera em um circuito que gera corrente entre 5 e 10 ampéres, foi preciso
-utilizar um componente que trabalhe com esta faixa de carga. Um relê foi a solução aplicada, mais epecificamente
-o circuito normalmente fechado do relê, cuja carga suportada é de 10 A. Para acionamento do relê, um circuito
-auxiliar que utiliza o sinal de uma das saídas digitais do Arduino Uno foi usado, assim, o sinal de baixa corrente
-da porta digital controla o acionamento da bobina de um relê, que aciona mecanicamente o circuito normalmente fechado
-ligado a bomba de combustível, interrompendo a alimentação da mesma quando solicitado. A figura 9 mostra o módulo de
-I/O com relê integrado.
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=5.00cm\textwidth]{figures/beefcake2.jpg}
-	\caption{Módulo de I/O com veículo}
-	\label{Figura 9}
-\end{figure}
-
-Após a seleção dos componentes, o módulo veicular foi montado. Os shields foram montados com facilidade já que
-existe uma conexão física padrão, apenas alguns ajustes foram necessários: no módulo GPS, os pinos de comunicação
-serial (TX e RX) coincidiram com os pinos do módulo GSM (pinos 2 e 3 digital da placa Aduino), para solucionar
-a questão, um jumper foi feito de modo a conectar a transmissão e recepção do GPS nos pinos 4 e 5 da placa Arduino.
-A figura 10 mostra o módulo embarcado montado.
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=5.00cm\textwidth]{figures/prototipo_4.jpg}
-	\caption{Módulo veicular montado}
-	\label{Figura 10}
-\end{figure}
+\subsection{Comunicação com Webservice}
 
 O módulo veicular embarcado se comunica com o servidor web através de requisições HTTP POST, trazendo em seu
 payload dados estruturados no padrão JSON. O adoção do método POST se deu pois o permite um maior tamanho de
