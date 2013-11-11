@@ -11,13 +11,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=TESE.tex
 
 [Frame0_View0,0]
-TopLine=258
+TopLine=266
 Cursor=8327
 
 [Frame1]
@@ -29,13 +29,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=tex_parts\CAP3.TEX
 
 [Frame1_View0,0]
-TopLine=218
+TopLine=225
 Cursor=10712
 
 [Frame2]
@@ -47,8 +47,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=tex_parts\SIGLAS.TEX
 
@@ -65,8 +65,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=tex_parts\ANEXOS.TEX
 
@@ -83,13 +83,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=BibTeXView
 Document=tex_parts\tese.bib
 
 [Frame4_View0,0]
-TopLine=165
+TopLine=167
 Cursor=5588
 
 [Frame5]
@@ -101,8 +101,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=tex_parts\CAP4.TEX
 
@@ -119,13 +119,13 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1130
-NormalPos.bottom=484
+NormalPos.right=1146
+NormalPos.bottom=478
 Class=LaTeXView
 Document=tex_parts\CAP1.TEX
 
 [Frame6_View0,0]
-TopLine=90
+TopLine=86
 Cursor=9053
 
 [SessionInfo]

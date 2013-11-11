@@ -379,6 +379,17 @@ Ao final jumper também foi adicionado interligando o pino digital 9 ao pino RST
 
 \section {Desenvolvimento do Firmware}
 
+O módulo embarcado possui um software de propósito específico, ou firmware, gravado na memória flash do microcontrolador, cujas principais funções são:
+
+\begin{itemize}
+	\item Comunicação e obtenção de dados GPS;
+	\item Montagem do corpo da requisição ao webservice;
+	\item Controle da conexão e transmissão de dados GPRS;
+	\item Manipulação da resposta e tratamento de bloqueio/desbloqueio do veículo através do módulo de IO;
+\end{itemize}
+
+
+
 \subsection{Interface com IO}
 
 \subsection{Interface com Shield GPS}
