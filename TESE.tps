@@ -14,11 +14,11 @@ NormalPos.top=26
 NormalPos.right=1146
 NormalPos.bottom=478
 Class=LaTeXView
-Document=TESE.tex
+Document=tex_parts\CAP3.TEX
 
 [Frame0_View0,0]
-TopLine=266
-Cursor=8327
+TopLine=403
+Cursor=20855
 
 [Frame1]
 Flags=0
@@ -32,11 +32,11 @@ NormalPos.top=26
 NormalPos.right=1146
 NormalPos.bottom=478
 Class=LaTeXView
-Document=tex_parts\CAP3.TEX
+Document=TESE.tex
 
 [Frame1_View0,0]
-TopLine=225
-Cursor=10712
+TopLine=274
+Cursor=8711
 
 [Frame2]
 Flags=0
@@ -125,7 +125,7 @@ Class=LaTeXView
 Document=tex_parts\CAP1.TEX
 
 [Frame6_View0,0]
-TopLine=86
+TopLine=82
 Cursor=9053
 
 [SessionInfo]

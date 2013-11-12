@@ -388,13 +388,80 @@ O módulo embarcado possui um software de propósito específico, ou firmware, g
 	\item Manipulação da resposta e tratamento de bloqueio/desbloqueio do veículo através do módulo de IO;
 \end{itemize}
 
+A criação desta rotina segue um modelo de atividades bem definidas, que se restringem a um laço de repetição principal. O modelo de programação da plataforma Arduino engloba a implementação de duas funções principais:
 
+\begin{itemize}
+	\item void setup(): função que é executada apenas uma vez a cada inicialização ou reboot da placa controladora, utilizada para inicialização de variáveis, configuração do modo dos pinos e bibliotecas.
+	\item void loop(): bloco executado após o setup(), fazendo o que o próprio nome diz, um laço de repetição que executa enquanto o microcontrolador estiver ligado, permitindo a leitura e modificação de estado. Utilizado para realizar o controle efetivo da placa controladora.
+\end{itemize} 
+
+O passos fundamentais do firmware no módulo embarcado são descritas no diagrama de atividades da figura 3.14, o fluxo principal se resume, após a execução da função setup, na repetição da obtenção dos dados GPS, envio dos dados ao servidor e leitura da resposta, verificando se deve se efetuar o bloqueio do veículo ou não.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/atividades_hl.png}
+\caption{Sequência lógica do firmware}
+\label{1}
+\end{figure}
+
+Para realização das atividades que envolvem o uso dos shields e outros hardwares acoplados a placa controladora, é necessário criar uma interface de comunicação com os mesmos, que é feita na maioria dos casos, utilizando uma biblioteca fornecida pelo fabricante ou pela comunidade Arduino. Estas bibliotecas são conjuntos de rotinas escritas em C/C++ e integradas ao programa principal por meio de uma diretiva \emph{\#include<biblioteca.h>}.
+
+As subseções a seguir descrevem a realização da interface com os shields GPS e GSM, além da comunicação com o módulo de IO (relé) e uso da funcionalidade EEPROM, que permite persistir um dado em memória não-volátil, recuperando seu estado em caso de reinicialização da placa.
+
+\subsection{Interface com EEPROM}
+
+O microcontrolador da placa Arduino possui uma memória do tipo EEPROM: Electrically-Erasable Programmable Read-Only Memory, com tamanho de 1024 bytes no ATmega328. Neste tipo de memória os valores armazenados são mantidos mesmo que a placa seja desligada, atuando como um disco rígido para armazenamento não-volátil.
+
+Este componente é essencial para realizar a persistência do estado de bloqueio do módulo embarcado, evitando que por um simples desligamento e religamento da bateria ocorra o desbloqueio do automóvel. A cada boot o último estado é restaurado e a cada alteração do mesmo, há uma atualização do valor na EEPROM.
+
+A manipulação da EEPROM consiste na leitura e na escrita de dados, para ambos é necessário incluir o cabeçalho \#include<EEPROM.h>. 
+
+A escrita de dados é feita pela função EEPROM.write(endereço, valor), onde endereço é um inteiro de 0 a 1023 e valor é um byte, aceitando valores de 0 a 255. Para leitura, a função EEPROM.read(endereço) é usada, bastando passar o valor do endereço como parâmetro e obter um byte como resposta.
+
+O processo de leitura do último estado e de escrita do estado atual do módulo na memória EEPROM é mostrado no código 3.6.1.
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/eeprom_write.cpp}
+   \end{boxit}
+   \caption{\it Rotinas de leitura e escrita em EEPROM}
+   \label{code:eeprom}
+\end{codigo}
+
+\newpage
 
 \subsection{Interface com IO}
 
+A interface com o módulo de IO com relé é bastante simplificada, uma vez que sua integração é realizada por meio dos pinos digitais. O processo basicamente define que o pino de comunicação utilizado tenha seu modo de operação (entrada ou saída) definido na função setup, depois disso, basta realizar uma chamada da função digitalWrite(pino, estado), onde o parâmetro pino é o número do mesmo assim como descrito na impressão sobre o circuito impresso, e o parâmetro estado pode assumir o valor da macro HIGH (ligado) ou LOW (desligado). O código 3.6.2 mostra a configuração e uso do pino de digital para acionamento ou desacionamento do relé de controle de carga.
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/io.cpp}
+   \end{boxit}
+   \caption{\it Rotinas de leitura e escrita em EEPROM}
+   \label{code:eeprom}
+\end{codigo}
+  
+
 \subsection{Interface com Shield GPS}
 
-\subsection{Criação da classe de comunicação com Shield GSM}
+O Shield GPS fornece está acoplado fisicamente à placa Arduino Uno e se comunicando por um canal serial estabelecido nos pinos 4 e 5 conforme abordado na seção 3.5.3, entretanto é preciso configurar este canal na inicialização do controlador e obter os dados enviados pelo módulo.
+
+Para obtenção dos dados de posicionamento, dois artefatos necessitam estar presentes no firmware: 
+
+\begin{itemize}
+	\item Um canal serial lógico: feito utilizando a biblioteca SoftwareSerial
+	\item Um parser das mensagens GPRMC: a biblioteca TinyGPS disponibilizda pela comunidade realiza esta função.
+\end{itemize}
+
+
+\subsection{Interface com Shield GSM}
 O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua 
 operação, mas é operável por meio de comandos AT especificados em suas referências. Entretanto,
 o uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória,
@@ -410,7 +477,7 @@ da classe de comunicação e a herança de SoftwareSerial.
 	\label{Figura 8}
 \end{figure}
 
-\subsection{Estados do firmware}
+
 
 \subsection{Comunicação com Webservice}
 
