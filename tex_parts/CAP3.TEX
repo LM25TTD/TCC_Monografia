@@ -453,12 +453,27 @@ A interface com o módulo de IO com relé é bastante simplificada, uma vez que 
 
 O Shield GPS fornece está acoplado fisicamente à placa Arduino Uno e se comunicando por um canal serial estabelecido nos pinos 4 e 5 conforme abordado na seção 3.5.3, entretanto é preciso configurar este canal na inicialização do controlador e obter os dados enviados pelo módulo.
 
-Para obtenção dos dados de posicionamento, dois artefatos necessitam estar presentes no firmware: 
+Para obtenção dos dados de posicionamento, dois artefatos necessitam estar presentes no código: 
 
 \begin{itemize}
-	\item Um canal serial lógico: feito utilizando a biblioteca SoftwareSerial
-	\item Um parser das mensagens GPRMC: a biblioteca TinyGPS disponibilizda pela comunidade realiza esta função.
+	\item Um canal serial lógico: feito utilizando a biblioteca SoftwareSerial, utilizado para efetuar a troca de dados bidirecional entre o microcontrolador e o módulo GPS.
+	\item Um parser das mensagens GPRMC: a biblioteca TinyGPS disponibilizada pela comunidade realiza esta função, capturando as mesagens transmitidas pelo módulo e disponibilizando as informações 
 \end{itemize}
+
+Além de configurar os itens citados, é necessário que o módulo tenha completado a montagem da mensagem GPRMC (citada no capítulo 2), para isto é criada uma função auxiliar chamada feedGps() que faz uma checagem contínua no status da mensagem por meio de um laço de repetição, que é interrompido caso a mensagem esteja completa ou ocorra um timeout sem resposta.
+
+O Código 3.6.3 mosta as chamadas necessárias para capturar a posição atual do módulo GPS.
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/codegps.cpp}
+   \end{boxit}
+   \caption{\it Rotinas de obter a posição geográfica via GPS}
+   \label{code:codegps}
+\end{codigo}
 
 
 \subsection{Interface com Shield GSM}
@@ -467,19 +482,17 @@ operação, mas é operável por meio de comandos AT especificados em suas refer
 o uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória,
 torna bastante complexo o controle de estados e a recuperação de erros. Para contornar esta questão,
 foi implementada uma classe de comunicação com o módulo, que é uma subclasse de SoftwareSerial, que por
-sua vez é uma classe de comunicação serial RS 232 com controle via software. A figura 8 mostra o diagrama
+sua vez é uma classe de comunicação serial RS 232 com controle via software. A figura 3.15 mostra o diagrama
 da classe de comunicação e a herança de SoftwareSerial.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=9.00cm\textwidth]{figures/lib_gsm.png}
+	\includegraphics[width=\textwidth]{figures/lib_gsm.png}
 	\caption{Classe de comunicação com SM5100B}
-	\label{Figura 8}
+	\label{1}
 \end{figure}
 
-
-
-\subsection{Comunicação com Webservice}
+\subsection{Requisição Webservice}
 
 O módulo veicular embarcado se comunica com o servidor web através de requisições HTTP POST, trazendo em seu
 payload dados estruturados no padrão JSON. O adoção do método POST se deu pois o permite um maior tamanho de
@@ -494,14 +507,14 @@ plano nos logs, como acontece com o GET. A estrutura JSON traz os seguintes camp
 	\item alarm: valor representando se o alarme do veículo foi acionado, 0 se falso 1 se verdadeiro. Não utilizado no momento.
 \end{itemize}
 
-A figura 11 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observer o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
+A figura 3.16 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observer o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
 
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=7.00cm\textwidth]{figures/requisicao_post.png}
+	\includegraphics[width=\textwidth]{figures/requisicao_post.png}
 	\caption{Requisição HTTP feita pelo módulo veicular}
-	\label{Figura 11}
+	\label{1}
 \end{figure}
 
 \section{Módulo Web (WebManager) - Introdução}
