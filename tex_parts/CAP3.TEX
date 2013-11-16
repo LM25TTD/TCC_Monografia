@@ -395,7 +395,7 @@ A criação desta rotina segue um modelo de atividades bem definidas, que se res
 	\item void loop(): bloco executado após o setup(), fazendo o que o próprio nome diz, um laço de repetição que executa enquanto o microcontrolador estiver ligado, permitindo a leitura e modificação de estado. Utilizado para realizar o controle efetivo da placa controladora.
 \end{itemize} 
 
-O passos fundamentais do firmware no módulo embarcado são descritas no diagrama de atividades da figura 3.14, o fluxo principal se resume, após a execução da função setup, na repetição da obtenção dos dados GPS, envio dos dados ao servidor e leitura da resposta, verificando se deve se efetuar o bloqueio do veículo ou não.
+O passos fundamentais do firmware no módulo embarcado são descritas no diagrama de atividades da figura 3.14, o fluxo principal se resume, após a execução da função setup (onde é aberta a conexão com o webservice), na repetição da obtenção dos dados GPS, envio dos dados ao servidor e leitura da resposta, verificando se deve se efetuar o bloqueio do veículo ou não.
 
 \begin{figure}[!htb]
 \centering
@@ -477,13 +477,14 @@ O Código 3.6.3 mosta as chamadas necessárias para capturar a posição atual d
 
 
 \subsection{Interface com Shield GSM}
-O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua 
-operação, mas é operável por meio de comandos AT especificados em suas referências. Entretanto,
-o uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória,
-torna bastante complexo o controle de estados e a recuperação de erros. Para contornar esta questão,
-foi implementada uma classe de comunicação com o módulo, que é uma subclasse de SoftwareSerial, que por
-sua vez é uma classe de comunicação serial RS 232 com controle via software. A figura 3.15 mostra o diagrama
-da classe de comunicação e a herança de SoftwareSerial.
+
+O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua operação, mas é operável por meio de comandos AT especificados em suas referências porém uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória, torna bastante complexo o controle de estados e a recuperação de erros.
+
+No SDK Arduino existe uma biblioteca chamada SoftwareSerial com uma classe principal de mesmo nome, a qual abstrai os comportamentos de um elemento que se comunica com o microcontrolador por um canal serial, facilitando questões como a configuração de pinos RX e TX, transmissão e recepção serializada de dados, controle de buffer e outras questões pertinentes.
+
+Foi implementada uma classe de comunicação com o módulo utilizando o conceito de herança do paradigma de orientação a objetos, onde a classe Shield GSM é uma subclasse de SoftwareSerial. 
+
+A figura 3.15 mostra o diagrama da classe de comunicação e a herança de SoftwareSerial.
 
 \begin{figure}[!htb]
 	\centering
@@ -492,7 +493,7 @@ da classe de comunicação e a herança de SoftwareSerial.
 	\label{1}
 \end{figure}
 
-\subsection{Requisição Webservice}
+\subsection{Requisição ao webservice}
 
 O módulo veicular embarcado se comunica com o servidor web através de requisições HTTP POST, trazendo em seu
 payload dados estruturados no padrão JSON. O adoção do método POST se deu pois o permite um maior tamanho de
@@ -507,8 +508,7 @@ plano nos logs, como acontece com o GET. A estrutura JSON traz os seguintes camp
 	\item alarm: valor representando se o alarme do veículo foi acionado, 0 se falso 1 se verdadeiro. Não utilizado no momento.
 \end{itemize}
 
-A figura 3.16 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observer o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
-
+A figura 3.16 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observar o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
 
 \begin{figure}[!htb]
 	\centering
@@ -517,11 +517,31 @@ A figura 3.16 mostra a mensagem enviada pelo módulo veicular a um servidor de t
 	\label{1}
 \end{figure}
 
-\section{Módulo Web (WebManager) - Introdução}
+\subsection {Visão geral do funcionamento do módulo embarcado}
+
+Conforme descrito anteriormente, o firmware opera em duas funções principais, a função void setup() e a função void loop(). A figura 3.17 mostra as atividades realizadas durante o boot, especificamente passos que envolvem a configuração para acesso a rede de dados GSM, login no APN da operadora, permitindo assim que seja realizada posteriormente a conexão e troca de dados com o webservice.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/ModuloVeicular_Boot.png}
+	\caption{Proceso de setup}
+	\label{1}
+\end{figure}
+
+Na figura 3.18 as atividades durante o loop envolvem a obtenção dos dados GPS, montagem da requisição, conexão e envio de dados ao webservice. Nos pontos onde existe possibilidade de falha há um direcionamento para a função de setup, onde qualquer configuração falha será substituída por novos valores, retomando o funcionamento normal.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.99\textwidth]{figures/ModuloVeicular_Loop.png}
+	\caption{Atividades durante o loop}
+	\label{1}
+\end{figure}
+
+\newpage
+
+\section{Módulo Web (WebManager)}
 
 O módulo web, ou WebManager, é a aplicação que roda na internet responsável por receber e armezenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
-
-Um webservice é uma solução adotada na integração de sistemas que funcionam em diferentes arquiteturas de hardware, normalizando a troca de informações para um formato (linguagem) universal, em geral uma combinação de uso do protocolo HTTP e dados estruturados XML/JSON. 
 
 A técnica REST permite fazer mapeamentos de métodos diretamente em URL com correspondência aos métodos HTTP, por exemplo, uma método de uma classe Java pode ser mapeado para uma URL chamada via método GET.
 
@@ -529,7 +549,7 @@ A implementação do WebManager como um todo foi feita utilizando a linguagem Ja
 
 Como banco de dados, o PostgreSQL foi adotado  pois possui um sofisticado mecanismo de bloqueio, suporta tamanhos ilimitados de linhas, bancos de dados e tabelas (até 16TB), aceita vários tipos de sub-consultas, possui mais tipos de dados e conta com um bom mecanismo de FAILSAVE (Segurança contra falhas, por exemplo no desligamento repentino do sistema).
 
-\section{Módulo Web (WebManager) - Modelagem}
+\subsection{Modelo geral}
 
 A arquitetura da modelagam do WebManager foi baseada no Pattern MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
 

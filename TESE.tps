@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
+NormalPos.right=663
+NormalPos.bottom=462
 Class=LaTeXView
 Document=tex_parts\CAP3.TEX
 
 [Frame0_View0,0]
-TopLine=403
-Cursor=20855
+TopLine=770
+Cursor=32072
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
+NormalPos.right=663
+NormalPos.bottom=462
 Class=LaTeXView
 Document=TESE.tex
 
 [Frame1_View0,0]
-TopLine=274
-Cursor=8711
+TopLine=23
+Cursor=623
 
 [Frame2]
 Flags=0
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
+NormalPos.right=663
+NormalPos.bottom=462
 Class=LaTeXView
-Document=tex_parts\SIGLAS.TEX
+Document=tex_parts\ANEXOS.TEX
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=295
+Cursor=9
 
 [Frame3]
 Flags=0
@@ -65,14 +65,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
+NormalPos.right=663
+NormalPos.bottom=462
 Class=LaTeXView
-Document=tex_parts\ANEXOS.TEX
+Document=tex_parts\CAP1.TEX
 
 [Frame3_View0,0]
-TopLine=0
-Cursor=9
+TopLine=99
+Cursor=9053
 
 [Frame4]
 Flags=0
@@ -83,14 +83,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
-Class=BibTeXView
-Document=tex_parts\tese.bib
+NormalPos.right=663
+NormalPos.bottom=462
+Class=LaTeXView
+Document=tex_parts\CAP4.TEX
 
 [Frame4_View0,0]
-TopLine=167
-Cursor=5588
+TopLine=78
+Cursor=3745
 
 [Frame5]
 Flags=0
@@ -101,14 +101,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
-Class=LaTeXView
-Document=tex_parts\CAP4.TEX
+NormalPos.right=663
+NormalPos.bottom=462
+Class=BibTeXView
+Document=tex_parts\tese.bib
 
 [Frame5_View0,0]
-TopLine=27
-Cursor=1554
+TopLine=123
+Cursor=3679
 
 [Frame6]
 Flags=0
@@ -119,14 +119,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1146
-NormalPos.bottom=478
+NormalPos.right=663
+NormalPos.bottom=462
 Class=LaTeXView
-Document=tex_parts\CAP1.TEX
+Document=tex_parts\SIGLAS.TEX
 
 [Frame6_View0,0]
-TopLine=82
-Cursor=9053
+TopLine=0
+Cursor=295
 
 [SessionInfo]
 FrameCount=7
