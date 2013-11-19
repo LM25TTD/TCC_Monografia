@@ -541,19 +541,21 @@ Na figura 3.18 as atividades durante o loop envolvem a obtenção dos dados GPS,
 
 \section{Módulo Web (WebManager)}
 
-O módulo web, ou WebManager, é a aplicação que roda na internet responsável por receber e armezenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
+O módulo web, definido também como WebManager, é a aplicação que roda na internet responsável por receber e armezenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
 
-A técnica REST permite fazer mapeamentos de métodos diretamente em URL com correspondência aos métodos HTTP, por exemplo, uma método de uma classe Java pode ser mapeado para uma URL chamada via método GET.
+A técnica REST permite fazer mapeamentos de métodos diretamente em URL com correspondência aos métodos HTTP, um método de uma classe Java pode ser mapeado para uma URL chamada via método GET.
 
 A implementação do WebManager como um todo foi feita utilizando a linguagem Java, por possuir um nível de maturidade muito alto para aplicações e serviços Web, contando com uma extensa gama de frameworks para os mais diversos fins, como mapeamento objeto-relacional, interface com o usuário,  webservices e outros.
 
-Como banco de dados, o PostgreSQL foi adotado  pois possui um sofisticado mecanismo de bloqueio, suporta tamanhos ilimitados de linhas, bancos de dados e tabelas (até 16TB), aceita vários tipos de sub-consultas, possui mais tipos de dados e conta com um bom mecanismo de FAILSAVE (Segurança contra falhas, por exemplo no desligamento repentino do sistema).
+Como banco de dados, o PostgreSQL foi adotado  pois possui um sofisticado mecanismo de bloqueio, suporta tamanhos ilimitados de linhas, bancos de dados e tabelas (até 16TB), aceita vários tipos de sub-consultas, possui mais tipos de dados e conta com um bom mecanismo de segurança contra falhas, por exemplo no desligamento repentino do sistema.
 
 \subsection{Modelo geral}
 
-A arquitetura da modelagam do WebManager foi baseada no Pattern MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
+A arquitetura da modelagam do WebManager foi baseada no padrão MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
 
-O modelo MVC é consagrado, pois permite o desacoplamento das camadas de software facilitando a manutenção e diminuindo a repetição de código, as vantagens de sua utilização ficam bastante claras quando existe a necessidade da alteração de código, por exemplo, caso haja mudança nas regras de negócio de algum cálculo do sistema, apenas é necessária atualização do conteúdo da camada Control. Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework e DAO's) e Facade (agregando funções de diversas interfaces a uma interface centralizada que é exposta para os subsistemas), descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura 12 mostra o diagrama de classes obtido.
+O modelo MVC permite o desacoplamento das camadas de software facilitando a manutenção e diminuindo a repetição de código, as vantagens de sua utilização ficam bastante claras quando existe a necessidade da alteração de código, por exemplo, caso haja mudança nas regras de negócio de algum cálculo do sistema, apenas é necessária atualização do conteúdo da camada Control.
+
+Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework), DAO, Factory Method descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura 3.19 mostra o diagrama de classes obtido.
 
 \begin{landscape}
 
@@ -561,21 +563,124 @@ O modelo MVC é consagrado, pois permite o desacoplamento das camadas de softwar
 	\centering
 	\includegraphics[width=20.00cm\textwidth]{figures/6_web_manager.png}
 	\caption{Modelo de classes do WebManager}
-	\label{Figura 12}
+	\label{}
 \end{figure}
 \end{landscape}
 
-\section{Módulo Web (WebManager) - Desenvolvimento}
-A implementação em do código do WebManager contemplou primeiramente o webservice e as camadas de model e controllers, deixando a implementação da interface com o usuário como última etapa. A modelagem de banco de dados utilizando modelo entidade-relacionamento não foi necessária, uma vez que a camada Model contendo as entidades do sistema sofreu um mapeamento objeto-realcional (ORM) feito pelo framework Hibernate. Este mapeamento isenta o desenvolvedor de criar na maioria dos casos, cláusulas SQL, deixando-o apenas com o trabalho de manipular instâncias de classes e seus atributos. A camada de entidades é mostrada na figura 13.
+\subsection{Camada de modelo}
+
+A camada de modelo representa os dados da aplicação e as regras do negócio que governam o acesso e a modificação dos dados. O modelo mantém o estado persistente do negócio e fornece ao controlador a capacidade de acessar as funcionalidades da aplicação encapsuladas pelo próprio modelo. As classes definidas nesta camada também são chamadas de entidades, o diagrama de classes para o modelo deste trabalho é mostrado na figura 3.20.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=15.00cm\textwidth]{figures/model.png}
+	\includegraphics[width=\textwidth]{figures/model.png}
 	\caption{Model - Entidades do sistema}
-	\label{Figura 13}
+	\label{}
 \end{figure}
 
-O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento, ação esta que é exibida em um mapa da API Google Maps. A figura 14 mostra a tela de login do sistema e a figura 15 exibe a tela de rastreamento principal.
+Uma vez que o conceito define que esta camada guarda um estado persistido, o diagrama de classes gera naturalmente uma modelagem de banco de dados. A criação de uma base de dados relacional a partir deste modelo é facilitada com o uso de um framework de mapeamento objeto-relacional (object-relational mapping ou simplesmente ORM).
+
+O framework Hibernate ORM foi adotado, adicionado alguns aspectos que facilitam o desenvolvimento de aplicações complexa, os principais são:
+
+\begin{itemize}
+	\item A base de dados é gerada automaticamente a partir das classes de modelo, eliminando o trabalho da criação de scripts DDL para criação de tabelas, chaves estrangeiras, constraints e outos aspectos inerentes à definição de banco de dados.
+	\item A necessidade da criação de scripts SQL para consulta de dados é eliminada, pois se trabalha diretamente com objetos Java inter-relacionados. Ao se obter um atributo de um objeto, seja ele um atributo simples ou complexo, o framework gera em tempo de execução o script de consulta ao banco, abstraindo uniões, subconsultas e outras necessidades.
+	\item O gerenciamento de transações é feita de maneira automatizada, bastando anotar os métodos transacionais para que haja este controle efetivo.
+	\item Caso seja necessário criar consultas manuais, o Hibernate possui uma linguagem própria bastante intuitiva, chamada HQL, onde se trabalha facilmente com a combinação de atributos de classes para se obter informação desejada. 
+\end{itemize}
+
+O diagrama da figura 3.20 foi traduzido em uma base de dados com seis tabelas, são elas:
+
+\begin{enumerate}
+	\item tb\_logposicao, que guarda a posição geográfica de cada requisição feita pelos módulos veiculares.
+	\item tb\_moduloveicular, contém todos os módulos veiculares embarcados cadastrados no sistema.
+	\item tb\_perfil, guardas os pefis de usuários do sistema, no caso administrador ou usuário comum.
+	\item tb\_usuario, armazena todos os usuários cadastrados no sistema.
+	\item tb\_perfilusuario, associa usuários e perfis.
+	\item tb\_veiculo, contém todos os veículos cadastrados no sistema.
+\end{enumerate}
+
+\subsection{Camada de controle}
+
+Nesta camada são definidos os controladores (controllers) do sitema, um controlador define o comportamento da aplicação, é ele que interpreta as ações do usuário e as mapeia para chamadas do modelo. Em um cliente de aplicações Web essas ações do usuário poderiam ser cliques de botões ou seleções de menus. As ações realizadas pelo modelo incluem ativar processos de negócio ou alterar o estado do modelo.
+
+Na figura 3.21 pode se observar que existe um controller para cada entidade principal do sistema, além de alguns métodos base para alteração do estado persistido do modelo.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\textwidth]{figures/webm_control.png}
+	\caption{Controllers}
+	\label{}
+\end{figure}
+
+Os controladores são beans, componentes Java injetados na interface com o usuário permitindo acesso a serviços não apenas da camada de modelo, mas também serviços externos como no caso do Framework de mapas. Neste caso, o controlador ControllerVeiculo guarda uma instância de mapa que é atualizada conforme as informações do módulo veicular correspondente vão chegando, além disso o controlador atualiza a página web correspondente.
+
+Nesta camada também é feita a integração com o Spring Security, framework que gerencia o Login, Logout e acesso aos serviços de acordo com o perfil do usuário, não permitindo que alguém logado com certo privilégio acesse servi'so que não correspondem à sua credencial.
+
+\newpage
+
+\subsection {Webservice}
+
+O webservice disponibilizado pela aplicação web é uma API RESTful, onde o serviço principal fica disponibilizado na URL \{servidor.url\}/AutoTrack\_WebManager/api/embedded. 
+
+A figura 3.22 demonstra um exemplo de requisição e mapeamento feito pelo webservice para entidades manipuláveis na camada de controllers do sistema.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\textwidth]{figures/RESTMapp.png}
+	\caption{Esquema do webservice}
+	\label{}
+\end{figure}
+
+O funcionamento do webservice pode ser sintetizado em alguns passos onde existe a interação entre o módulo veicular e a API REST, em concordância com a figura anterior as etapas são as seguintes: 
+
+\begin{enumerate}
+	\item O módulo embarcado monta uma requisição HTTP POST para a URL mostrada no esquema, esta requisição traz alguns parâmetros de configuração, como:
+	\begin{itemize}
+		\item Host: endereço de hospedagem da aplicação;
+		\item Keep-alive: sinaliza que deverá mantera a conexão entre o módulo embarcado e o webservice sempre aberta.
+		\item User-Agent: indica a engine do browser web, neste caso simula que a requisição está sendo feita de um navegadro com engine Mozilla, como o Firefox.
+		\item Accept e Content-Type: indica o tipo de conteúdo enviado e aceito como resposta, neste caso dados JSON.
+		\item Content-Length: tamanho em bytes do campo payload.
+		\item Payload: todo conteúdo compreendido entre as chaves, inclusive as mesmas, se trata de uma estrtura JSON trazendo informações sobre o módulo veicular embarcado utilizadas para alimentar o sistema. 
+	\end{itemize}
+	
+	\item A requisição trafega sobre o protocolo HTTP, direcionado a URL em que o webservice está esperando. Esta URL está mapeada para uma função Java chamada addPosition() que recebe como parâmetro um objeto do tipo EmbeddedRequest. Este parâmetro é montado automaticamente pelo framework Spring a partir de um processo de parser da requisição, gerando um objeto EmbeddedRequest.
+	\item Uma vez montado o objeto do tipo EmbeddedRequest, este é passado para a classe EmbeddedControl, responsável por montar recuperar do banco de dados as informações referentes ao módulo veicular que está enviando a requisição em questão e, de posse disto, gerar um nova entrada na tabela LogPosicao. A informação sobre o módulo veicular cruzada com o veículo de instalação mostra se existe ou não um bloqueio do conjunto.
+	\item De acordo com o estado de bloqueio, a resposta para o módulo veicular é diferente: caso exista um bloqueio, o webservice responde com status HTTP 200, caso contrário ele responderá com status HTTP 300.
+	\item O módulo veicular analisa o status de resposta e age caso necessário.
+\end{enumerate}
+
+
+\subsection{DAO}
+
+Conforme descrito no capítulo 2, Data Acces Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura 3.23.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\textwidth]{figures/dao_layer.png}
+	\caption{Camada DAO}
+	\label{}
+\end{figure}
+
+O par de interface/classe respectivamente IGenericDAO/GenericDao, contém métodos para operações CRUD anotados com as respectivas configurações de transação. Os principais métodos da implementação genérica são:
+
+\begin{itemize}
+	\item save(object): Salva um objeto de uma classe definida como entidade no banco de dados.
+	\item delete(object): Remove do banco de dados o objeto passado como parâmetro.
+	\item update(object): Atualiza os atributos de um objeto previamente salvo no banco de dados.
+	\item getAll(class): Retorna uma lista contendo todos os objetos do tipo da classe passada como parâmetro que estejam salvos no banco de dados.
+\end{itemize}
+
+As classes especializadas VeiculoDAO, ModuloVeicularDAO e UsuarioDAO, além de suas respectivas interfaces, apenas extendem a implementação genérica com a inclusão de métodos de busca específicos, utilizados para alguns cenários.
+
+Cada controller contém como atributo uma interface para o DAOs correspondente a sua natureza, que sofre injeção de uma instância da classe correlata em tempo de execução. O uso de interface permite que, durante um teste unitário, a implementação real seja subtituída por um mock, isolado a classe a ser testada de dependências externas.
+
+\subsection{View}
+
+Para implementação da camada de view, que neste escopo são páginas Web, foi utilizado o framework Primefaces, que fornece uma infinidade de componentes de UI prontos para uso, bastando setar algumas propriedades. As páginas são escritas em XHTML e interpretadas por um container como o Tomcat, que fornece o ambiente de execução para aplicações Java Web.
+
+O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento. A figura 3.24 mostra a tela de login do sistema.
 
 \begin{figure}[!htb]
 	\centering
@@ -584,12 +689,18 @@ O funcionamento do módulo web é bastante simples, um usuário acessa o sistema
 	\label{Figura 14}
 \end{figure}
 
+O rastreamento do módulo é feito com o auxílio da API do Google Maps. O framework Primefaces possui um componente que realiza esta linkgem com a API, trazendo os dados geográficos correspondente a uma posição latitude-longitude fornecida.
+
+A figura 3.25 exibe a página de rastreamento de veículo, é possível perceber o círculo verde que corresponde a posição aproximada do veículo.
+
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=15.00cm\textwidth]{figures/webmanager_rastrear.png}
+	\includegraphics[width=\textwidth]{figures/webmanager_rastrear.png}
 	\caption{Tela de Rastreamento}
 	\label{Figura 15}
 \end{figure}
+
+A ação de bloqueio do veículo é realizada por meio do botão "Bloquear", que atualiza o estado do veículo em foco no banco de dados. Com isto, ao realizar a próxima requisição ao webservice, o módulo embarcado no veículo citado reberá uma resposta HTTP correspondente à ação de bloqueio e assim deverá acionar o mecanismo para realizar a ação.
 
 \hfill
 
