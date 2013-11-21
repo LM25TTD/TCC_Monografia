@@ -3,22 +3,22 @@
 
 \section{Descri\c{c}\~{a}o do Problema}
 
-A quantidade de roubos e furtos de veículos no Brasil vem avançando de forma 
+De acordo com a reportagem de \textcite{borges:2011} quantidade de roubos e furtos de veículos no Brasil vem avançando de forma 
 significativa durante os últimos anos, aumentando proporcionalmente ao número 
-de automóveis em circulação. Informações das secretarias estaduais de 
-segurança pública do Detran e do Denatran, mostram que as cidades do Rio de Janeiro, São Paulo e Salvador são as que ocupam, respectivamente, os três primeiros lugares em número de roubos e furtos no país.
+de automóveis em circulação. O texto indica que informações das secretarias estaduais de 
+segurança pública dos Detrans e do Denatran mostram as cidades do Rio de Janeiro, São Paulo e Salvador ocupando, respectivamente, os três primeiros lugares em número de roubos e furtos no país.
 
-Segundo a reportagem de \textcite{borges:2011}, em média, 150 carros são 
+Ainda segundo \textcite{borges:2011}, em média, 150 carros são 
 roubados ou furtados por dia no Rio de Janeiro, quatro por dia em São Paulo e 
 2,8 por dia em Salvador. Para a polícia, os grupos que comandam o esquema de
 roubo e furto articulam as ações de dentro de presídios e possuem ramificações
 em vários estados. 
 
-A principal utilidade dos automóveis sinistrados é a transformação em dublês (ou clones), passando por alterações no chassi, placas e outros dados para venda ilegal em outros estados, é claro que parte destes serve para a prática de crimes, como o transporte de quadrilhas durante assaltos e o transporte de drogas.
+A principal utilidade dos automóveis sinistrados é a transformação em dublês (ou clones), passando por alterações no chassi, placas e outros dados para venda ilegal em outros estados. Uma parte também serve para a prática de crimes, como o transporte de quadrilhas durante assaltos e o transporte de drogas.
 
-O maior problema relacionado ao crime é o risco de vida que os ocupantes do veículo são expostos, principalmente quando se há uma tentativa reação contra os criminosos, que ocorre pela incerteza se o bem perdido será recuperado pelas autoridades e em boas condições.
+O maior problema relacionado ao crime é o risco de vida que os ocupantes do veículo são expostos, principalmente quando se há uma tentativa de reação contra os criminosos, que ocorre pela incerteza se o bem perdido será recuperado pelas autoridades e em boas condições.
 
-Diante deste cenário, é necessária uma solução que permita a geolocalização em tempo real contando com mecanismos de bloqueio que podem ser controlados remotamente, o que geraria tranquilidade aos que sofrerem roubo/furto de dos seus veículos, eliminando a ânsia de reação em um primeiro momento.
+Diante deste cenário, é necessária uma solução que permita a geolocalização em tempo real contando com mecanismos de bloqueio que podem ser controlados remotamente, o que geraria tranquilidade aos que sofrerem roubo/furto dos seus veículos, eliminando a ânsia de reação em um primeiro momento.
 
 \hfill
 
@@ -27,57 +27,55 @@ Diante deste cenário, é necessária uma solução que permita a geolocalizaç�
 Durante o levantamento bibliográfico realizado para obtenção de trabalhos correlatos foram encontrados três projetos de relevância na categoria de alarme automotivo inteligente, alguns utilizando inclusive comunicação remota inter-dispositivos e hardware open-source.
 
 \textcite{ivan:2007} descreve um projeto de sistema de alarme automotivo 
-cuja principal funcionalidade é a detecção de um evento sonoro no interior do veículo e, realizando as conversões necessárias, sinaliza a um micro controlador o evento ocorrido. O micro controlador por sua vez está programado para acionar um dispositivo que realiza uma chamada telefônica destinada ao aparelho celular do proprietário do veículo de modo a alertá-lo sobre a anomalia, o objetivo geral é a detecção do choro de uma criança ou barulho de um animal esquecido dentro do veículo. 
+cuja principal funcionalidade é a detecção de um evento sonoro no interior do veículo e a sinalização a um microcontrolador. O microcontrolador, por sua vez, está programado para acionar um dispositivo que realiza uma chamada telefônica destinada ao aparelho celular do proprietário do veículo de modo a alertá-lo sobre a anomalia. O objetivo geral é a detecção do choro de uma criança ou barulho de um animal esquecido dentro do veículo. 
 
-Em toda extensão do trabalho verificou-se uma abordagem bastante prática, com 
-experimentos e construção de circuitos, além da exibição do funcionamento do 
-protótipo, além disso, foi realizado um fundamental teórico bastante sucinto 
+Em toda extensão do trabalho de \textcite{ivan:2007} verificou-se uma abordagem bastante prática, com 
+experimentos, construção de circuitos, exibição do funcionamento do 
+protótipo e um fundamental teórico bastante sucinto 
 que se focou principalmente nos tipos de microfone. O ponto negativo ficou 
 por conta da ausência de modelagem do problema, não existem diagramas UML ou 
 similares que representem as funcionalidades, projeto de classes e sequência, 
 que são essenciais para qualidade do projeto.
 
-Em sua monografia, \textcite{leandro:2010} propõe um sistema de segurança veicular para ser integrado a um alarme já existente no veículo, este sistema objetiva além de avisar ao proprietário via SMS/GPRS quando o alarme comum for acionado, detectar quando algum objeto, criança ou animal de estimação for esquecido sobre o banco verificando a presença do peso sobre este. 
-
-O autor promove uma explanação sobre a motivação do trabalho baseado em dados jornalísticos e casos verídicos de esquecimento de crianças pelos pais e quais as consequências biológicas trazidas a um indivíduo se exposto às condições ambientais semelhantes a de um carro fechado exposto ao sol.
+Em sua monografia, \textcite{leandro:2010} propõe um sistema de segurança veicular para ser integrado a um alarme já existente no veículo, este sistema objetiva, além de avisar ao proprietário via SMS/GPRS quando o alarme for acionado, detectar quando algum objeto, criança ou animal de estimação for esquecido sobre o banco verificando a presença do peso sobre este. 
 
 O projeto se baseia na plataforma Arduino, utilizando a filisofia de hardware 
 livre, modularização de componentes e desenvolvimento simplificado de protótipos 
-para posterior produtização, o autor optou pela utilização de uma placa Arduino 
+para posterior fabricação, o autor optou pela utilização de uma placa Arduino 
 Mega com módulo externo. 
 
-Foram disponibilizados os passos realizados no projeto, um modelo esquemático de testes além de anexar o código fonte aplicado na placa controladora todavia há a ausência de esquemas de modelagem, principalmente baseados em UML, além da falta do esquema eletrônico geral, o que facilitaria bastante a análise das limitações e aplicação de possíveis melhorias em projetos futuros.
+Foram disponibilizados os passos realizados no projeto, um modelo esquemático de testes além de anexar o código fonte aplicado na placa controladora, todavia há a ausência de esquemas de modelagem, principalmente baseados em UML, além da falta do esquema eletrônico geral, o que facilitaria bastante a análise das limitações e aplicação de possíveis melhorias em projetos futuros.
 
-O trabalho de \textcite{alfonso:2006} se refere à criação de um sistema de autenticação, onde o usuário recebe uma mensagem desafio em um módulo portátil e a responde, para assim poder utilizar o veículo (funcionamento do motor e partes elétricas). Uma das funções deste dispositivo é o desligamento do veículo caso a central não detecte que o módulo portátil nas proximidades do veículo, se assemelhando às técnicas utilizadas nos alarmes veiculares mais modernos.
+O trabalho de \textcite{alfonso:2006} se refere à criação de um sistema de autenticação em que o usuário recebe uma mensagem desafio em um módulo portátil e a responde, para assim poder utilizar o veículo (funcionamento do motor e partes elétricas). Uma das funções deste dispositivo é o desligamento do veículo caso a central não detecte que o módulo portátil nas proximidades do veículo, se assemelhando às técnicas utilizadas nos alarmes veiculares mais modernos.
 
 Por modularizar os componentes e estes se comunicarem utilizando radiofrequência,
 se fez necessária a utilização de criptografia para que as mensagens trocadas não 
 fossem interceptadas, interpretadas e posteriormente injetadas, em uma tentativa 
 de fraudar o sistema. 
 
-Apesar de descrever textualmente de modo detalhado cada módulo desenvolvido, no decorrer o trabalho não traz modelagem de requisitos e de projeto baseada em UML, apenas diagramas resultantes da fase de implementação, além disso, uma interface mais amigável com o usuário seria muito bem vinda, neste ponto, o desenvolvimento de trabalhos futuros substituindo o módulo portátil por um smartphone seria promissor.
+Apesar de descrever textualmente de modo detalhado cada módulo desenvolvido, o trabalho não traz modelagem de requisitos e de projeto baseada em UML, apenas diagramas resultantes da fase de implementação, além disso, o projeto não implementa uma interface amigável.
 
 
 \section{Contribui\c{c}\~{o}es}
 
 Este trabalho apresenta o desenvolvimento de um sistema de segurança veicular com uso de GPS, cujas principais funcionalidades são: a obtenção da posição atual de um automóvel e a possibilidade de seu desligamento remoto por meio de uma interface Web.
 
-O processo de elaboração do sistema utilizou a metodologia descritas em \textcite{Wolf:2001} voltada a sistemas embarcados onde se aplicam alguns conceitos de Engenharia de Software para concepção de plataformas de tempo real. Com isto foram gerados artefatos de modelagem: diagramas UML englobando requisitos, arquitetura e componentes de hardware/software descritos de forma a sintetizar o funcionamento esperado do conjunto e que servem de base para novas implementações.
+O processo de elaboração do sistema utilizou a metodologia descritas em \textcite{Wolf:2001} voltada a sistemas embarcados em que aplicam-se  conceitos de Engenharia de Software para concepção de plataformas de tempo real. Com isto foram gerados artefatos de modelagem: diagramas UML englobando requisitos, arquitetura e componentes de hardware/software descritos de forma a sintetizar o funcionamento esperado do conjunto e que servem de base para novas implementações.
 
 A escolha e montagem dos componentes de hardware, o software embarcado, protocolos de comunicação escolhidos e frameworks usados podem servir de guia para projetos com funcionalidades que se encaixem na mesma categoria.  
 
 \section{Metodologia}
 
 Foi conduzida uma revisão bibliográfica relativa a projeto de sistemas
-embarcados a fim de aplicar padrões de projetos já consagrados e recomendados para a categoria desta implementação, após esta fase de embasamento teórico, elaborou-se a modelagem de requisitos utilizando modelo de casos de uso derivando naturalmente para a construção do diagrama de classes, diagramas de sequências e diagrama de atividades.
+embarcados a fim de aplicar padrões de projetos já consagrados e recomendados para a categoria desta implementação, após esta fase de embasamento teórico, elaborou-se a modelagem de requisitos utilizando modelo de casos de uso derivando o diagrama de classes, diagramas de sequências e diagrama de atividades.
 
 A elaboração de um diagrama de componentes foi feita para se obter uma melhor visão do sistema, distiguindo módulo embarcado, módulo Web e interface 
 com o usuário. Após isto, foram definidos os componentes de hardware
 para construção do módulo embarcado e feito estudo da documentação destes componentes que fora fornecida pelo fabricante. 
 
-Seguido a construcao do módulo embarcado, realizou-se a implementação do serviço Web em conjunto com a interface com o usuário (UI), onde foi criada a estrutura que de comunicação entre módulos, realizando fluxos de controle, comando, armazenamento transitório de dados e integração com o serviço de mapas.  
+Seguido a construção do módulo embarcado, realizou-se a implementação do serviço Web em conjunto com a interface com o usuário (UI), onde foi criada a estrutura que de comunicação entre módulos, realizando fluxos de controle, comando, armazenamento transitório de dados e integração com o serviço de mapas.  
 
-Finalizada a implementação dos módulos, a integração de todas as partes do sistema foi realizada juntamente com testes exploratórios, verificando o comportamento real da aplicação. O módulo embarcado foi instalado em um automóvel real e sua posição mostrada no serviço de mapas foi aferida para validar o funcionamento correto da plataforma, suas limitações de resposta, além da checagem da função de bloqueio. Os testes exploratórios foram registrados em vídeo.
+Finalizada a implementação dos módulos, a integração de todas as partes do sistema foi realizada juntamente com testes exploratórios, verificando o comportamento real da aplicação. O módulo embarcado foi instalado em um automóvel real e sua posição mostrada no serviço de mapas foi aferida para validar o funcionamento correto da plataforma, suas limitações de resposta, além da checagem da função de bloqueio. Os testes exploratórios foram registrados em vídeo que se encontra anexado a monografia em mídia digital.
 
 \section{Organiza\c{c}\~{a}o}
 
@@ -86,5 +84,7 @@ O restante texto deste trabalho está organizado da seguinte maneira:
 \begin{itemize}
 	\item O capítulo 2 apresenta uma descrição teórica sobre os itens utilizados para o desenvolvimento do sistema.
 	\item O capítulo 3 descreve os passos do desenvolvimento em si, desde os requisitos, o conceito da solução, a modelagem dos compomentes e finalmente a implementação destes.
-	\item O capítulo 4 traz os resultados obtidos com a implementação, dados de testes realizados e conclusões sobre o processo de desenvolvimento.
+	\item O capítulo 4 apresenta os resultados obtidos com a implementação, dados de testes realizados durante o processo de desenvolvimento.
+	\item O capítulo 5 descreve as conclusões e trabalhos futuros.
+	
 \end{itemize}

@@ -1953,27 +1953,33 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">borges:2011</bcf:citekey>
-    <bcf:citekey order="2">ivan:2007</bcf:citekey>
-    <bcf:citekey order="3">leandro:2010</bcf:citekey>
-    <bcf:citekey order="4">alfonso:2006</bcf:citekey>
-    <bcf:citekey order="5">Wolf:2001</bcf:citekey>
-    <bcf:citekey order="6">Wolf:2001</bcf:citekey>
-    <bcf:citekey order="7">Martin:2001</bcf:citekey>
+    <bcf:citekey order="2">borges:2011</bcf:citekey>
+    <bcf:citekey order="3">ivan:2007</bcf:citekey>
+    <bcf:citekey order="4">ivan:2007</bcf:citekey>
+    <bcf:citekey order="5">leandro:2010</bcf:citekey>
+    <bcf:citekey order="6">alfonso:2006</bcf:citekey>
+    <bcf:citekey order="7">Wolf:2001</bcf:citekey>
     <bcf:citekey order="8">Wolf:2001</bcf:citekey>
     <bcf:citekey order="9">Martin:2001</bcf:citekey>
-    <bcf:citekey order="10">Espinoza:2008</bcf:citekey>
-    <bcf:citekey order="11">Wolf:2001</bcf:citekey>
-    <bcf:citekey order="12">Marwedel:2001</bcf:citekey>
-    <bcf:citekey order="13">arduino_specs:2013</bcf:citekey>
-    <bcf:citekey order="14">arduino_icsp:2013</bcf:citekey>
-    <bcf:citekey order="15">gps_iniciantes:2003</bcf:citekey>
-    <bcf:citekey order="16">gpsshield:2013</bcf:citekey>
-    <bcf:citekey order="17">inatel:1998</bcf:citekey>
-    <bcf:citekey order="18">Wolf:2001</bcf:citekey>
-    <bcf:citekey order="19">jacobson:2005</bcf:citekey>
-    <bcf:citekey order="20">Mendes:2002</bcf:citekey>
-    <bcf:citekey order="21">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="10">Wolf:2001</bcf:citekey>
+    <bcf:citekey order="11">Martin:2002</bcf:citekey>
+    <bcf:citekey order="12">Espinoza:2008</bcf:citekey>
+    <bcf:citekey order="13">Wolf:2001</bcf:citekey>
+    <bcf:citekey order="14">Marwedel:2001</bcf:citekey>
+    <bcf:citekey order="15">arduino_specs:2013</bcf:citekey>
+    <bcf:citekey order="16">gps_iniciantes:2003</bcf:citekey>
+    <bcf:citekey order="17">gpsshield:2013</bcf:citekey>
+    <bcf:citekey order="18">inatel:1998</bcf:citekey>
+    <bcf:citekey order="19">3gpp:2001</bcf:citekey>
+    <bcf:citekey order="20">w3c_ws:2004</bcf:citekey>
+    <bcf:citekey order="21">w3c_ws:2004</bcf:citekey>
     <bcf:citekey order="22">Gamma:2000</bcf:citekey>
+    <bcf:citekey order="23">mvc_xerox:1978</bcf:citekey>
+    <bcf:citekey order="24">Wolf:2001</bcf:citekey>
+    <bcf:citekey order="25">jacobson:2005</bcf:citekey>
+    <bcf:citekey order="26">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="27">Mendes:2002</bcf:citekey>
+    <bcf:citekey order="28">Gamma:2000</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>

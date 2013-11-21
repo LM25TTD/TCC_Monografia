@@ -1,33 +1,32 @@
-﻿\chapter{Fundamenta\c{c}\~{a}o Te\'{o}rica}
-\label{cap:fundamentacao teorica}
+﻿\chapter{Referencial Tecnol\'{o}gico}
+\label{cap:referencial tecnologico}
 
 
 \section{Sistema Embarcado}
 
-Segundo \textcite{Wolf:2001} um sistema de computação embarcado é qualquer dispositivo que inclui um computador programável, o qual não é direcionado para resolver problemas de propósito geral, mas sim uma situação ou necessidade específica, operando geralmente com recursos limitados e executando algoritmos para resposta em tempo real.
+Segundo \textcite{Wolf:2001}, um sistema de computação embarcado é qualquer dispositivo que inclui um computador programável, o qual não é direcionado para resolver problemas de propósito geral, mas sim uma situação ou necessidade específica, operando geralmente com recursos limitados e executando algoritmos para resposta em tempo real.
 
 A diferenciação entre um sistema embarcado de um sistema de propósito geral se dá por algumas características:
 \begin{itemize}
-	\item \emph{Tempo real}: a resposta do sistema deve ser dada em um tempo limite. Caso a resposta venha fora do limite de tempo aceitável, o sistema pode ser tornar instável, parar de funcionar ou realizar ações fora do previsto gerando danos catastróficos. 
+	\item \emph{Tempo real}: a resposta do sistema deve ser dada em um tempo limite. Caso a resposta venha fora do limite de tempo aceitável, o sistema pode se tornar instável, parar de funcionar ou realizar ações fora do previsto gerando danos catastróficos. 
 	\item \emph{Diferentes taxas de entrada de dados}: um sistema embarcado pode receber diversas entradas de dados com velocidades diferentes, ele deve tratar esta situação e oferecer uma saída sincronizada e sem perdas.
 	\item \emph{Custo de produção}: todos os componentes de hardware devem ser escolhidos para minimizar o custo de produção, por isso, um projeto cuidadosamente elaborado se faz necessário.
-	\item \emph{Consumo de energia}: conjunto hardware/software dever ser projetado de maneira tal que o consumo de recursos energéticos seja sempre o mínimo possível. Um elevado consumo influi tanto no custo de produção  quanto no custo de operação.
+	\item \emph{Consumo de energia}: conjunto hardware/software dever ser projetado de tal maneira que o consumo de recursos energéticos seja sempre o mínimo possível. Um elevado consumo influi tanto no custo de produção  quanto no custo de operação.
 \end{itemize}
 
-Um exemplo de sistema embarcado a se considerar é um roteador wireless conforme a figura 2.1, pois possui as seguintes características:
+Um exemplo de sistema embarcado a se considerar é um roteador wireless conforme a figura \ref{fig:roteador}, pois possui as seguintes características:
 
 \begin{itemize}
-	\item É um computador de propósito específico: realiza funcões de roteamento, controle de conexões, controle do sinal de rádio e implementa seviços da camada física a camada de rede (modelo OSI);
-	\item Opera em tempo real: todos os pacotes que passam pelo roteador deve ser processados em tempo hábil, caso contrário a comunicação entre dispositivos que estão conectados a ele se torna impraticável;
+	\item É um computador de propósito específico: realiza funcões de roteamento, controle de conexões, controle do sinal de rádio e implementa seviços da camada física a camada de rede TCP/IP;
+	\item Opera em tempo real: todos os pacotes que passam pelo roteador deve ser processados em tempo hábil;
 	\item Custo de produção resuzido: São utilizados processadores de custo reduzido, quantidade de memória limitada e outros componentes de menor custo a fim de reduzir o preço total e facilitar a produção em massa.
-	\item Baixo consumo de energia: O conjunto hardware/software opera com baixíssimo consumo de energia a fim de não impactar na conta de energia do consumidor, afinal é um produto que funciona, em geral, 24 horas por dia.
 \end{itemize}
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/embarcado_exemplo.jpg}
-			\caption{Um roteador wireless é um sistema embarcado}
-			\label{1}
+			\caption{Exemplo de sistema embarcado: roteador wireless}
+			\label{fig:roteador}
 	\end{figure}
 
 
@@ -35,59 +34,59 @@ Um exemplo de sistema embarcado a se considerar é um roteador wireless conforme
 
 \section{Projeto de Sistemas Embarcados}
 
-Modelos para projeto de sistemas embarcados têm sido propostos ao longo dos anos, como é caso do Embedded UML. De acordo com \textcite{Martin:2001}, autor do modelo, este é um profile UML que representa a síntese de várias ideias discutidas pela comunidade que adota UML no projeto de aplicações de tempo real. 
+Modelos para projeto de sistemas embarcados têm sido propostos ao longo dos anos, como é caso do Embedded UML proposto por \textcite{Martin:2001}, que é um profile UML representando a síntese de várias ideias discutidas pela comunidade que adota UML no projeto de aplicações de tempo real. 
 
 Foram selecionadas as melhores práticas de análise e especificação de requisitos para sistemas os quais necessitam que hardware e software sejam co-projetados, introduzido um conceito de mapeamento da plataforma para gerar uma implementação otimizada de hardware e software, uma vez que conforme \textcite{Wolf:2001}, o custo de produção e o consumo de recursos energéticos deve ser o mínimo possível.
 
 Esta metodologia fornece uma abordagem que permite o desenvolvimento de ferramentas de análise automatizada, simulação, síntese e geração de código equanto se define um padrão UML para embarcados.
 
-O próprio \textcite{Martin:2001}, propõe em um segundo artigo, após utilizar UML para modelagem de sistemas embarcados, novas extensões UML que cobrem lacunas não atendidas pela linguagem, como suporte a modelagem de hardware baseada em VHDL (que é uma abordagem dependente de plataforma).
+Em um segundo artigo, \textcite{Martin:2002} propõe novas extensões UML que cobrem lacunas não atendidas pela linguagem, como suporte a modelagem de hardware baseada em VHDL.
 
 É claro que na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sitema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
 
-\textcite{Wolf:2001} propõe uma abstração em alto nível dos principais passos no projeto de sistemas embarcados, são estes do topo à base:
+\textcite{Wolf:2001} propõe uma abstração em alto nível dos principais passos no projeto de sistemas embarcados em uma abordagem \textit{top-down}, são estes:
 
 \begin{itemize}
-	\item \emph{Requisitos}: onde são obtidas informações sobre o que se desenvolver no sistema, obter os requisitos esperados pelo cliente/usuário e extrair apenas o que for importante para o projeto levando requisitos funcionais e não funcionais são levados em conta.
-	\item \emph{Especificação}: etapa onde se realiza a mapeamento dos requisitos funcionais de um sistema embarcado, quais funções ele deve fornecer ao usuário. Os Casos de Uso da UML são um meio de documentar os requisitos.
+	\item \emph{Requisitos}: são obtidas informações sobre o que se desenvolver no sistema, obter os requisitos esperados pelo cliente/usuário e extrair apenas o que for importante para o projeto. Requisitos funcionais e não funcionais são levados em conta.
+	\item \emph{Especificação}: etapa em que se realiza o mapeamento dos requisitos funcionais de um sistema embarcado, quais funções ele deve fornecer ao usuário. Os Casos de Uso da UML são um meio de documentar os requisitos.
 	\item \emph{Projeto Arquitetural}: nesta etapa é feita a quebra do sistema em componentes de alto nível e como eles se integram e se comunicam. A UML oferece o Diagrama de Componentes para esta finalidade.
 	\item \emph{Projeto de componentes de hardware e software}: para cada componente definido, são mapeados seus atributos e métodos, levando a uma abordagem utilizando Orientação a Objetos. O Diagrama de Classes da UML permite fazer este tipo de representação.
-	 \item \emph{Integração do sistema}: após a construção de cada componente de hardware e implementação dos componentes de software, estes são integrados seguindo o projeto.
+	 \item \emph{Integração do sistema}: após a construção de cada componente de hardware e implementação dos componentes de software, estes são integrados.
 \end{itemize}
 \textcite{Marwedel:2001}  inclui etapas de teste dentro das etapas de projeto, designando o fluxo como modelo-V. As etapas de teste são: 
 
 \begin{itemize}
 	\item \emph{Testes unitários}: Teste individual para cada unidade mínima funcional do sistema, com isto é possível verificar o comportamento de cada parte e, em caso de defeitos, corrigi-los antes de qualquer integração, poupando tempo de desenvolvimento uma vez que seria dispendioso, depois do sistema pronto, rastrear e econtrar o problema.
-	\item \emph{Testes de integração}: Verificação da comunicação entre os diferentes componentes quanto interligados. Esta etapa é válida pois mesmo que os componentes funcionem individualmente e separados, sempre que se integram partes um novo comportamento é gerado, o que pode levar a erros inesperados.
-	\item \emph{Aceitação e Uso}: Verifica se o comportamento do sistema está dentro do esperado nas especificações, é um teste do sistema completo e em funcionamento, parar confirmação que todos os requisitos elicitados estão sendo atendidos.
+	\item \emph{Testes de integração}: Verificação da comunicação entre os diferentes componentes quando interligados. Esta etapa é válida pois mesmo que os componentes funcionem individualmente e separados, sempre que se integram partes um novo comportamento é gerado, o que pode levar a erros inesperados.
+	\item \emph{Aceitação e Uso}: Verifica-se o comportamento do sistema em relação ao descrito nas especificações, é um teste do sistema completo e em funcionamento, para confirmação se todos os requisitos estão sendo atendidos.
 \end{itemize}
 
 
-
+\newpage
 \section{Microcontroladores}
 
 Um microcontrolador é uma unidade de processamento que, diferente de um microprocessador, traz todos os módulos necessários ao seu funcionamento (como memória volátil, memória somente leitura, blocos de entrada e saída, conversores analógico-digital e digital-analógico, linhas para troca de dados com componentes externos) no interior de um único chip, podendo assim ser programado para executar uma rotina de propósito específico.
 
-Realizando uma comparativa com os microprocessadores, pode-se constatar que os microcontroladores operam em uma frequência muito baixa no entanto adequada a maioria das aplicações as quais são designados, como por exemplo: controlar uma esteira, uma caldeira ou uma máquina. Devido a esta característica, o consumo de energia é pequeno, normalmente na casa dos miliwatts, além disso os microncontroladores podem entrar em modo de espera, aguardando por um evento externo como o pressionar de uma tecla ou acionamento de um sensor.
+Realizando uma comparação com os microprocessadores, pode-se constatar que os microcontroladores operam em uma frequência muito baixa, porém adequada a maioria das aplicações as quais são designados, como por exemplo: controlar uma esteira, uma caldeira ou uma máquina. Devido a esta característica, o consumo de energia é pequeno, normalmente na casa dos miliwatts, além disso os microncontroladores podem entrar em modo de espera, aguardando por um evento externo, tal como pressionar de uma tecla ou acionamento de um sensor.
 
-Uma outra característica antagônica em relação aos microprocessadores é que, enquanto neste últimos é feito um superdimensionamento de recursos sendo limitado pela faixa financeira que o usuário pode investir, em um projeto com microcontroladores o superdimensionamento é um erro de projeto, um desperdício de recurso que reflete diretamente no preço do equipamento final, sendo multiplicado no caso de uma produção em larga escala.
+Uma outra característica antagônica em relação a um microprocessador é que, enquanto neste último é feito um superdimensionamento de recursos sendo limitado pela faixa financeira que o usuário pode investir, em um projeto com microcontroladores o superdimensionamento é um erro de projeto, um desperdício de recurso que reflete diretamente no preço do equipamento final, sendo multiplicado no caso de uma produção em larga escala.
 
-As aplicações deste componente compreendem principalmente automação e controle de produto periféricos, como sistemas de controle de motores automotivos, máquinas industriais, de escritório e residenciais, brinquedos, sistemas de supervisão e outros. Por reduzir o tamanho, custo e consumo de energia se comparados ao microprocessadores, se tornam uma alternativa eficiente para controlar processos e aplicações. A figura 2.2 mostra um microcontrolador da fabricante Atmel, pode-se observar que ele possui um único encapsulamento com todos os periféricos necessários ao seu funcionamento embutidos.
+As aplicações deste componente compreendem principalmente automação e controle de produto periféricos, como sistemas de controle de motores automotivos, máquinas industriais, de escritório e residenciais, brinquedos, sistemas de supervisão e outros. Por reduzir o tamanho, custo e consumo de energia se comparados ao microprocessadores, se tornam uma alternativa eficiente para controlar processos e aplicações. A figura \ref{fig:atmegabloc} mostra um microcontrolador da fabricante Atmel, pode-se observar que ele possui um único encapsulamento com componentes básicos ao seu funcionamento embutidos.
 
 
 \begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.4\textwidth]{figures/microcont_atm.jpg}
+			\includegraphics[width=0.6\textwidth]{figures/microcont_atm.jpg}
 			\caption{Microcontrolador Atmel}
-			\label{1}
+			\label{fig:atmegabloc}
 	\end{figure}
 
-
+\newpage
 \section{Plataforma Arduino}
 
-Arduino é uma plataforma para prototipagem eletrônica que utiliza o conceito de hardware livre. Neste conceito deve-se prover um lançamento irrestrito de informações sobre o projeto de hardware como digramas eletrônicos, estrutura de produtos, layout de placas de circuito impresso, rotinas de baixo nível e qualquer outra informação necessária para um construção from-scratch do projeto.
+Arduino é uma plataforma para prototipagem eletrônica que utiliza o conceito de hardware livre. Neste conceito deve-se prover a disponibilização irrestrita de informações sobre o projeto de hardware, tais como digramas eletrônicos, estrutura de produtos, layout de placas de circuito impresso, rotinas de baixo nível e qualquer outra informação necessária para um construção \textit{from-scratch} do projeto.
 
-A linhagem mais utilizada da placa microcontroladora Arduino (modelos Duemilanove e Uno) foi concebida com base em um microncontrolador Atmel AVR montado em placa única, possui suporte de entra/saída embutido, uma linguagem de programação padrão baseada em C/C++.
+Os modelos mais utilizados da placa microcontroladora Arduino (Duemilanove e Uno) foram concebidas com base em um microncontrolador Atmel AVR montado em placa única, possui suporte de entra/saída embutido, uma linguagem de programação padrão baseada em C/C++.
 
 A plataforma surgiu para que amadores, entusiastas e outras pessoas que não teriam acesso ao controladores e ferramentas mais sofisticadas, pudessem criar seus projetos, tornando-os acessíveis, flexíveis e com baixo custo. Uma placa Arduino, em geral, possui os seguintes elementos em sua construção:
 
@@ -102,12 +101,14 @@ A plataforma surgiu para que amadores, entusiastas e outras pessoas que não ter
 Seguindo estas características comuns, ao decorrer da existência do projeto foram desenvolvidas diversas placas microncontroladoras, cada uma carrega um codinome e especificações de hardware próprias. A tabela 2.1 descreve algumas placas da família Arduino.
 
 \begin{table}[!h]
+\caption{Modelos de placa Arduino}
+
 	\begin{tabular}{|r|c|c|c|c|c|}
 		\hline 
 			\textbf{Modelo} & \textbf{Clock} & \textbf{E/S Digital} & \textbf{E/S Analógico} & \textbf{Alimentação} & \textbf{Flash}
 		\\
 		\hline
-			Arduino Due & 84MHz & 54 & 12 & 7-12V & 512 KB
+			Arduino Due (ARM) & 84MHz & 54 & 12 & 7-12V & 512 KB
 		\\
 		\hline
 			Arduino Leonardo & 16MHz & 20 & 12 & 7-12V & 32 KB
@@ -137,14 +138,13 @@ Seguindo estas características comuns, ao decorrer da existência do projeto fo
 
 \hline
 \end{tabular}
-\caption{Modelos de placa Arduino}
 \end{table}
 
-Uma possibilidade bastante interessante para projetos que utilizam a plataforma Arduino é a expansão da placa microcontroladora através da agregação de novos hardwares, estes chamados de shields (do inglês concha).
+Uma possibilidade bastante interessante para projetos que utilizam a plataforma Arduino é a expansão da placa microcontroladora através da agregação de novos hardwares, estes chamados de \textit{shields}.
 
 \subsection{Arduino Shields}
 
-Placas Arduinos e outras baseadas no projeto utilizam expansões de hardware chamadas shields. São placas de circuito impresso fixadas ao topo da placa microcontroladora através dos pinos de conexão e se comunicam com a unidade principal através dos canais de Entrada/Saída analógicos ou digitais, ou ainda, através do canal de comunicação serial.
+Placas Arduinos e outras baseadas no projeto utilizam expansões de hardware chamadas \textit{shields}. São placas de circuito impresso fixadas ao topo da placa microcontroladora através dos pinos de conexão e se comunicam com a unidade principal através dos canais de Entrada/Saída analógicos ou digitais, ou ainda, através do canal de comunicação serial.
 
 Caso não utilizem a mesma pinagem, pode-se empilhar diversos shields na mesma placa controladora. A idéia destas expansões é criar componentes com determinada especialização, muito similar ao conceito de framework em software. Existem shields para as mais diversas aplicações como:
 
@@ -161,28 +161,29 @@ Caso não utilizem a mesma pinagem, pode-se empilhar diversos shields na mesma p
 	\item Sintetizador de Voz
 \end{itemize}
 
-A figura 2.3 mostra uma placa Arduino Uno conectada a dois shields para controle de motores. Pode-se observar a facilidade de conexão entre os componentes, uma vez que utilizam um layout de pinagem padronizado.
+A figura \ref{fig:arduinoshields} mostra uma placa Arduino Uno conectada a dois shields para controle de motores. Pode-se observar a facilidade de conexão entre os componentes, uma vez que utilizam um layout de pinagem padronizado.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/arduino_with_shield.jpg}
-			\caption{Placa Arduino com shields conectados}
-			\label{1}
+			\caption{Ilustra\c{c}\~{a}o da placa Arduino com shields conectados}
+			\label{fig:arduinoshields}
 \end{figure}
 
+\newpage
 \section {Placa Arduino Uno}
 
-Para realizar a implementação deste trabalho, optou-se por utilizar uma placa Arduino Uno pois: projetos similares utilizaram esta placa sem problemas de sub ou super dimensionamento, ou seja, suas especificações atendem exatamente a necessidade do projeto ; seu layout permite a conexão da maioria dos shields disponíveis; existe documentação rica disponível na Internet.
+Para realizar a implementação deste projeto, optou-se por utilizar uma placa Arduino Uno pois projetos similares utilizaram esta placa sem problemas de sub ou super dimensionamento, ou seja, suas especificações atendem exatamente a necessidade do projeto, seu layout permite a conexão da maioria dos shields disponíveis e existe documentação disponível na Internet.
 
-A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel, botão de reset e conexão ICSP. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um bootloader\footnote{Bootloader é o gerenciador de inicialização do microcontrolador.} que captura automatiza este passo (\textcite{arduino_specs:2013}).
+A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel e botão de reset. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um \textit{bootloader}\footnote{\textit{Bootloader} é o gerenciador de inicialização do microcontrolador.} que automatiza este passo (\textcite{arduino_specs:2013}).
 
-A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. É observável que a placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S. Os pinos da placa são descritos com textos impressos na superfície.
+A figura \ref{fig:arduinouno} exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. A placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S. Os pinos da placa são descritos com textos impressos na superfície.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/arduinoUnoFront.jpg}
 			\caption{Placa Arduino Uno em detalhes}
-			\label{1}
+			\label{fig:arduinouno}
 \end{figure}
 
 
@@ -191,6 +192,7 @@ A figura 2.4 exibe uma tomada frontal da placa Arduino Uno onde é visível o mi
 A tabela 2.2 mostra um resumo das especificações operacionais da placa Arduino Uno.
 
 \begin{table}[!h]
+\caption{Resumo das Especificações - Arduino Uno}
 	\begin{tabular}{|r|c|}
 		\hline
 			Microcontrolador & ATmega328
@@ -227,23 +229,22 @@ A tabela 2.2 mostra um resumo das especificações operacionais da placa Arduino
 		\\
 \hline
 \end{tabular}
-\caption{Resumo das Especificações - Arduino Uno}
 \end{table}
 
 \subsection{Alimentação da Placa Arduino Uno}
 
 Um Arduino Uno pode ser alimentado pela conexão USB ou uma fonte externa e a placa faz a seleção automática de fonte de entrada. Uma alimentação com tensão inferior a 7V pode fazer com que o pino de saída de 5V para o microcontrolador forneça uma tensão inferior a descrita causando instabilidade no funcioamento. Por outro lado, se colocada uma tensão de entrada maior que 12V, o regulador de voltagem pode sofrer superaquecimento, danificando a placa e diminuindo sua vida útil.
 
-No desenvolvimento deste trabalho foi utilizada, para testes em bancada, uma fonte regulada com saída de 12V e 1850mA de corrente máxima, retratada na figura 2.5.
+No desenvolvimento deste projeto foi utilizada, para testes em bancada, uma fonte regulada com saída de 12V e 1850mA de corrente máxima, ilustrada na figura \ref{fig:fontedc}.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/fonteAlim.jpg}
 			\caption{Fonte de alimentação para testes em bancada}
-			\label{1}
+			\label{fig:fontedc}
 \end{figure}
 
-Para a aplicação em automóveis não se faz necessário o uso de regulação de voltagem já que os veículos utilizam uma voltagem padronizada de 12V, com variações até o máximo de 14V. Apenas é preciso encontrar um ponto de alimentação permanente dentre os cabos do painel e utilizar um cabo com terminal adequado para ligação com a placa Arduino Uno.
+Para a aplicação em automóveis não se faz necessário o uso de regulação de tensão já que os veículos utilizam uma tensão padronizada de 12V, com variações até o máximo de 14V. Apenas é preciso encontrar um ponto de alimentação permanente dentre os cabos do painel e utilizar um cabo com terminal adequado para ligação com a placa Arduino Uno.
 
 Após passar pelos circuitos de alimentação da placa, existem alguns pinos que fornecem alimentação tanto para periféricos quanto para os shields, são estes:
 
@@ -276,46 +277,44 @@ Dentre estes pinos, alguns possuem funções especiais como:
 
 \subsection{Programação}
 
-A programação do microcontrolador ATmega328 do Arduino Uno pode ser feita através da IDE Arduino, mostrada na figura 2.6. A linguagem de desenvolvimento é C/C++ com recursos exclusivos desenvolvidos com base na linguagem Wiring. O microcontrolador vem com um bootloader pré-gravado, o que permite o upload de novos códigos com o pressionar de um botão, sem uso de hardware para programação externa, como no caso de gravadores de flash.
+A programação do microcontrolador ATmega328 do Arduino Uno pode ser feita através da IDE Arduino, ilustrada na figura \ref{fig:ide}. A linguagem de desenvolvimento é C/C++ com recursos exclusivos desenvolvidos com base na linguagem \textit{Wiring}. O microcontrolador vem com um \textit{bootloader} pré-gravado, o que permite o upload de novos códigos com o pressionar de um botão, sem uso de hardware para programação externa, como no caso de gravadores de flash.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/ideArduino204.png}
-			\caption{IDE Arduino}
-			\label{1}
+			\caption{Ilustra\c{c}\~{a}o do ambiente de programa\c{c}\~{a}o Arduino}
+			\label{fig:ide}
 \end{figure}
 
-É possível realizar a programação do microcontrolador por meio da interface ICSP (In-Circuit Serial Programming), entretanto esse estratégia não foi utilizada para este trabalho, mais informações consultar \textcite{arduino_icsp:2013}.
-
-Sempre que é feita uma gravação de rotina no controlador é feita uma reinicialização do circuito, forçando a sobrescrita de dados na memória RAM. A reinicialização também pode ser feita através do botão reset ou mesmo de um circuito interligado ao pino RESET controlado via software.
+Sempre que é feita uma gravação de rotina no controlador ocorrerá uma reinicialização do circuito, forçando a sobrescrita de dados na memória RAM. A reinicialização também pode ser feita através do botão reset ou mesmo de um circuito interligado ao pino RESET controlado via software.
 
 \section{Tecnologia GPS}
 
-O termo GPS foi extraído da designação NAVigation System with Time and Ranging Global Positioning System - NAVSTAR GPS, sistema inicialmente voltado às operações miltares, auxiliando na navegação e é em síntese um sistema de rádio navegação que fornece as coordenadas bi ou tridimensionais de pontos no terreno, além da velocidade e direção do deslocamento entre pontos.
+O termo GPS foi extraído da designação NAVigation System with Time and Ranging Global Positioning System - NAVSTAR GPS, sistema inicialmente voltado às operações miltares, auxiliando na navegação. Em síntese, é um sistema de rádio navegação que fornece as coordenadas bi ou tridimensionais de pontos no terreno, além da velocidade e direção do deslocamento entre pontos.
 
-De acordo com \textcite{gps_iniciantes:2003}, para o funcionamento do GPS, existe uma constelação composta por 24 satélites na orbita terrestre, distribuídos em 6 planos orbitais igualmente espaçados, com 4 satélites em cada plano a uma altitude de aproximadamente 20200 km. Os planos orbitais estão inclinados a $55\,^{\circ}$ em relação ao Equador e o período orbital é de aproximadamente 12 horas siderais. Com esta configuração fica garantido que no mínimo 4 satélites visíveis na superfície da Terra em qualque horário do dia. A figura 2.7 mostra uma idéia conceitual desta configuração.
+De acordo com \textcite{gps_iniciantes:2003}, para o funcionamento do GPS, existe uma constelação composta por 24 satélites na orbita terrestre, distribuídos em 6 planos orbitais igualmente espaçados, com 4 satélites em cada plano a uma altitude de aproximadamente 20200 km. Os planos orbitais estão inclinados a $55\,^{\circ}$ em relação ao Equador e o período orbital é de aproximadamente 12 horas. Com esta configuração fica garantido que no mínimo 4 satélites visíveis na superfície da Terra em qualque horário do dia. A figura \ref{fig:conceitogps} ilustra uma idéia conceitual desta configuração.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/constelacaoGPS.png}
 			\caption{Modelo conceitual da constela\c{c}\~{a}o de sat\'{e}lites GPS}
-			\label{1}
+			\label{fig:conceitogps}
 \end{figure}
 
 Além das atividades de navegação, o sistema GPS também auxiliar na realização de levantamentos geodésicos e topográficos, operando de forma ininterrupta, independente das condições meteorológicas mesmo que estas possam afetar na precisão dos dados.
 
 \subsection{Modelo de Posicionamento GPS}
 
-Para identificar a posição de pontos de interesse, o sistema GPS utiliza as coordenadas de seus satélites, que são referenciadas a um sistema geodésico, o mesmo utilzado no receptor GPS pera processar os dados recebidos e determinar as coordenadas do ponto referido. A figura 2.8 mostra este processo, onde o ponto é calculado através das referências de 5 satélites, o ponto P é obtido por triangularização das coordenadas.
+Para identificar a posição de pontos de interesse, o sistema GPS utiliza as coordenadas de seus satélites, que são referenciadas a um sistema geodésico, o mesmo utilzado no receptor GPS para processar os dados recebidos e determinar as coordenadas do ponto referido. A figura \ref{fig:coordenadagps} ilustra este processo, onde o ponto é calculado através das referências de três satélites e estimada quando existe sinal de apenas dois satélites.
 
 \begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.3\textwidth]{figures/triangGPS.png}
-			\caption{Conceito para c\'{a}lculo da coordenada de um ponto via GPS}
-			\label{1}
+			\includegraphics[width=0.8\textwidth]{figures/triangGPS.jpg}
+			\caption{Coordenada de um ponto pela trangulariza\c{c}\~{a}o do sinal de sat\'{e}lites GPS}
+			\label{fig:coordenadagps}
 \end{figure}
 
-Um sistema GPS é composto por três elementos principais conforme a figura 2.9, são eles:
+Um sistema GPS é composto por três elementos principais conforme a figura \ref{fig:elementosgps}, são eles:
 
 \begin{itemize}
 	\item Estação de Controle: são distribuídas em torno da Terra, próximas da linha do Equador. Dentre suas funções, realizam o monitoramento e controle dos satélites, determinam o tempo GPS, prevêem as efemérides, calculam as correções dos relógios e atualizam as mensagens de navegação dos satélites.
@@ -327,40 +326,42 @@ Um sistema GPS é composto por três elementos principais conforme a figura 2.9,
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/elemGPS.png}
 			\caption{Elementos do sistema GPS}
-			\label{1}
+			\label{fig:elementosgps}
 \end{figure}
 
+\newpage
 \section{Arduino GPS Shield Kit}
 
-Para adicionar o suporte a rastreamento via GPS em tempo real a este trabalho, um hardware que implemente tal funcionalidade se faz necessário. Neste âmbito, o conceito de shield da plataforma Arduino oferece um gama de componentes que atendem esta necessidade.
+Para adicionar o suporte a rastreamento via GPS em tempo real ao projeto, um hardware que implemente tal funcionalidade se faz necessário. Neste âmbito, o conceito de shield da plataforma Arduino oferece um gama de componentes que atendem esta necessidade.
 
-Após realizar uma pesquisa de mercado, optou-se pelo uso do GPS Shield Retail Kit da fabricante Sparkfun (\textcite{gpsshield:2013}), que se mostrou financeiramente mais viável, além disso o fabricante disponibiliza um rico arcabouço documental, programas de exemplo e esquemáticos de hardware. A figura 2.10 mostra os elementos do kit GPS.
+Após realizar uma pesquisa de mercado, optou-se pelo uso do GPS Shield Retail Kit da fabricante Sparkfun (\textcite{gpsshield:2013}), que se mostrou financeiramente mais viável, além disso o fabricante disponibiliza todo arcabouço documental, programas de exemplo e esquemáticos de hardware. A figura \ref{fig:kitgps} ilustra os elementos do kit GPS.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/6_gps.png}
 			\caption{Kit GPS}
-			\label{1}
+			\label{fig:kitgps}
 \end{figure}
 
 O kit é composto de dois elementos principais, são eles:
 
 \begin{itemize}
-	\item Shield (ou placa base): É uma placa de circuito impresso com laoyut padrão Arduino Uno contendo reguladores de tensão para 3.3 volts, leds indicadores, chave liga/desliga, botão reset e um conector padronizado para diversos modelos de módulos GPS. Esta placa é a peça chave para integração entre o Arduino Uno e o módulo GPS, pois isenta o projetista de realizar qualquer solda ou conexão adicional (salvo casos em que se faz necessário mudar os pinos de comunicação serial), permitindo que este adicione ou remova a funcionalidade GPS ao seu projeto com extrema facilidade. A figura 2.11 mostra o esquemático do GPS Shield.
+	\item Shield (ou placa base): É uma placa de circuito impresso com laoyut padrão Arduino Uno contendo reguladores de tensão para 3.3 volts, leds indicadores, chave liga/desliga, botão reset e um conector padronizado para diversos modelos de módulos GPS. Esta placa é a peça chave para integração entre o Arduino Uno e o módulo GPS, pois isenta o projetista de realizar qualquer solda ou conexão adicional (salvo casos em que se faz necessário mudar os pinos de comunicação serial), permitindo que este adicione ou remova a funcionalidade GPS ao seu projeto com extrema facilidade. A figura \ref{fig:esquemagpdshield} ilustra o esquemático do GPS Shield.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.8\textwidth]{figures/schemaGPS.png}
 			\caption{Esquema elétrico do GPS Shield}
-			\label{1}
+			\label{fig:esquemagpdshield}
 \end{figure}
 
 
-	\item Módulo receptor GPS USGlobalSat EM-406A: Realiza a função de captura das mensagens GPS e cálculo de posicionamento global. Possui todos os componentes integrados, inclusive antena, regulador de voltagem e LED de status. É conectado ao GPS Shield por meio de um cabo de 4 vias. A tabela 2.3 mostra os dados operacionais do módulo EM-406A.	
+	\item Módulo receptor GPS USGlobalSat EM-406A: Realiza a função de captura das mensagens GPS e cálculo de posicionamento global. Possui todos os componentes integrados, inclusive antena, regulador de voltagem e LED de status. É conectado ao GPS Shield por meio de um cabo de 4 vias. A tabela 2.3 apresenta os dados operacionais do módulo EM-406A.	
 \end{itemize}
 
 \begin{table}[!h]
-  \centering
+  \caption{Especificações operacionais do módulo GPS EM-406A}
+	\centering
 	\begin{tabular}{|r|c|}
 		\hline
 			Canais de recepção & 20
@@ -394,19 +395,20 @@ O kit é composto de dois elementos principais, são eles:
 		\\
 \hline
 \end{tabular}
-\caption{Especificações operacionais do módulo GPS EM-406A}
 \end{table}
 
-O módulo EM-406A trafega o formato de dados configurado de fábrica em sua resposta ao microcontrolador, este formato é definido no protocolo NMEA 0183 ACII versão 3.01. A mensagem segue a estrutura mostrada na figura 2.12 e cada seção dela é descrito na tabela 2.4.
+\newpage
+O módulo EM-406A trafega o formato de dados configurado de fábrica em sua resposta ao microcontrolador, este formato é definido no protocolo NMEA 0183 ACII versão 3.01. A mensagem segue a estrutura ilustrada na figura \ref{fig:gprmc} e cada seção dela é descrita na tabela 2.4.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.8\textwidth]{figures/gprmc.png}
 			\caption{Mensagem NMEA 0183}
-			\label{1}
+			\label{fig:gprmc}
 \end{figure}
 
 \begin{table}[!h]
+\caption{Descrições das seções da mensagem NMEA 0183}
 \centering
 \begin{tabular}{|r|c|c|c|}
      \hline
@@ -429,7 +431,6 @@ O módulo EM-406A trafega o formato de dados configurado de fábrica em sua resp
 		8 & {\scriptsize Data UTC} & {\scriptsize 211200} & {\scriptsize Data UTC de uma posição fixa no formato, ddmmyy}\\
 		\hline
 	\end{tabular}
-\caption{Descrições das seções da mensagem NMEA 0183}
 \end{table}
 
 \section {Comunicação Móvel}
@@ -438,26 +439,26 @@ Segundo \textcite{inatel:1998}, "pode-se definir como comunicação móvel aquel
 
 Portanto, devido a característica de mobilidade deste trabalho, onde existe um elemento que se desloca no espaço e ao mesmo tempo necessita trocar dados com um sistema na Internet, este se classifica como um sistema de comunicação móvel. Para suprir as necessidades do projeto, os serviços de telefonia celular, mais especificamente serviços de internet móvel GPRS foram utilizados.
 
-\section {Tecnologia GPRS}
+\subsection {Tecnologia GPRS}
 
-O GPRS (General Packet Radio Service) é um serviço que foi criado para possibilitar o tráfego de dados por pacotes na rede GSM, possibilitando que a rede de telefonia celular possa ser ligada a Internet.
+O GPRS (General Packet Radio Service) é um serviço que foi criado para possibilitar o tráfego de dados por pacotes na rede GSM, possibilitando que a rede de telefonia celular possa ser ligada a Internet (\textcite{3gpp:2001}).
 
 Na especificação inicial do GSM, a comunicação era realizada através de comutação de circuitos, onde uma conexão entre dois pontos de rede era alocada de forma a estar sempre disponível; a comunicação é feita de forma ininterrupta, uma otimização para chamadas de voz.
 
 Porém a Internet é baseada na comutação de pacotes, e pela natura de circuitos da rede GSM inicial, a velocidade de acesso era muito pequena. Para corrigir esta questão, a tecnologia GPRS foi criada e implementada se comunicando o GSM, trazendo a comutação de pacotes para a rede celular. Neste tipo de comutação, o ponto de origem envia uma informação dentro de um pacote que leva o endereço de destino em seu cabeçalho, o pacote então é transmitido pela rede que é responsável por escolher o melhor caminho até o ponto final.
 
-Na figura 2.13 é ilustrada a comutação para dados de voz e dados por pacote. O elemento RTPC representa a rede para comunicação de voz, enquanto o elemento IP (Internet Protocol) representa os ponto de integração com a Internet.
+Na figura \ref{fig:gprscom} é ilustrada a comutação para dados de voz e dados por pacote. O elemento RTPC representa a rede para comunicação de voz, enquanto o elemento IP (Internet Protocol) representa os ponto de integração com a Internet.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.8\textwidth]{figures/gprs.jpg}
 			\caption{Comutação de circuito e de pacote nas redes GSM e GPRS}
-			\label{1}
+			\label{fig:gprscom}
 \end{figure}
 
 O endereçamento em GPRS é estabelecido em referência a o APN (Access Point Name) da rede. O APN define os serviços de comunicação com a Internet como email e acesso a World Wide Web. Para iniciar uma conexão GPRS, o usuário deve especificar o APN, e opcionalmente um nome de usuário e uma senha, todos estes dados são fornecidos pela operadora. 
 
-\section {Arduino Cellular Shield with SM5100B}
+\subsection {Arduino Cellular Shield with SM5100B}
 
 Assim como a funcionalidade GPS, existe um kit shield que implementa o acesso ao serviço GPRS das operadoras de celular. Após pesquisa de referências, análise de preços e análise da facilidade de compra, optou-se pelo Cellular Shield com SM5100B do fabicante Sparkfun. O kit é composto pelos seguintes elementos:
 
@@ -469,20 +470,20 @@ Assim como a funcionalidade GPS, existe um kit shield que implementa o acesso ao
 
 O módulo se comunica com o microcontrolador através de comandos AT transmitidos por um canal de comunicação serial bidirecional (são utilizados dois pinos digitais do Arduino Uno para montar este canal). A lista de comandos AT está descrita no manual fornecido pelo fabricante, bom como seus parâmetros e respostas. Para funcionamento do kit, é necessário um cartão SIM devidamente habilitado e com plano de dados ativo para as funções GPRS.
 
- A figura 2.14 mostra o kit acoplado a placa Arduino Uno. Devido a necessidade de ganho de sinal, foi utilizada uma antena quad-band de 1.5 dBi similar a mostrada na figura 2.15.
+ A figura \ref{fig:cellularshield} mostra o kit acoplado a placa Arduino Uno. Devido a necessidade de ganho de sinal, foi utilizada uma antena quad-band de 1.5 dBi similar a mostrada na figura \ref{fig:antenna}.
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/gsm.jpg}
-			\caption{Cellular Shield}
-			\label{1}
+			\caption{Ilustra\c{c}\~{a}o do Cellular Shield}
+			\label{fig:cellularshield}
 \end{figure}
 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/antena.jpg}
 			\caption{Antena quad-band com 1.5 dBi de ganho}
-			\label{1}
+			\label{fig:antenna}
 \end{figure}
 
 \section{Controle de carga via Arduino Uno}
@@ -491,7 +492,7 @@ Pela especificação da placa Arduino Uno observa-se que seus pinos digitais, qu
 
 Dependendo da natureza do projeto, pode ser necessário o acionamento de dispositivos que consumam consumam corrente acima da saída máxima do microcontrolador e/ou operem em tensão diferente da plataforma. Para solucionar esta questão uma das alternativas é necessário utilizar um circuito auxiliar de chaveamento com relê, onde a saída do microncontrolador é utilizada apenas como sinal para acionamento.
 
-A figura 2.16 mostra o circuito de acionamento via relê (também conhecido como drive de acionamento), considerando que o relê do esquema possui uma bobina que opera com 5 volts, o funcionamento do circuito pode ser descrito com os seguintes passos: 
+A figura \ref{fig:relay} mostra o circuito de acionamento via relê (também conhecido como drive de acionamento), considerando que o relê do esquema possui uma bobina que opera com 5 volts, o funcionamento do circuito pode ser descrito com os seguintes passos: 
 
 \begin{itemize}
 	\item Os pontos descritos como RAW são alimentados com a saída de 5 volts do Arduino.
@@ -505,10 +506,10 @@ A figura 2.16 mostra o circuito de acionamento via relê (também conhecido como
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/circRele.png}
 			\caption{Circuito de controle de cargas com relê}
-			\label{1}
+			\label{fig:relay}
 \end{figure}
 
-Neste trabalho foi utilizado uma placa pré-fabricada pelo fornecedor Sparkfun, conforme a figura 2.17 observa-se que o circuito conta com um pequeno LED sinalizador de estado e conectores para facilitar a instalação. O relê aplicado possui bobina que opera em 5 volts e possui duas malhas de chaveamento utilizáveis:
+Neste projeto foi utilizado uma placa pré-fabricada pelo fornecedor Sparkfun, conforme a figura \ref{fig:placarelay} observa-se que o circuito conta com um pequeno LED sinalizador de estado e conectores para facilitar a instalação. O relê aplicado possui bobina que opera em 5 volts e possui duas malhas de chaveamento utilizáveis:
 
 \begin{itemize}
 	\item Malha normalmente aberta (NO) que suporta corrente máxima de 20 ampéres em 240 volts.
@@ -519,12 +520,12 @@ Neste trabalho foi utilizado uma placa pré-fabricada pelo fornecedor Sparkfun, 
 			\centering
 			\includegraphics[width=0.4\textwidth]{figures/beefCake2.jpg}
 			\caption{Placa para controle de cargas por relê}
-			\label{1}
+			\label{fig:placarelay}
 \end{figure}
 
 \section{Webservice}
 
-Um webservice é um método de comunicação entre dispositivos sobre a Web. Pela definição da W3C é um sistema de software projetado para suportar a interoperabilidade de interação entre máquinas sobre uma rede, possuindo uma interface descrita em um formato processável (especificamente WSDL). Outros sistemas que interagem com um webservice tipicamente usando protocolo HTTP e dados estruturados representados em XML em conjunto com outros tecnologias Web.
+Um webservice é uma arquitetura de comunicação entre dispositivos sobre a Web. Pela definição da W3C é um sistema de software projetado para suportar a interoperabilidade de interação entre máquinas sobre uma rede, possuindo uma interface descrita em um formato processável (especificamente WSDL). Outros sistemas que interagem com um webservice tipicamente usando protocolo HTTP e dados estruturados representados em XML em conjunto com outros tecnologias Web (\textcite{w3c_ws:2004}).
 
 Essencialmente, um Webservice faz com que os recursos de uma aplicação estejam disponíveis sobre a rede de uma forma normalizada, onde cara recurso é identificado por um endereço universal único (URI) acessado pelo protocolo HTTP. Web Services é a tecnologia ideal para comunicação entre sistemas, sendo muito usado em aplicações Business to Business. A comunicação entre os serviços é padronizada possibilitando a independencia de plataforma e de linguagem de programação. Por exemplo, um sistema de reserva de passagens aéreas feito em Java e rodando em um servidor Linux pode acessar, com transparência, um serviço de reserva de hotel feito em .Net rodando em um servidor Microsoft.
 
@@ -550,9 +551,9 @@ Na aquitetura REST se afirma que a web já fornece a escalabilidade como resulta
 
 Um conceito importante em REST é a existência de recursos (elementos de informação), que podem ser usados utilizando um identificador global (um Identificador Uniforme de Recurso) para manipular estes recursos, os componentes da rede (clientes e servidores) se comunicam através de uma interface padrão (HTTP) e trocam representações de recursos (XML, JSON ou outro).
 
-\subsection {RESTful Web APIs}
+\subsection {API Web baseada em REST}
 
-Uma Web API REST é uma API implementada utilizando os princípios do HTTP e REST, sendo uma coleção de recursos com quatro aspectos principais:
+Segundo \textcite{w3c_ws:2004}, uma API implementada utilizando os princípios do HTTP e REST é chamada Web API RESTful, sendo uma coleção de recursos com quatro aspectos principais:
 
 \begin{itemize}
 	\item Uma URI base para a API como: http://example.com/resources/
@@ -564,6 +565,7 @@ Uma Web API REST é uma API implementada utilizando os princípios do HTTP e RES
 A tabela 2.5 mostra como um seviço pode ser disponibilizado usando URIs e os métodos HTTP, sendo caracterizado como uma API RESTful.
 
 \begin{table}[!h]
+\caption{Web API RESTful}
   \centering
 	\begin{tabularx}{\textwidth}{|X|X|X|X|X|}
 		\hline
@@ -585,12 +587,11 @@ A tabela 2.5 mostra como um seviço pode ser disponibilizado usando URIs e os m�
 		\\
 \hline
 \end{tabularx}
-\caption{Web API RESTful}
 \end{table}
 
 \section {Padrões de Projeto}
 
-Um Padrão de Projeto de Software, ou Design Pattern, descreve uma solução geral reutilizável para um problema recorrente no desenvolvimento de sistemas, com paradigma orientado a objetos. Não é um código final, é uma descrição ou modelo de como resolver o problema do qual trata, que pode ser usada em muitas situações diferentes. Os Padrões de Projeto normalmente definem as relações e interações entre as classes ou objetos, sem especificar os detalhes das classes ou objetos envolvidos, ou seja, estão num nível de generalidade mais alto.
+Um Padrão de Projeto de Software, ou Design Pattern, descreve uma solução geral reutilizável para um problema recorrente no desenvolvimento de sistemas, com paradigma orientado a objetos (\textcite{Gamma:2000}). Não é um código final, é uma descrição ou modelo de como resolver o problema do qual trata, que pode ser usada em muitas situações diferentes. Os Padrões de Projeto normalmente definem as relações e interações entre as classes ou objetos, sem especificar os detalhes das classes ou objetos envolvidos, ou seja, estão num nível de generalidade mais alto.
 
 Os padrões de projeto :
 
@@ -601,7 +602,7 @@ Os padrões de projeto :
 
 \subsection{MVC}
 
-Model-view-controller (MVC) é um modelo de arquitetura de software que separa a representação da informação da interação do usuário com ele. O modelo (model) consiste nos dados da aplicação, regras de negócios, lógica e funções. Uma visão (view) pode ser qualquer saída de representação dos dados, como uma tabela ou um diagrama. É possível ter várias visões do mesmo dado, como um gráfico de barras para gerenciamento e uma visão tabular para contadores. O controlador (controller) faz a mediação da entrada, convertendo-a em comandos para o modelo ou visão. As ideias centrais por trás do MVC são a reusabilidade de código e separação de conceitos.
+Model-view-controller (MVC) é um modelo de arquitetura de software que separa a representação da informação da interação do usuário com ele. O modelo (model) consiste nos dados da aplicação, regras de negócios, lógica e funções. Uma visão (view) pode ser qualquer saída de representação dos dados, como uma tabela ou um diagrama. É possível ter várias visões do mesmo dado, como um gráfico de barras para gerenciamento e uma visão tabular para contadores. O controlador (controller) faz a mediação da entrada, convertendo-a em comandos para o modelo ou visão. As ideias centrais por trás do MVC são a reusabilidade de código e separação de conceitos. (\textcite{mvc_xerox:1978})
 
 Além de dividir a aplicação em três tipos de componentes, o design MVC define as interações entre eles.
 

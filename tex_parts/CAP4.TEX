@@ -1,64 +1,56 @@
 \chapter{Resultados e Discussões}
 \label{cap:resultados e discussoes}
 
-\section{Módulo Web (WebManager) - Testes de Carga}
+\section{Testes de Carga do Módulo Web}
 
-A fim de validar o comportamento do aplicação Web durante um alto número de requisições, caso que ocorre quando muitos módulos embarcados enviam requests HTTP no mesmo espaço de tempo (simulando uma situação de crescimento da plataforma), a ferramenta para testes de performance Apache JMeter foi utilizada para gerar o tráfego e o software VisualVM serviu para coletar métricas da aplicação como consumo de memória e uso da CPU.
+Afim de validar o comportamento do aplicação Web durante um alto número de requisições, caso que ocorre quando muitos módulos embarcados enviam requests HTTP no mesmo espaço de tempo (simulando uma situação de crescimento da plataforma), a ferramenta para testes de performance Apache JMeter foi utilizada para gerar o tráfego e o software VisualVM serviu para coletar métricas da aplicação como consumo de memória e uso da CPU.
 
-Uma quantidade de 200 módulos concorrendo aos recursos do serviro foi aplicada, gerando resultados satisfatórios, com o consumo de memória em picos de 750 MB com gráfico de comportamento serrilhado, ou seja, liberação de memória não utilizada e ausência de leaks, além disso o consumo máximo de CPU ficou em torno de 30 \%, uma margem segura. A figura 16 mosta o comportamento serrilhado do gráfico de consumo de memória, demonstrando a ausência de leaks e atuação correta do Garbage Collector.
+Uma quantidade de 200 módulos concorrendo aos recursos do serviro foi aplicada, gerando resultados satisfatórios, com o consumo de memória em picos de 750 MB com gráfico de comportamento serrilhado, ou seja, liberação de memória não utilizada e ausência de leaks, além disso o consumo máximo de CPU ficou em torno de 30 \%, uma margem segura. A figura \ref{fig:profilemem} mostra o comportamento serrilhado do gráfico de consumo de memória, demonstrando a ausência de leaks e atuação correta do Garbage Collector.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=15.00cm\textwidth]{figures/teste_heap.png}
+	\includegraphics[width=\textwidth]{figures/teste_heap.png}
 	\caption{Gráfico do consumo de memória heap}
-	\label{Figura 16}
+	\label{fig:profilemem}
 \end{figure}
 
-O consumo de CPU mesmo com a ação do Garbage Collector ficou em margens coerentes de acordo com o gráfico da figura 17.
+\newpage
+O consumo de CPU mesmo com a ação do Garbage Collector ficou em margens coerentes de acordo com o gráfico da figura \ref{fig:profilecpu}.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=15.00cm\textwidth]{figures/teste_cpu.png}
+	\includegraphics[width=\textwidth]{figures/teste_cpu.png}
 	\caption{Gráfico do uso de CPU}
-	\label{Figura 17}
+	\label{fig:profilecpu}
 \end{figure}
 
-\section{Resultados}
+\section{Integra\c{c}\~{a}o ao ve\'{i}culo}
 
-Os testes do protótipo incluem aplicação do módulo veicular em um automóvel para validar seu comportamento. Foi utilizado um veículo da marca Fiat modelo Palio Fire ano 2002, no qual o módulo embarcado foi acoplado no circuito de alimentação da bomba de combustível para efetuar o corte de alimentação no caso da solicitação de bloqueio, resultando no desligamento do veículo. Os testes de rastreamento com automotor em movimento, bloqueio e desbloqueio foram realizados com sucesso e registrados em vídeo. A figura 18 mostra o protótipo integrado ao circuito elétrico do automóvel de testes.
+Os testes do protótipo incluem aplicação do módulo veicular em um automóvel para validar seu comportamento. Foi utilizado um veículo da marca Fiat modelo Palio Fire ano 2002, no qual o módulo embarcado foi acoplado no circuito de alimentação da bomba de combustível para efetuar o corte de alimentação no caso da solicitação de bloqueio, resultando no desligamento do veículo. 
+
+Os testes de rastreamento com automóvel em movimento, bloqueio e desbloqueio foram realizados com sucesso e registrados em vídeo, anexado em formato digital a este trabalho. A figura \ref{fig:integracaopalio} ilustra o protótipo integrado ao circuito elétrico do automóvel de testes.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=12.00cm\textwidth]{figures/integracao.jpg}
+	\includegraphics[width=\textwidth]{figures/integracao.jpg}
 	\caption{Integração do protótipo}
-	\label{Figura 18}
+	\label{fig:integracaopalio}
 \end{figure}
 
-Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seções de coleta mostram um espaço aproximado de um minuto entre as inserções na base de dados, tempo previsto pois os parâmetros de delay setados no firmware do módulo embarcado foram calculados para resultar neste intervalo. A figura 19 mostra as linhas inseridas no banco de dados durante o período de testes.
+Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seções de coleta mostram um espaço aproximado de um minuto entre as inserções na base de dados, tempo previsto pois os parâmetros de delay setados no firmware do módulo embarcado foram calculados para resultar neste intervalo. A figura \ref{fig:dadoscoletados} mostra as linhas inseridas no banco de dados durante o período de testes.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=12.00cm\textwidth]{figures/dados_coletados.png}
+	\includegraphics[width=\textwidth]{figures/dados_coletados.png}
 	\caption{Dados coletados}
-	\label{Figura 19}
+	\label{fig:dadoscoletados}
 \end{figure}
 
-\vspace{200pt}
+\section{Algoritmos Gerados}
 
+Um dois principais algoritmos gerados neste projeto foi o firmware do módulo veicular embarcado. Utilizando uma combinação de bibliotecas de interface com os shields e funções implementadas de acordo com os diagramas de atividades das figuras \ref{fig:seqsetup} e \ref{fig:seqloop} foi gerada a rotina embarcada.
 
-\section{Próximos Passos}
-
-\begin{itemize}
-	\item Finalizar a implementação da UI.
-	\item Verificar a possibilidade de implementação de caminho feito pelo veículo.
-	\item Verificar possibilidade de comunicação assíncrona entre módulo e webmanager.
-	\item Melhorar eficiência do uso do módulo GSM.	
-\end{itemize}
-
-
-
-
-\section{Algoritmos}
+Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \ref{code:embedded4} apresentam o firmware em linguagem C/C++ gerado neste projeto.  
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
@@ -68,7 +60,7 @@ Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seç
       \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded.cpp}
    \end{boxit}
    \caption{\it Código do Módulo Embarcado Parte 1}
-   \label{code:embedded}
+   \label{code:embedded1}
 \end{codigo}
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
@@ -103,3 +95,27 @@ Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seç
    \caption{\it Código do Módulo Embarcado Parte 4}
    \label{code:embedded4}
 \end{codigo}
+
+\section{Resultados}
+
+Os resultados gerados por este projeto incluem:
+
+\begin{enumerate}
+	\item Artefatos de modelagem: diagrama casos de uso, diagrama de classes, diagrama de componentes de arquitetura, diagrama de atividades do módulo embarcado e diagramas de sequência.
+	\item Classe de comunicação com o módulo GSM SM5100B para Arduino.
+	\item Código fonte do firmware do módulo veicular embarcado, componente do sistema de segurança veicular com uso de GPS.
+	\Código fonte da aplicação Web que contempla o \textit{webservice}, lógica de negócio, banco de dados e interface com usuário. 
+\end{enumerate}
+
+Estes artefatos se encontram publicados na Internet com código aberto, possibilitando o desenvolvimento de novos projetos que possuam cenário de operação e requisitos similares.
+
+O endereço de publicação é: \url{https://github.com/LM25TTD/autotrack} .
+
+Ao acessar o link, será exibida uma estrutura de diretórios, os principais artefatos seguem a localização descrita:
+
+\begin{itemize}
+	\item DESIGN/ModelagemTCC.asta: este arquivo contém toda modelagem do sistema. Deve ser aberta com software Astah ou compatível.
+	\item SRC/Arduino SM5100B Lib/SM5100B\_GPRS: contém a classe de comunicação entre o Arduino e o módulo GSM SM5100B.
+	\item SRC/Embedded\_GPS\_RealTracking: possui o código fonte do firmware desenvolvido para o módulo veicular embarcado. Deve ser editado com o software IDE Arduino ou compatível. 
+	\item SRC/AutoTrack\_WebManager: contém o código fonte do módulo Web deste projeto. Pode ser importado como projeto na IDE Eclipse.
+\end{itemize} 

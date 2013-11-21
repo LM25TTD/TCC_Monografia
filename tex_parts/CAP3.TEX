@@ -1,40 +1,41 @@
-\chapter{Desenvolvimento do Protótipo}
-\label{cap:desenvolvimento do prototipo}
+\chapter{Sistema de Seguran\c{c}a Veicular com uso de GPS}
+\label{cap:prototipo do sistema}
 
-\section{Modelo Conceitual}
+Este capítulo apresenta a implementação do Sistema de Segurança Veicular com uso de GPS contemplando a criação do conceito, etapa de modelagem, elaboração do hardware embarcado no veículo, finalizando com o desenvolvimento da aplicação Web responsável pela lógica de negócio e interface com usuário.  
+
+\section{Levantamento de requisitos}
 Como ponto de partida é necessário definir o escopo do projeto partindo de uma idéia base, 
 contendo os elementos interativos iniciais do sistema e sua representação conceitual. O cenário de operação
-deste trabalho é composto por alguns elementos que emitem e consomem informação:
+deste projeto é composto por alguns elementos que emitem e consomem informação:
 
 \begin{itemize}
 	\item Cada automóvel a ser verificado possui um módulo embarcado instalado e responsável por enviar sua 
 	localização geográfica atual, esta informação é obtida por meio da tecnologia GPS. 
-	\item  Os dados obtidos dados são enviados a um serviço Web. Após pesquisa de trabalho similares e soluções aplicadas,
+	\item  Os dados obtidos são enviados a um serviço Web. Após pesquisa de trabalho similares e soluções aplicadas,
 	foi decidido pelo uso da rede GPRS de uma operadora de telefonia móvel.
-  \item O serviço Web captura as informações e organiza em uma base de dados. 
+  \item O serviço Web captura as informações e armazena em uma base de dados. 
 	\item O usuário fará acesso ao sistema por meio de uma aplicação Web que oferece uma interface 
-	de acesso às principais operações, como localizar seus veículos sobre uma API de mapas e opcionalmente 
-	realizar o desligamento remoto dos mesmos. 
+	de acesso às principais operações, como localizar o veículo sobre uma API de mapas e opcionalmente 
+	realizar o desligamento remoto do mesmo. 
 \end{itemize}
 
-A Figura 3.1 mostra o modelo conceitual abstraído do sistema.
+A Figura \ref{fig:visgeral} ilustra o modelo conceitual abstraído do sistema.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/1_conceitual.png}
-\caption{Visão conceitual do sistema}
-\label{1}
+\caption{Visão geral do sistema de seguran\c{c}a veicular com uso de GPS}
+\label{fig:visgeral}
 \end{figure}
 
 \section{Especificação de Requisitos}
 Seguindo as recomendações de \textcite{Wolf:2001} para projeto de sistemas embarcados, é necessário
-capturar e descrever os requisitos, para realizar esta etapa, o Diagrama de Casos de Uso da UML se
-mostra ideal, além disso a descrição dos casos permite o entendimento do fluxo de dados criando uma base
+capturar e descrever os requisitos. Nesta etapa, o Diagrama de Casos de Uso da UML foi utilizado, além disso a descrição dos casos permite o entendimento do fluxo de dados criando uma base
 para descrição dos componentes para implementação.
 
 \subsection{Casos de Uso}
 
-Foram identificados dois atores do sistema (agentes externos): 
+Foram identificados dois atores do sistema: 
 
 \begin{itemize}
 	\item Ator "Usuário comum": Faz o uso final do sistema, realizando atividades como rastreamento e bloqueio
@@ -42,37 +43,37 @@ Foram identificados dois atores do sistema (agentes externos):
 	\item Ator "Administrador": Realiza operações de gerenciamento de usuário e módulos veiculares.
 \end{itemize}
   
-A figura 3.2 retrata os casos de uso de cada ator identificado.
+A figura \ref{fig:casosuso} ilustra o diagrama de casos de uso do projeto.
 
 %\vspace{50pt}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{figures/2_uc.png}
-\caption{Casos de uso do sistema}
-\label{1}
+\caption{Casos de uso do sistema de seguran\c{c}a veicular com uso de GPS}
+\label{fig:casosuso}
 \end{figure}
 
 \subsection{Descrição dos Casos de Uso}
 
-Segundo \textcite{jacobson:2005}, podemos dizer que um caso de uso é um documento narrativo que descreve uma sequência de eventos de ator que usa um sistema para completar um processo, portanto, a descrição textual dos elementos da representação gráfica se faz necessária.
+Segundo \textcite{jacobson:2005}, podemos dizer que um caso de uso é um documento narrativo que descreve uma sequência de eventos de ator que usa um sistema para completar um processo, portanto, a descrição textual dos elementos da representação gráfica faz-se necessária.
 
-As tabelas 3.1 e 3.2 descrevem os dois principais casos de uso do sistema, o restante das descrições se encontra nos anexos.
-
+As tabelas 3.1 e 3.2 descrevem os dois principais casos de uso do sistema, o restante das descrições encontra-se  em anexo no final deste documento.
+\newpage
 \begin{flushleft}
 \tablefirsthead{}
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-\bottomcaption{Caso de Uso Obter Posi\c{c}\~{a}o Atual}
+\topcaption{Caso de Uso Obter Posi\c{c}\~{a}o Atual}
 \begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
 \hline
 Nome do caso de uso &
 Obter posição atual\\\hline
 Sumário &
-Caso que descreve a obtenção da posição atual de um veículo. \\\hline
+Caso de uso que descreve a obtenção da posição atual de um veículo. \\\hline
 Ator primário &
-Usuário\\\hline
+"Usuário comum"\\\hline
 Atores secundários &
 ~
 \\\hline
@@ -110,20 +111,21 @@ Data &
 \end{supertabular}
 \end{flushleft}
 
+\newpage
 \begin{flushleft}
 \tablefirsthead{}
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-\bottomcaption{Caso de Uso Setar Status de Bloqueio}
+\topcaption{Configurar situa\c{c}\~{a}o de Bloqueio}
 \begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
 \hline
 Nome do caso de uso &
 Setar Status de Bloqueio\\\hline
 Sumário &
-Este caso descreve como o usuário realiza o bloqueio ou desbloqueio do veículo através do sistema com o objetivo de facilitar a recuperação do automóvel. \\\hline
+Este caso de uso descreve como o usuário realiza o bloqueio ou desbloqueio do veículo através do sistema com o objetivo de facilitar a recuperação do automóvel. \\\hline
 Ator primário &
-Usuário\\\hline
+"Usuário comum"\\\hline
 Atores secundários &
 ~
 \\\hline
@@ -162,25 +164,60 @@ Data &
 \end{supertabular}
 \end{flushleft}
 
+\section{Modelo de classes para o módulo embarcado}
+
+Para descrever os comportamentos de cada componente e integrá-los de forma lógica um Diagrama de Classes
+é desenhado, uma vez que a orientação a objetos atende de forma completa a descrição do conjunto de hardware.
+Pode-se abstrair comportamentos e representá-los através de métodos e abstrair estados como atributos de uma classe. 
+
+A principal vantagem em modelar os componentes de hardware com o digrama de classes é observada
+no momento de escrever funções ou bibliotecas para comunicação entre componentes, pois como o 
+mapeamento de métodos necessários já está feito, o desenvolvimento é focado apenas nestes,
+evitando a criação de código não utilizado. 
+
+Para exemplificar esta situação, neste projeto o componente GSM fornece uma gama de funcionalidade 
+que não são utilizadas, como funções de chamada de voz, mensagem SMS e outras,
+porém como o modelo prevê apenas comportamentos relacionados a funções GPRS,
+não foi despendido tempo com a implementação de serviços para acessar estas funcionalidades. 
+
+A Figura \ref{fig:classemodveicular} ilustra o diagrama de classes UML que abstrai as funcionalidades do módulo veicular embarcado e 
+o representa de forma estruturada lógica.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{figures/5_mod_veicular.png}
+\caption{Diagrama de Classes do Módulo Veicular}
+\label{fig:classemodveicular}
+\end{figure}
+
+Conforme se observa no desenho de classes, o módulo se resume a quatro classes, em que existe uma composição na classe principal ModuloVeicularHw, isto significa que esta só existe juntamente com as outras da composição e se uma destas últimas for removida a principal deixará de existir. Ainda na classe principal são guardados os atributos de estado, conexão e posição atual, além de alguns atributos para verificação de erros.
+
+A classe GSM possui como atributo principal uma lista de comandos AT, utilizados para acionar as diversas funções de celular, estes comandos são strings definidas pelo fabricante e descritas no manual do produto. Nota-se que apenas métodos relacionados com a função GPRS e conexões de rede dados foram mapeados, pois só existe a necessidade de uso nesta modalidade.
+
+No modelo da classe GPS, os atributos principais utilizados para obter posição geográfica atual são latitude e longitude, porém para o funcionamento do hardware
+dados de altitude, data, hora e número de satélites também são utilizados. Como comportamentos padrão existem: a obtenção da posição atual, velocidade, curso, satélites e data com hora.
+
+O componente IO Veículo apenas representa as ações de bloquear, desbloquear e estado do alarme (não utilizado neste projeto). Como atributos, o estado do alarme e estado de bloqueio são representados.
+
 \section{Arquitetura do Sistema}
 
 Baseado no modelo conceitual, nos casos de uso, suas descrições e pesquisa de trabalhos correlatos,
 é possível estabelecer um modelo arquitetural transcrito em um diagrama de componentes UML, 
 seguindo recomendações estabelecidas para sistemas de tempo real de acordo com \textcite{Mendes:2002}.
 Nesta etapa da modelagem são definidas algumas tecnologias utilizadas, uso de serviços externos e protocolos
-de comunicação. A Figura 3.3 mostra o diagrama de componentes da UML gerado.
+de comunicação. A Figura \ref{fig:arquitetura} mostra o diagrama de componentes da UML gerado.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{figures/4_arquitetural.png}
-\caption{Arquitetura do Sistema}
-\label{Figura 3}
+\caption{Diagrama de Arquitetura do Sistema de Seguran\c{c} Veicular com uso de GPS}
+\label{fig:arquitetura}
 \end{figure}
 
 
 Pela definição arquitetural obteve-se um cenário onde existem dois componentes macro: o módulo veicular e o módulo Web chamado WebManager.
 
-O módulo veicular pode ser destrinchado em diversos subcomponentes, interfaces requeridas e interfaces fornecidas conforme a descrições a seguir.
+O módulo veicular pode ser dividido em diversos subcomponentes, interfaces requeridas e interfaces fornecidas conforme a descrições a seguir.
 
 \begin{itemize}
 	\item Serviço GPS: representa a utilização do serviço de rádio fornecido pelos satélites/estações GPS;
@@ -206,48 +243,11 @@ O módulo nomeado WebManager realiza o gerenciamento e aplicação das regras de
 	\item Maps API: Indica necessidade de acesso a um serviço de mapas de terceiros para representação visual no sistema.
 \end{itemize}
 
-\section{Modelo de classes para o módulo embarcado}
-
-Para descrever os comportamentos de cada componente e integrá-los de forma lógica um Diagrama de Classes
-é desenhado, uma vez que a orientação a objetos atende de forma completa a descrição do conjunto de hardware.
-Pode-se abstrair comportamentos e representá-los através de métodos e abstrair estados como atributos de uma classe. 
-
-A principal vantagem em modelar os componentes de hardware com o digrama de classes é observada
-no momento de escrever funções ou bibliotecas para comunicação entre componentes, pois como o 
-mapeamento de métodos necessários já está feito, o desenvolvimento é focado apenas nestes,
-evitando a criação de código não utilizado. 
-
-Para exemplificar esta situação, neste projeto o componente GSM fornece uma gama de funcionalidade 
-que não são utilizadas, como funções de chamada de voz, mensagem SMS e outras,
-porém como o modelo prevê apenas comportamentos relacionados a funções GPRS,
-não foi despendido tempo com a implementação de serviços para acessar estas funcionalidades. 
-
-A Figura 3.4 mostra o diagrama de classes UML que abstrai as funcionalidades do módulo veicular embarcado e 
-o representa de forma estruturada lógica.
-
-\newpage
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=\textwidth]{figures/5_mod_veicular.png}
-\caption{Diagrama de Classes do Módulo Veicular}
-\label{1}
-\end{figure}
-
-Conforme se observa no desenho de classes, o módulo se resume a quatro classes, onde existe uma composição na classe principal ModuloVeicularHw, isto significa que esta é só existe juntamente com as outras da composição e se uma destas últimas for removida a principal deixará de existir. Ainda na classe principal são guardados os atributos de estado, conexão e posição atual, além de alguns atributos para verificação de erros.
-
-A classe GSM possui como atributo principal um lista de comandos AT, utilizados para acionar as diversas funções de celular, estes comandos são strings definidas pelo fabricante e descritas no manual do produto. Nota-se que apenas métodos relacionados com a função GPRS e conexões de rede dados foram mapeados, pois só existe a necessidade de uso nesta modalidade.
-
-No modelo da classe GPS, os atributos principais utilizados para obter posição geográfica atual são latitude e longitude, porém para o funcionamento do hardware
-dados de altitude, data, hora e número de satélites também são utilizados. Como comportamentos padrão existem: a obtenção da posição atual, velocidade, curso, satélites e data com hora.
-
-O componente IO Veículo apenas representa as ações de bloquear, desbloquear e estado do alarme (não utilizado neste projeto). Como atributos, o estado do alarme e estado de bloqueio são representados.
-
 \section{Hardware do módulo embarcado}
 
 Conforme abordado no capítulo 2, a plataforma de prototipagem Arduino foi escolhida para servir de base para implementação em hardware do módulo embarcado, sendo que a placa controladora Arduino Uno é o núcleo funcional do mesmo. 
 
-Baseado no modelo de classes da figura 3.4, é possível perceber que existe uma correspondência de um para um entre classe e hardware que implementa certa funcionalidade, assim sendo:
+Baseado no modelo de classes da figura \ref{fig:classemodveicular}, é possível perceber que existe uma correspondência de um para um entre classe e hardware que implementa certa funcionalidade, assim sendo:
 
 \begin{itemize}
 	\item Classe ModuloVeicularHw: corresponde a placa controladora Arduino Uno.
@@ -258,26 +258,26 @@ Baseado no modelo de classes da figura 3.4, é possível perceber que existe uma
 
 \subsection{Placa controladora}
 
-O processo de montagem se inicia com a placa microcontroladora que recebe os shields conforme o desenvolvimento do firmware. A figura 3.5 mostra o exemplar de Arduino Uno adquirido para montagem do protótipo.
+O processo de montagem se inicia com a placa microcontroladora que recebe os shields conforme o desenvolvimento do firmware. A figura \ref{fig:arduinounoimpl} mostra o exemplar de Arduino Uno adquirido para montagem do protótipo.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\textwidth]{figures/arduinoUnoReal.jpg}
 	\caption{Exemplar Arduino Uno}
-	\label{1}
+	\label{fig:arduinounoimpl}
 \end{figure}
 
 Por serem parte de uma plataforma orientada a prototipagem, os hardwares da família Arduino possuim algumas características para facilitar a integração entre módulos, placas de circuito impresso e componentes de outra natureza, é possível enumerar as principais:
 
 \begin{enumerate}
 	\item Layout padrão: os shields seguem o mesmo desenho da placa controladora Arduino Uno, com issso não existe desproporcionalidade de tamanho na integração.
-	\item Pinos para empilhamento: as placas possuem pinos passantes que permitem conectar nós de circuito a uma segunda placa empilhada sob a primeira. Os pinos são mostrados na figura 3.6.
+	\item Pinos para empilhamento: as placas possuem pinos passantes que permitem conectar nós de circuito a uma segunda placa empilhada sob a primeira. Os pinos são mostrados na figura \ref{fig:empilpin}.
 	
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\textwidth]{figures/stackPins.jpg}
 	\caption{Pinos para empilhamento no Shield GSM}
-	\label{1}
+	\label{fig:empilpin}
 \end{figure}	
 
 	\item O kit Arduino traz um conjunto de jumpers com terminais do tipo pino, facilmente conectáveis aos soquetes da placa controladora.
@@ -287,17 +287,18 @@ Por serem parte de uma plataforma orientada a prototipagem, os hardwares da fam�
 
 \subsection{Shield GSM}
 
-O próximo componente integrado é o Shield GSM, nesta etapa apenas é necessária a soldagem do pinos de empilhamento conforme a figura 3.6, e encaixar o conjunto sobre a placa controladora.
+O próximo componente integrado é o Shield GSM, nesta etapa apenas é necessária a soldagem do pinos de empilhamento conforme a figura \ref{fig:empilpin}, e encaixar o conjunto sobre a placa controladora.
 
-Conforme obtido na documentação disponibilizada pelo fabricante, este shield utiliza alimentação dos pinos 5V e 3.3V, além disso faz uso dos pino digitais 2 e 3 para abertura de um canal serial com o microcontrolador, o restante dos pinos fica livre para uso. Existe um conector para antena padrão SMA, que recebe uma atena quad band afim de melhorar a recepção de sinal da rede GSM. A figura 3.7 mostra a integração realizada.
+Conforme obtido na documentação disponibilizada pelo fabricante, este shield utiliza alimentação dos pinos 5V e 3.3V, além disso faz uso dos pino digitais 2 e 3 para abertura de um canal serial com o microcontrolador, o restante dos pinos fica livre para uso. Existe um conector para antena padrão SMA, que recebe uma atena quad band afim de melhorar a recepção de sinal da rede GSM. A figura \ref{fig:shieldgsmimpl} mostra a integração realizada.
  
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/arduinoAndGSM.jpg}
 \caption{Shield GSM integrado ao Arduino Uno}
-\label{1}
+\label{fig:shieldgsmimpl}
 \end{figure}
 
+\newpage
 \subsection{Shield GPS}
 
 A próxima etapa é a integração do Shield GPS no conjunto atual, para isto se procede a soldagem dos pinos de empilhamento da mesma forma que no passo anterior, porém foi percebido na análise documental que existe um pequeno empecilho que demanda uma adaptção no hardware.
@@ -309,44 +310,44 @@ A questão é que o Shield GPS, assim como o GSM, também necessita de um canal 
 	\item Os pinos 2 e 3 são utilizados pelo Shield GSM e não se pode compartilhar o mesmo canal.
 \end{itemize}
 
-A solução aplicada foi alterar os pinos do canal serial para o par 4-5 que se encontra livre. O desenho do shield permite fazer isto facilmente: conforme a figura 3.8, existem dois pontos de solda no circuito com os textos "2" e "3", deve-se remover o pontos de solda desses locais e realizar um jumpeamento do ponto 2 para o pino 4 e do ponto 3 para o pino 5. A chave de seleção deve ser mantida na posição DLINE.
+A solução aplicada foi alterar os pinos do canal serial para o par 4-5 que se encontra livre. O desenho do shield permite fazer isto facilmente: conforme a figura \ref{fig:modgpsimpl}, existem dois pontos de solda no circuito com os textos "2" e "3", deve-se remover o pontos de solda desses locais e realizar um jumpeamento do ponto 2 para o pino 4 e do ponto 3 para o pino 5. A chave de seleção deve ser mantida na posição DLINE.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/gpsMod.jpg}
 \caption{Modificação no Shield GPS}
-\label{1}
+\label{fig:modgpsimpl}
 \end{figure}  
 
-Após a modificação se procede o empilhamento da placa normalmente, deixando o conjunto com o aspecto da figura 3.9.
+Após a modificação se procede o empilhamento da placa normalmente, deixando o conjunto com o aspecto da figura \ref{fig:empunogpsgsm}.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/arduinoGSMGPS.jpg}
 \caption{Integração Arduino Uno, GSM e GPS}
-\label{1}
+\label{fig:empunogpsgsm}
 \end{figure}
 
 \subsection{Circuito de I/O com Veículo}
 
 Um dos requisitos do sistema é a possibilidade de bloquear, ou seja, desligar o veículo e não permitir que o mesmo seja ligado novamente por meios normais. Após pesquisar sobre os métodos utilizados pelos alarmes automotivos para realizar este desligamento foi constatado que o mesmos comumente realizam uma intervenção sobre o circuito da bomba de combustível do veículo.
 
-O funcionamento desta técnica se baseia no princípio de malhas fechadas, a figura 3.10 representa o circuito de uma bomba de combustível automotiva: uma vez que a ignição fecha o circuito, a bomba fica alimentada e funciona normalmente.
+O funcionamento desta técnica se baseia no princípio de malhas fechadas, a figura \ref{fig:circbombnorm} representa o circuito de uma bomba de combustível automotiva: uma vez que a ignição fecha o circuito, a bomba fica alimentada e funciona normalmente.
 
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/circBomba.png}
 \caption{Circuito normal da bomba de combustível}
-\label{1}
+\label{fig:circbombnorm}
 \end{figure}
 
-A intervenção se dá na inserção de uma nova chave, neste caso um relé normalmente fechado\footnote{Um relé normalmente fechado permite a passagem de corrente entre dois pontos e, quando acionado, desconecta estes dois ponto impedindo a condução e abrindo o circuito.} é colocado em série com a chave de ignição, no momento que o microcontrolador acionar o relé, o circuito é aberto e a bomba deixa de funcionar por falta de alimentação. A figura 3.11 mostra o circuito alterado e a chave representativa do relé se encontra aberta, indicando um bloqueio do veículo.
+A intervenção se dá na inserção de uma nova chave, neste caso um relé normalmente fechado\footnote{Um relé normalmente fechado permite a passagem de corrente entre dois pontos e, quando acionado, desconecta estes dois ponto impedindo a condução e abrindo o circuito.} é colocado em série com a chave de ignição, no momento que o microcontrolador acionar o relé, o circuito é aberto e a bomba deixa de funcionar por falta de alimentação. A figura \ref{fig:circbombinterv} mostra o circuito alterado e a chave representativa do relé se encontra aberta, indicando um bloqueio do veículo.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/circBombaFin.png}
 \caption{Circuito da bomba após intervenção}
-\label{1}
+\label{fig:circbombinterv}
 \end{figure}
 
 A bomba de combustível de um automóvel possui uma corrente de operação de 5 a 6 ampéres, com pico de 10 ampéres, conforme relatado no capítulo 2, um microcontrolador necessita de um circuito externo, em geral feito com relés, para manipular esta carga. Para suprir esta necessidade foi adquirido um circuito com relé da fabricante Sparkfun. Detalhes deste componente se encontram no capítulo 2.
@@ -359,22 +360,22 @@ A integração deste circuito ao conjunto montado até o momento é feita por me
   \intem Jumper de controle ligado no pino digital 12 para sinalizar o acionamento ou desligamento do relé.
 \end{itemize}
 
-Uma intervenção no circuito de relé foi necessária pois por padrão o conector da placa está interligado à malha normalmente aberta, com isso foram soldados dois cabos diretamente à malha normalmente fechada conforme a figura 3.12.
+Uma intervenção no circuito de relé foi necessária pois por padrão o conector da placa está interligado à malha normalmente aberta, com isso foram soldados dois cabos diretamente à malha normalmente fechada conforme a figura \ref{fig:fiosrelay}.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/jmpNC.jpg}
 \caption{Fios interligados à malha normalmente fechada do relé}
-\label{1}
+\label{fig:fiosrelay}
 \end{figure}
 
-Ao final jumper também foi adicionado interligando o pino digital 9 ao pino RST para fins de reboot automático do microcontrolador quando necessário. A figura 3.13 mostra o conjunto completo montado.
+Ao final jumper também foi adicionado interligando o pino digital 9 ao pino RST para fins de reboot automático do microcontrolador quando necessário. A figura \ref{fig:modulomontado} mostra o conjunto completo montado.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/fullMount.jpg}
 \caption{Conjunto de hardware do módulo embarcado montado}
-\label{1}
+\label{fig:modulomontado}
 \end{figure}
 
 \section {Desenvolvimento do Firmware}
@@ -395,19 +396,20 @@ A criação desta rotina segue um modelo de atividades bem definidas, que se res
 	\item void loop(): bloco executado após o setup(), fazendo o que o próprio nome diz, um laço de repetição que executa enquanto o microcontrolador estiver ligado, permitindo a leitura e modificação de estado. Utilizado para realizar o controle efetivo da placa controladora.
 \end{itemize} 
 
-O passos fundamentais do firmware no módulo embarcado são descritas no diagrama de atividades da figura 3.14, o fluxo principal se resume, após a execução da função setup (onde é aberta a conexão com o webservice), na repetição da obtenção dos dados GPS, envio dos dados ao servidor e leitura da resposta, verificando se deve se efetuar o bloqueio do veículo ou não.
+O passos fundamentais do firmware no módulo embarcado são descritas no diagrama de atividades da figura \ref{fig:sequencialogicabasica}, o fluxo principal se resume, após a execução da função setup (onde é aberta a conexão com o webservice), na repetição da obtenção dos dados GPS, envio dos dados ao servidor e leitura da resposta, verificando se deve se efetuar o bloqueio do veículo ou não.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/atividades_hl.png}
 \caption{Sequência lógica do firmware}
-\label{1}
+\label{fig:sequencialogicabasica}
 \end{figure}
 
 Para realização das atividades que envolvem o uso dos shields e outros hardwares acoplados a placa controladora, é necessário criar uma interface de comunicação com os mesmos, que é feita na maioria dos casos, utilizando uma biblioteca fornecida pelo fabricante ou pela comunidade Arduino. Estas bibliotecas são conjuntos de rotinas escritas em C/C++ e integradas ao programa principal por meio de uma diretiva \emph{\#include<biblioteca.h>}.
 
 As subseções a seguir descrevem a realização da interface com os shields GPS e GSM, além da comunicação com o módulo de IO (relé) e uso da funcionalidade EEPROM, que permite persistir um dado em memória não-volátil, recuperando seu estado em caso de reinicialização da placa.
 
+\newpage
 \subsection{Interface com EEPROM}
 
 O microcontrolador da placa Arduino possui uma memória do tipo EEPROM: Electrically-Erasable Programmable Read-Only Memory, com tamanho de 1024 bytes no ATmega328. Neste tipo de memória os valores armazenados são mantidos mesmo que a placa seja desligada, atuando como um disco rígido para armazenamento não-volátil.
@@ -418,7 +420,7 @@ A manipulação da EEPROM consiste na leitura e na escrita de dados, para ambos 
 
 A escrita de dados é feita pela função EEPROM.write(endereço, valor), onde endereço é um inteiro de 0 a 1023 e valor é um byte, aceitando valores de 0 a 255. Para leitura, a função EEPROM.read(endereço) é usada, bastando passar o valor do endereço como parâmetro e obter um byte como resposta.
 
-O processo de leitura do último estado e de escrita do estado atual do módulo na memória EEPROM é mostrado no código 3.6.1.
+O processo de leitura do último estado e de escrita do estado atual do módulo na memória EEPROM é mostrado no código \ref{code:eeprom}.
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
@@ -433,9 +435,9 @@ O processo de leitura do último estado e de escrita do estado atual do módulo 
 
 \newpage
 
-\subsection{Interface com IO}
+\subsection{Interface com I/O}
 
-A interface com o módulo de IO com relé é bastante simplificada, uma vez que sua integração é realizada por meio dos pinos digitais. O processo basicamente define que o pino de comunicação utilizado tenha seu modo de operação (entrada ou saída) definido na função setup, depois disso, basta realizar uma chamada da função digitalWrite(pino, estado), onde o parâmetro pino é o número do mesmo assim como descrito na impressão sobre o circuito impresso, e o parâmetro estado pode assumir o valor da macro HIGH (ligado) ou LOW (desligado). O código 3.6.2 mostra a configuração e uso do pino de digital para acionamento ou desacionamento do relé de controle de carga.
+A interface com o módulo de I/O com relé é bastante simplificada, uma vez que sua integração é realizada por meio dos pinos digitais. O processo basicamente define que o pino de comunicação utilizado tenha seu modo de operação (entrada ou saída) definido na função setup, depois disso, basta realizar uma chamada da função digitalWrite(pino, estado), onde o parâmetro pino é o número do mesmo assim como descrito na impressão sobre o circuito impresso, e o parâmetro estado pode assumir o valor da macro HIGH (ligado) ou LOW (desligado). O código \ref{code:ctrlrelay} mostra a configuração e uso do pino de digital para acionamento ou desacionamento do relé de controle de carga.
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
@@ -444,8 +446,8 @@ A interface com o módulo de IO com relé é bastante simplificada, uma vez que 
       \vspace{2mm}
       \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/io.cpp}
    \end{boxit}
-   \caption{\it Rotinas de leitura e escrita em EEPROM}
-   \label{code:eeprom}
+   \caption{\it Rotinas de acionamento do pino digital para controle do relé}
+   \label{code:ctrlrelay}
 \end{codigo}
   
 
@@ -462,7 +464,7 @@ Para obtenção dos dados de posicionamento, dois artefatos necessitam estar pre
 
 Além de configurar os itens citados, é necessário que o módulo tenha completado a montagem da mensagem GPRMC (citada no capítulo 2), para isto é criada uma função auxiliar chamada feedGps() que faz uma checagem contínua no status da mensagem por meio de um laço de repetição, que é interrompido caso a mensagem esteja completa ou ocorra um timeout sem resposta.
 
-O Código 3.6.3 mosta as chamadas necessárias para capturar a posição atual do módulo GPS.
+O Código \ref{code:codegps} mosta as chamadas necessárias para capturar a posição atual do módulo GPS.
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
@@ -475,7 +477,7 @@ O Código 3.6.3 mosta as chamadas necessárias para capturar a posição atual d
    \label{code:codegps}
 \end{codigo}
 
-
+\newpage
 \subsection{Interface com Shield GSM}
 
 O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua operação, mas é operável por meio de comandos AT especificados em suas referências porém uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória, torna bastante complexo o controle de estados e a recuperação de erros.
@@ -484,13 +486,13 @@ No SDK Arduino existe uma biblioteca chamada SoftwareSerial com uma classe princ
 
 Foi implementada uma classe de comunicação com o módulo utilizando o conceito de herança do paradigma de orientação a objetos, onde a classe Shield GSM é uma subclasse de SoftwareSerial. 
 
-A figura 3.15 mostra o diagrama da classe de comunicação e a herança de SoftwareSerial.
+A figura \ref{fig:classesm} mostra o diagrama da classe de comunicação e a herança de SoftwareSerial.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/lib_gsm.png}
 	\caption{Classe de comunicação com SM5100B}
-	\label{1}
+	\label{fig:classesm}
 \end{figure}
 
 \subsection{Requisição ao webservice}
@@ -508,33 +510,34 @@ plano nos logs, como acontece com o GET. A estrutura JSON traz os seguintes camp
 	\item alarm: valor representando se o alarme do veículo foi acionado, 0 se falso 1 se verdadeiro. Não utilizado no momento.
 \end{itemize}
 
-A figura 3.16 mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observar o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
+A figura \ref{fig:requisicaohttp} mostra a mensagem enviada pelo módulo veicular a um servidor de testes, é possível observar o cabeçalho HTTP simulando um browser com engine Mozilla/5.0 e a sinalização do uso de dados estruturados JSON.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/requisicao_post.png}
 	\caption{Requisição HTTP feita pelo módulo veicular}
-	\label{1}
+	\label{fig:requisicaohttp}
 \end{figure}
 
 \subsection {Visão geral do funcionamento do módulo embarcado}
 
-Conforme descrito anteriormente, o firmware opera em duas funções principais, a função void setup() e a função void loop(). A figura 3.17 mostra as atividades realizadas durante o boot, especificamente passos que envolvem a configuração para acesso a rede de dados GSM, login no APN da operadora, permitindo assim que seja realizada posteriormente a conexão e troca de dados com o webservice.
+Conforme descrito anteriormente, o firmware opera em duas funções principais, a função void setup() e a função void loop(). A figura \ref{fig:seqsetup} mostra as atividades realizadas durante o boot, especificamente passos que envolvem a configuração para acesso a rede de dados GSM, login no APN da operadora, permitindo assim que seja realizada posteriormente a conexão e troca de dados com o webservice.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/ModuloVeicular_Boot.png}
 	\caption{Proceso de setup}
-	\label{1}
+	\label{fig:seqsetup}
 \end{figure}
 
-Na figura 3.18 as atividades durante o loop envolvem a obtenção dos dados GPS, montagem da requisição, conexão e envio de dados ao webservice. Nos pontos onde existe possibilidade de falha há um direcionamento para a função de setup, onde qualquer configuração falha será substituída por novos valores, retomando o funcionamento normal.
+\newpage
+Na figura \ref{fig:seqloop} as atividades durante o loop envolvem a obtenção dos dados GPS, montagem da requisição, conexão e envio de dados ao webservice. Nos pontos onde existe possibilidade de falha há um direcionamento para a função de setup, onde qualquer configuração falha será substituída por novos valores, retomando o funcionamento normal.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.99\textwidth]{figures/ModuloVeicular_Loop.png}
 	\caption{Atividades durante o loop}
-	\label{1}
+	\label{fig:seqloop}
 \end{figure}
 
 \newpage
@@ -551,11 +554,11 @@ Como banco de dados, o PostgreSQL foi adotado  pois possui um sofisticado mecani
 
 \subsection{Modelo geral}
 
-A arquitetura da modelagam do WebManager foi baseada no padrão MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
+A arquitetura da modelagem do WebManager foi baseada no padrão MVC que segundo \textcite{Mendes:2002} estabelece o desenvolvimento de software em camadas: classes de Entidade (Models), classes de controle (Control) e classes de interface com o usuário (View). 
 
 O modelo MVC permite o desacoplamento das camadas de software facilitando a manutenção e diminuindo a repetição de código, as vantagens de sua utilização ficam bastante claras quando existe a necessidade da alteração de código, por exemplo, caso haja mudança nas regras de negócio de algum cálculo do sistema, apenas é necessária atualização do conteúdo da camada Control.
 
-Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework), DAO, Factory Method descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura 3.19 mostra o diagrama de classes obtido.
+Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework), DAO, Factory Method descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura \ref{fig:classgeralwebman} mostra o diagrama de classes obtido.
 
 \begin{landscape}
 
@@ -563,19 +566,19 @@ Além do modelo arquitetural base, alguns padrões de projeto como Singleton (ut
 	\centering
 	\includegraphics[width=20.00cm\textwidth]{figures/6_web_manager.png}
 	\caption{Modelo de classes do WebManager}
-	\label{}
+	\label{fig:classgeralwebman}
 \end{figure}
 \end{landscape}
 
 \subsection{Camada de modelo}
 
-A camada de modelo representa os dados da aplicação e as regras do negócio que governam o acesso e a modificação dos dados. O modelo mantém o estado persistente do negócio e fornece ao controlador a capacidade de acessar as funcionalidades da aplicação encapsuladas pelo próprio modelo. As classes definidas nesta camada também são chamadas de entidades, o diagrama de classes para o modelo deste trabalho é mostrado na figura 3.20.
+A camada de modelo representa os dados da aplicação e as regras do negócio que governam o acesso e a modificação dos dados. O modelo mantém o estado persistente do negócio e fornece ao controlador a capacidade de acessar as funcionalidades da aplicação encapsuladas pelo próprio modelo. As classes definidas nesta camada também são chamadas de entidades, o diagrama de classes para o modelo deste trabalho é mostrado na figura \ref{fig:webmanmodel}.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/model.png}
 	\caption{Model - Entidades do sistema}
-	\label{}
+	\label{fig:webmanmodel}
 \end{figure}
 
 Uma vez que o conceito define que esta camada guarda um estado persistido, o diagrama de classes gera naturalmente uma modelagem de banco de dados. A criação de uma base de dados relacional a partir deste modelo é facilitada com o uso de um framework de mapeamento objeto-relacional (object-relational mapping ou simplesmente ORM).
@@ -589,7 +592,7 @@ O framework Hibernate ORM foi adotado, adicionado alguns aspectos que facilitam 
 	\item Caso seja necessário criar consultas manuais, o Hibernate possui uma linguagem própria bastante intuitiva, chamada HQL, onde se trabalha facilmente com a combinação de atributos de classes para se obter informação desejada. 
 \end{itemize}
 
-O diagrama da figura 3.20 foi traduzido em uma base de dados com seis tabelas, são elas:
+O diagrama da figura \ref{fig:webmanmodel} foi traduzido em uma base de dados com seis tabelas, são elas:
 
 \begin{enumerate}
 	\item tb\_logposicao, que guarda a posição geográfica de cada requisição feita pelos módulos veiculares.
@@ -604,13 +607,13 @@ O diagrama da figura 3.20 foi traduzido em uma base de dados com seis tabelas, s
 
 Nesta camada são definidos os controladores (controllers) do sitema, um controlador define o comportamento da aplicação, é ele que interpreta as ações do usuário e as mapeia para chamadas do modelo. Em um cliente de aplicações Web essas ações do usuário poderiam ser cliques de botões ou seleções de menus. As ações realizadas pelo modelo incluem ativar processos de negócio ou alterar o estado do modelo.
 
-Na figura 3.21 pode se observar que existe um controller para cada entidade principal do sistema, além de alguns métodos base para alteração do estado persistido do modelo.
+Na figura \ref{fig:webmancontrol} pode se observar que existe um controller para cada entidade principal do sistema, além de alguns métodos base para alteração do estado persistido do modelo.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/webm_control.png}
 	\caption{Controllers}
-	\label{}
+	\label{fig:webmancontrol}
 \end{figure}
 
 Os controladores são beans, componentes Java injetados na interface com o usuário permitindo acesso a serviços não apenas da camada de modelo, mas também serviços externos como no caso do Framework de mapas. Neste caso, o controlador ControllerVeiculo guarda uma instância de mapa que é atualizada conforme as informações do módulo veicular correspondente vão chegando, além disso o controlador atualiza a página web correspondente.
@@ -623,13 +626,13 @@ Nesta camada também é feita a integração com o Spring Security, framework qu
 
 O webservice disponibilizado pela aplicação web é uma API RESTful, onde o serviço principal fica disponibilizado na URL \{servidor.url\}/AutoTrack\_WebManager/api/embedded. 
 
-A figura 3.22 demonstra um exemplo de requisição e mapeamento feito pelo webservice para entidades manipuláveis na camada de controllers do sistema.
+A figura \ref{fig:webmanwebservice} demonstra um exemplo de requisição e mapeamento feito pelo webservice para entidades manipuláveis na camada de controllers do sistema.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/RESTMapp.png}
 	\caption{Esquema do webservice}
-	\label{}
+	\label{fig:webmanwebservice}
 \end{figure}
 
 O funcionamento do webservice pode ser sintetizado em alguns passos onde existe a interação entre o módulo veicular e a API REST, em concordância com a figura anterior as etapas são as seguintes: 
@@ -654,13 +657,13 @@ O funcionamento do webservice pode ser sintetizado em alguns passos onde existe 
 
 \subsection{DAO}
 
-Conforme descrito no capítulo 2, Data Acces Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura 3.23.
+Conforme descrito no capítulo 2, Data Acces Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura \ref{fig:webmandao}.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/dao_layer.png}
 	\caption{Camada DAO}
-	\label{}
+	\label{fig:webmandao}
 \end{figure}
 
 O par de interface/classe respectivamente IGenericDAO/GenericDao, contém métodos para operações CRUD anotados com as respectivas configurações de transação. Os principais métodos da implementação genérica são:
@@ -680,24 +683,24 @@ Cada controller contém como atributo uma interface para o DAOs correspondente a
 
 Para implementação da camada de view, que neste escopo são páginas Web, foi utilizado o framework Primefaces, que fornece uma infinidade de componentes de UI prontos para uso, bastando setar algumas propriedades. As páginas são escritas em XHTML e interpretadas por um container como o Tomcat, que fornece o ambiente de execução para aplicações Java Web.
 
-O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento. A figura 3.24 mostra a tela de login do sistema.
+O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento. A figura \ref{fig:webmanviewlogin} mostra a tela de login do sistema.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=15.00cm\textwidth]{figures/webmanager_login.png}
 	\caption{Tela de Login do Sistema}
-	\label{Figura 14}
+	\label{fig:webmanviewlogin}
 \end{figure}
 
 O rastreamento do módulo é feito com o auxílio da API do Google Maps. O framework Primefaces possui um componente que realiza esta linkgem com a API, trazendo os dados geográficos correspondente a uma posição latitude-longitude fornecida.
 
-A figura 3.25 exibe a página de rastreamento de veículo, é possível perceber o círculo verde que corresponde a posição aproximada do veículo.
+A figura \ref{fig:webmanviewrastrear} exibe a página de rastreamento de veículo, é possível perceber o círculo verde que corresponde a posição aproximada do veículo.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\textwidth]{figures/webmanager_rastrear.png}
 	\caption{Tela de Rastreamento}
-	\label{Figura 15}
+	\label{fig:webmanviewrastrear}
 \end{figure}
 
 A ação de bloqueio do veículo é realizada por meio do botão "Bloquear", que atualiza o estado do veículo em foco no banco de dados. Com isto, ao realizar a próxima requisição ao webservice, o módulo embarcado no veículo citado reberá uma resposta HTTP correspondente à ação de bloqueio e assim deverá acionar o mecanismo para realizar a ação.
