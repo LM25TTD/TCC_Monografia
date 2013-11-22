@@ -17,7 +17,7 @@ Class=LaTeXView
 Document=TESE.tex
 
 [Frame0_View0,0]
-TopLine=186
+TopLine=190
 Cursor=5783
 
 [Frame1]

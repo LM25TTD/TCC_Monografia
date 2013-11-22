@@ -17,9 +17,9 @@ A diferenciação entre um sistema embarcado de um sistema de propósito geral s
 Um exemplo de sistema embarcado a se considerar é um roteador wireless conforme a figura \ref{fig:roteador}, pois possui as seguintes características:
 
 \begin{itemize}
-	\item É um computador de propósito específico: realiza funcões de roteamento, controle de conexões, controle do sinal de rádio e implementa seviços da camada física a camada de rede TCP/IP;
+	\item É um computador de propósito específico: realiza funções de roteamento, controle de conexões, controle do sinal de rádio e implementa serviços da camada física a camada de rede TCP/IP;
 	\item Opera em tempo real: todos os pacotes que passam pelo roteador deve ser processados em tempo hábil;
-	\item Custo de produção resuzido: São utilizados processadores de custo reduzido, quantidade de memória limitada e outros componentes de menor custo a fim de reduzir o preço total e facilitar a produção em massa.
+	\item Custo de produção reduzido: São utilizados processadores de custo reduzido, quantidade de memória limitada e outros componentes de menor custo a fim de reduzir o preço total e facilitar a produção em massa.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -38,11 +38,11 @@ Modelos para projeto de sistemas embarcados têm sido propostos ao longo dos ano
 
 Foram selecionadas as melhores práticas de análise e especificação de requisitos para sistemas os quais necessitam que hardware e software sejam co-projetados, introduzido um conceito de mapeamento da plataforma para gerar uma implementação otimizada de hardware e software, uma vez que conforme \textcite{Wolf:2001}, o custo de produção e o consumo de recursos energéticos deve ser o mínimo possível.
 
-Esta metodologia fornece uma abordagem que permite o desenvolvimento de ferramentas de análise automatizada, simulação, síntese e geração de código equanto se define um padrão UML para embarcados.
+Esta metodologia fornece uma abordagem que permite o desenvolvimento de ferramentas de análise automatizada, simulação, síntese e geração de código enquanto se define um padrão UML para embarcados.
 
 Em um segundo artigo, \textcite{Martin:2002} propõe novas extensões UML que cobrem lacunas não atendidas pela linguagem, como suporte a modelagem de hardware baseada em VHDL.
 
-É claro que na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sitema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
+É claro que na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sistema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
 
 \textcite{Wolf:2001} propõe uma abstração em alto nível dos principais passos no projeto de sistemas embarcados em uma abordagem \textit{top-down}, são estes:
 
@@ -56,7 +56,7 @@ Em um segundo artigo, \textcite{Martin:2002} propõe novas extensões UML que co
 \textcite{Marwedel:2001}  inclui etapas de teste dentro das etapas de projeto, designando o fluxo como modelo-V. As etapas de teste são: 
 
 \begin{itemize}
-	\item \emph{Testes unitários}: Teste individual para cada unidade mínima funcional do sistema, com isto é possível verificar o comportamento de cada parte e, em caso de defeitos, corrigi-los antes de qualquer integração, poupando tempo de desenvolvimento uma vez que seria dispendioso, depois do sistema pronto, rastrear e econtrar o problema.
+	\item \emph{Testes unitários}: Teste individual para cada unidade mínima funcional do sistema, com isto é possível verificar o comportamento de cada parte e, em caso de defeitos, corrigi-los antes de qualquer integração, poupando tempo de desenvolvimento uma vez que seria dispendioso, depois do sistema pronto, rastrear e encontrar o problema.
 	\item \emph{Testes de integração}: Verificação da comunicação entre os diferentes componentes quando interligados. Esta etapa é válida pois mesmo que os componentes funcionem individualmente e separados, sempre que se integram partes um novo comportamento é gerado, o que pode levar a erros inesperados.
 	\item \emph{Aceitação e Uso}: Verifica-se o comportamento do sistema em relação ao descrito nas especificações, é um teste do sistema completo e em funcionamento, para confirmação se todos os requisitos estão sendo atendidos.
 \end{itemize}
@@ -67,7 +67,7 @@ Em um segundo artigo, \textcite{Martin:2002} propõe novas extensões UML que co
 
 Um microcontrolador é uma unidade de processamento que, diferente de um microprocessador, traz todos os módulos necessários ao seu funcionamento (como memória volátil, memória somente leitura, blocos de entrada e saída, conversores analógico-digital e digital-analógico, linhas para troca de dados com componentes externos) no interior de um único chip, podendo assim ser programado para executar uma rotina de propósito específico.
 
-Realizando uma comparação com os microprocessadores, pode-se constatar que os microcontroladores operam em uma frequência muito baixa, porém adequada a maioria das aplicações as quais são designados, como por exemplo: controlar uma esteira, uma caldeira ou uma máquina. Devido a esta característica, o consumo de energia é pequeno, normalmente na casa dos miliwatts, além disso os microncontroladores podem entrar em modo de espera, aguardando por um evento externo, tal como pressionar de uma tecla ou acionamento de um sensor.
+Realizando uma comparação com os microprocessadores, pode-se constatar que os microcontroladores operam em uma frequência muito baixa, porém adequada a maioria das aplicações as quais são designados, como por exemplo: controlar uma esteira, uma caldeira ou uma máquina. Devido a esta característica, o consumo de energia é pequeno, normalmente na casa dos miliwatts, além disso os microcontroladores podem entrar em modo de espera, aguardando por um evento externo, tal como pressionar de uma tecla ou acionamento de um sensor.
 
 Uma outra característica antagônica em relação a um microprocessador é que, enquanto neste último é feito um superdimensionamento de recursos sendo limitado pela faixa financeira que o usuário pode investir, em um projeto com microcontroladores o superdimensionamento é um erro de projeto, um desperdício de recurso que reflete diretamente no preço do equipamento final, sendo multiplicado no caso de uma produção em larga escala.
 
@@ -86,7 +86,7 @@ As aplicações deste componente compreendem principalmente automação e contro
 
 Arduino é uma plataforma para prototipagem eletrônica que utiliza o conceito de hardware livre. Neste conceito deve-se prover a disponibilização irrestrita de informações sobre o projeto de hardware, tais como digramas eletrônicos, estrutura de produtos, layout de placas de circuito impresso, rotinas de baixo nível e qualquer outra informação necessária para um construção \textit{from-scratch} do projeto.
 
-Os modelos mais utilizados da placa microcontroladora Arduino (Duemilanove e Uno) foram concebidas com base em um microncontrolador Atmel AVR montado em placa única, possui suporte de entra/saída embutido, uma linguagem de programação padrão baseada em C/C++.
+Os modelos mais utilizados da placa microcontroladora Arduino (Duemilanove e Uno) foram concebidas com base em um microcontrolador Atmel AVR montado em placa única, possui suporte de entra/saída embutido, uma linguagem de programação padrão baseada em C/C++.
 
 A plataforma surgiu para que amadores, entusiastas e outras pessoas que não teriam acesso ao controladores e ferramentas mais sofisticadas, pudessem criar seus projetos, tornando-os acessíveis, flexíveis e com baixo custo. Uma placa Arduino, em geral, possui os seguintes elementos em sua construção:
 
@@ -98,7 +98,7 @@ A plataforma surgiu para que amadores, entusiastas e outras pessoas que não ter
 	\item Interface USB para programação e interação com um computador hospedeiro.
 \end{itemize} 
 
-Seguindo estas características comuns, ao decorrer da existência do projeto foram desenvolvidas diversas placas microncontroladoras, cada uma carrega um codinome e especificações de hardware próprias. A tabela 2.1 descreve algumas placas da família Arduino.
+Seguindo estas características comuns, ao decorrer da existência do projeto foram desenvolvidas diversas placas microcontroladoras, cada uma carrega um codinome e especificações de hardware próprias. A tabela 2.1 descreve algumas placas da família Arduino.
 
 \begin{table}[!h]
 \caption{Modelos de placa Arduino}

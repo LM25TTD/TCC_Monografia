@@ -222,13 +222,13 @@ O módulo veicular pode ser dividido em diversos subcomponentes, interfaces requ
 \begin{itemize}
 	\item Serviço GPS: representa a utilização do serviço de rádio fornecido pelos satélites/estações GPS;
 	\item Módulo GPS: hardware que implementa as funcionalidade GPS, se comunicando com o microcontrolador por um canal serial descrito como Serial GPS;
-	\item MicroControlador: componente físico que ATmega328 da placa Arduino;
+	\item Microcontrolador: componente físico que ATmega328 da placa Arduino;
 	\item Digital I/O: Pinos digitais do microcontrolador que interagem com o I/O Veículo;
 	\item I/O Veículo: Hardware que implementa o chaveamento para desligamento do veículo;
 	\item Módulo GSM/GPRS: hardware que implementa funcionalidade de celular para acesso a rede GPRS. Se comunica com o microcontrolador por meio de um canal serial nomeado Serial GSM;
 \end{itemize}
 
-O módulo nomeado WebManager realiza o gerenciamento e aplicação das regras de negócio, interface com usuário e diponibilização do webservice. Seus principais componentes são:
+O módulo nomeado WebManager realiza o gerenciamento e aplicação das regras de negócio, interface com usuário e disponibilização do webservice. Seus principais componentes são:
 
 \begin{itemize}
 	\item REST API For Embedded: interface pela qual o módulo embarcado se comunica com o WebManager, é um webservice RESTful pronto para receber e responder às requisições dos módulos;
@@ -267,10 +267,10 @@ O processo de montagem se inicia com a placa microcontroladora que recebe os shi
 	\label{fig:arduinounoimpl}
 \end{figure}
 
-Por serem parte de uma plataforma orientada a prototipagem, os hardwares da família Arduino possuim algumas características para facilitar a integração entre módulos, placas de circuito impresso e componentes de outra natureza, é possível enumerar as principais:
+Por serem parte de uma plataforma orientada a prototipagem, os hardwares da família Arduino possuem algumas características para facilitar a integração entre módulos, placas de circuito impresso e componentes de outra natureza, é possível enumerar as principais:
 
 \begin{enumerate}
-	\item Layout padrão: os shields seguem o mesmo desenho da placa controladora Arduino Uno, com issso não existe desproporcionalidade de tamanho na integração.
+	\item Layout padrão: os shields seguem o mesmo desenho da placa controladora Arduino Uno, com isso não existe desproporcionalidade de tamanho na integração.
 	\item Pinos para empilhamento: as placas possuem pinos passantes que permitem conectar nós de circuito a uma segunda placa empilhada sob a primeira. Os pinos são mostrados na figura \ref{fig:empilpin}.
 	
 \begin{figure}[!htb]
@@ -289,7 +289,7 @@ Por serem parte de uma plataforma orientada a prototipagem, os hardwares da fam�
 
 O próximo componente integrado é o Shield GSM, nesta etapa apenas é necessária a soldagem do pinos de empilhamento conforme a figura \ref{fig:empilpin}, e encaixar o conjunto sobre a placa controladora.
 
-Conforme obtido na documentação disponibilizada pelo fabricante, este shield utiliza alimentação dos pinos 5V e 3.3V, além disso faz uso dos pino digitais 2 e 3 para abertura de um canal serial com o microcontrolador, o restante dos pinos fica livre para uso. Existe um conector para antena padrão SMA, que recebe uma atena quad band afim de melhorar a recepção de sinal da rede GSM. A figura \ref{fig:shieldgsmimpl} mostra a integração realizada.
+Conforme obtido na documentação disponibilizada pelo fabricante, este shield utiliza alimentação dos pinos 5V e 3.3V, além disso faz uso dos pino digitais 2 e 3 para abertura de um canal serial com o microcontrolador, o restante dos pinos fica livre para uso. Existe um conector para antena padrão SMA, que recebe uma antena quad band afim de melhorar a recepção de sinal da rede GSM. A figura \ref{fig:shieldgsmimpl} mostra a integração realizada.
  
 \begin{figure}[!htb]
 \centering
@@ -301,7 +301,7 @@ Conforme obtido na documentação disponibilizada pelo fabricante, este shield u
 \newpage
 \subsection{Shield GPS}
 
-A próxima etapa é a integração do Shield GPS no conjunto atual, para isto se procede a soldagem dos pinos de empilhamento da mesma forma que no passo anterior, porém foi percebido na análise documental que existe um pequeno empecilho que demanda uma adaptção no hardware.
+A próxima etapa é a integração do Shield GPS no conjunto atual, para isto se procede a soldagem dos pinos de empilhamento da mesma forma que no passo anterior, porém foi percebido na análise documental que existe um pequeno empecilho que demanda uma adaptação no hardware.
 
 A questão é que o Shield GPS, assim como o GSM, também necessita de um canal serial com o microcontrolador. Em sua configuração padrão, este componente possui uma chave que permite alternar o canal serial entre os pares de pino 0-1 e 2-3, neste momento surge o problema:
 
@@ -464,7 +464,7 @@ Para obtenção dos dados de posicionamento, dois artefatos necessitam estar pre
 
 Além de configurar os itens citados, é necessário que o módulo tenha completado a montagem da mensagem GPRMC (citada no capítulo 2), para isto é criada uma função auxiliar chamada feedGps() que faz uma checagem contínua no status da mensagem por meio de um laço de repetição, que é interrompido caso a mensagem esteja completa ou ocorra um timeout sem resposta.
 
-O Código \ref{code:codegps} mosta as chamadas necessárias para capturar a posição atual do módulo GPS.
+O Código \ref{code:codegps} mostra as chamadas necessárias para capturar a posição atual do módulo GPS.
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
 \begin{codigo}[htb]
@@ -480,7 +480,7 @@ O Código \ref{code:codegps} mosta as chamadas necessárias para capturar a posi
 \newpage
 \subsection{Interface com Shield GSM}
 
-O módulo SM5100B do Shiels GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua operação, mas é operável por meio de comandos AT especificados em suas referências porém uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória, torna bastante complexo o controle de estados e a recuperação de erros.
+O módulo SM5100B do Shield GSM não possui uma biblioteca do fabricante com funções pré-definidas para sua operação, mas é operável por meio de comandos AT especificados em suas referências porém uso direto de comandos AT insere duplicações no código fonte, eleva o consumo de memória, torna bastante complexo o controle de estados e a recuperação de erros.
 
 No SDK Arduino existe uma biblioteca chamada SoftwareSerial com uma classe principal de mesmo nome, a qual abstrai os comportamentos de um elemento que se comunica com o microcontrolador por um canal serial, facilitando questões como a configuração de pinos RX e TX, transmissão e recepção serializada de dados, controle de buffer e outras questões pertinentes.
 
@@ -544,7 +544,7 @@ Na figura \ref{fig:seqloop} as atividades durante o loop envolvem a obtenção d
 
 \section{Módulo Web (WebManager)}
 
-O módulo web, definido também como WebManager, é a aplicação que roda na internet responsável por receber e armezenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
+O módulo web, definido também como WebManager, é a aplicação que roda na internet responsável por receber e armazenar os dados vindos do módulo embarcado, transmitir comandos para este e permitir a interação do usuário com o sistema. O WebManager conta com um webservice RESTful que é responsável pela comunicação com o módulo embarcado.
 
 A técnica REST permite fazer mapeamentos de métodos diretamente em URL com correspondência aos métodos HTTP, um método de uma classe Java pode ser mapeado para uma URL chamada via método GET.
 
@@ -597,7 +597,7 @@ O diagrama da figura \ref{fig:webmanmodel} foi traduzido em uma base de dados co
 \begin{enumerate}
 	\item tb\_logposicao, que guarda a posição geográfica de cada requisição feita pelos módulos veiculares.
 	\item tb\_moduloveicular, contém todos os módulos veiculares embarcados cadastrados no sistema.
-	\item tb\_perfil, guardas os pefis de usuários do sistema, no caso administrador ou usuário comum.
+	\item tb\_perfil, guardas os perfis de usuários do sistema, no caso administrador ou usuário comum.
 	\item tb\_usuario, armazena todos os usuários cadastrados no sistema.
 	\item tb\_perfilusuario, associa usuários e perfis.
 	\item tb\_veiculo, contém todos os veículos cadastrados no sistema.
@@ -605,7 +605,7 @@ O diagrama da figura \ref{fig:webmanmodel} foi traduzido em uma base de dados co
 
 \subsection{Camada de controle}
 
-Nesta camada são definidos os controladores (controllers) do sitema, um controlador define o comportamento da aplicação, é ele que interpreta as ações do usuário e as mapeia para chamadas do modelo. Em um cliente de aplicações Web essas ações do usuário poderiam ser cliques de botões ou seleções de menus. As ações realizadas pelo modelo incluem ativar processos de negócio ou alterar o estado do modelo.
+Nesta camada são definidos os controladores (controllers) do sistema, um controlador define o comportamento da aplicação, é ele que interpreta as ações do usuário e as mapeia para chamadas do modelo. Em um cliente de aplicações Web essas ações do usuário poderiam ser cliques de botões ou seleções de menus. As ações realizadas pelo modelo incluem ativar processos de negócio ou alterar o estado do modelo.
 
 Na figura \ref{fig:webmancontrol} pode se observar que existe um controller para cada entidade principal do sistema, além de alguns métodos base para alteração do estado persistido do modelo.
 
@@ -618,7 +618,7 @@ Na figura \ref{fig:webmancontrol} pode se observar que existe um controller para
 
 Os controladores são beans, componentes Java injetados na interface com o usuário permitindo acesso a serviços não apenas da camada de modelo, mas também serviços externos como no caso do Framework de mapas. Neste caso, o controlador ControllerVeiculo guarda uma instância de mapa que é atualizada conforme as informações do módulo veicular correspondente vão chegando, além disso o controlador atualiza a página web correspondente.
 
-Nesta camada também é feita a integração com o Spring Security, framework que gerencia o Login, Logout e acesso aos serviços de acordo com o perfil do usuário, não permitindo que alguém logado com certo privilégio acesse servi'so que não correspondem à sua credencial.
+Nesta camada também é feita a integração com o Spring Security, framework que gerencia o Login, Logout e acesso aos serviços de acordo com o perfil do usuário, não permitindo que alguém logado com certo privilégio aceçe servi'so que não correspondem à sua credencial.
 
 \newpage
 
@@ -642,10 +642,10 @@ O funcionamento do webservice pode ser sintetizado em alguns passos onde existe 
 	\begin{itemize}
 		\item Host: endereço de hospedagem da aplicação;
 		\item Keep-alive: sinaliza que deverá mantera a conexão entre o módulo embarcado e o webservice sempre aberta.
-		\item User-Agent: indica a engine do browser web, neste caso simula que a requisição está sendo feita de um navegadro com engine Mozilla, como o Firefox.
+		\item User-Agent: indica a engine do browser web, neste caso simula que a requisição está sendo feita de um navegador com engine Mozilla, como o Firefox.
 		\item Accept e Content-Type: indica o tipo de conteúdo enviado e aceito como resposta, neste caso dados JSON.
 		\item Content-Length: tamanho em bytes do campo payload.
-		\item Payload: todo conteúdo compreendido entre as chaves, inclusive as mesmas, se trata de uma estrtura JSON trazendo informações sobre o módulo veicular embarcado utilizadas para alimentar o sistema. 
+		\item Payload: todo conteúdo compreendido entre as chaves, inclusive as mesmas, se trata de uma estrutura JSON trazendo informações sobre o módulo veicular embarcado utilizadas para alimentar o sistema. 
 	\end{itemize}
 	
 	\item A requisição trafega sobre o protocolo HTTP, direcionado a URL em que o webservice está esperando. Esta URL está mapeada para uma função Java chamada addPosition() que recebe como parâmetro um objeto do tipo EmbeddedRequest. Este parâmetro é montado automaticamente pelo framework Spring a partir de um processo de parser da requisição, gerando um objeto EmbeddedRequest.
@@ -657,7 +657,7 @@ O funcionamento do webservice pode ser sintetizado em alguns passos onde existe 
 
 \subsection{DAO}
 
-Conforme descrito no capítulo 2, Data Acces Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura \ref{fig:webmandao}.
+Conforme descrito no capítulo 2, Data Accs Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura \ref{fig:webmandao}.
 
 \begin{figure}[!htb]
 	\centering
@@ -675,15 +675,15 @@ O par de interface/classe respectivamente IGenericDAO/GenericDao, contém métod
 	\item getAll(class): Retorna uma lista contendo todos os objetos do tipo da classe passada como parâmetro que estejam salvos no banco de dados.
 \end{itemize}
 
-As classes especializadas VeiculoDAO, ModuloVeicularDAO e UsuarioDAO, além de suas respectivas interfaces, apenas extendem a implementação genérica com a inclusão de métodos de busca específicos, utilizados para alguns cenários.
+As classes especializadas VeiculoDAO, ModuloVeicularDAO e UsuarioDAO, além de suas respectivas interfaces, apenas estendem a implementação genérica com a inclusão de métodos de busca específicos, utilizados para alguns cenários.
 
-Cada controller contém como atributo uma interface para o DAOs correspondente a sua natureza, que sofre injeção de uma instância da classe correlata em tempo de execução. O uso de interface permite que, durante um teste unitário, a implementação real seja subtituída por um mock, isolado a classe a ser testada de dependências externas.
+Cada controller contém como atributo uma interface para o DAOs correspondente a sua natureza, que sofre injeção de uma instância da classe correlata em tempo de execução. O uso de interface permite que, durante um teste unitário, a implementação real seja substituída por um mock, isolado a classe a ser testada de dependências externas.
 
 \subsection{View}
 
 Para implementação da camada de view, que neste escopo são páginas Web, foi utilizado o framework Primefaces, que fornece uma infinidade de componentes de UI prontos para uso, bastando setar algumas propriedades. As páginas são escritas em XHTML e interpretadas por um container como o Tomcat, que fornece o ambiente de execução para aplicações Java Web.
 
-O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de ralizar o rastreamento. A figura \ref{fig:webmanviewlogin} mostra a tela de login do sistema.
+O funcionamento do módulo web é bastante simples, um usuário acessa o sistema por meio de um login e senha fornecidos, em caso de sucesso é direcionado à página de rastreamento onde pode efetuar a seleção do veículo pertencente a ele a fim de realizar o rastreamento. A figura \ref{fig:webmanviewlogin} mostra a tela de login do sistema.
 
 \begin{figure}[!htb]
 	\centering
@@ -692,7 +692,7 @@ O funcionamento do módulo web é bastante simples, um usuário acessa o sistema
 	\label{fig:webmanviewlogin}
 \end{figure}
 
-O rastreamento do módulo é feito com o auxílio da API do Google Maps. O framework Primefaces possui um componente que realiza esta linkgem com a API, trazendo os dados geográficos correspondente a uma posição latitude-longitude fornecida.
+O rastreamento do módulo é feito com o auxílio da API do Google Maps. O framework Primefaces possui um componente que realiza esta lainkgem com a API, trazendo os dados geográficos correspondente a uma posição latitude-longitude fornecida.
 
 A figura \ref{fig:webmanviewrastrear} exibe a página de rastreamento de veículo, é possível perceber o círculo verde que corresponde a posição aproximada do veículo.
 
