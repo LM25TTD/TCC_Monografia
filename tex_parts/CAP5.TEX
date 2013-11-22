@@ -1,0 +1,67 @@
+\chapter{Considera\c{c}\~{o}es Finais}
+\label{cap:consideracoes finais}
+
+\section{Conclus\~{a}o}
+
+A preocupação com a segurança dos próprios bens tem se tornado cada vez mais intensa,
+uma vez que atos onde criminosos praticam roubos ou furtos ocorrem com bastante
+frequência. No caso de veículos automotores, o proprietário fica sem poder algum para
+evitar o crime, já que uma reação pode colocar em risco sua vida e de outros que o acompanham.
+Nesta situação se faz necessário o uso de algum mecanismo que permita ao
+usuário recuperar sua propriedade minimizando os riscos à sua integridade e de outros que
+o estejam acompanhando no momento da ação criminosa.
+
+Neste trabalho foi desenvolvido um sistema de segurança veicular com uso de GPS, composto um módulo de hardware embarcado no veículo e um sistema Web, cujo escopo soluciona o problema citado, permitindo ao usuário rastrear e bloquear seu veículo via Internet. 
+
+Houve a opção pelo uso da plataforma de hardware livre Arduino, pois conta com diversos componentes desenvolvidos para aplicação imediata, documentação disponibilizada na internet e uma comunidade extensa de desenvolvedores. Ao longo da elaboração do sistema foram gerados artefatos documentais que, juntamente com os códigos-fonte, foram disponibilizados publicamente.
+
+O protótipo foi submetido a testes isolados e testes experimentais, este último contemplou a integração do módulo de harware a um veículo, permitindo que uma análise de comportamento em ambiente real fosse realizada. O sistema Web foi submetido a testes de performance e exploratórios, obtendo plena aprovação de seu comportamento.  
+
+O projeto se mostrou economicamente viável mesmo quando utilizados componentes de prototipagem, portanto uma produção em escala industrial derrubaria o custo e permitiria a miniaturização do conjunto do módulo veicular embarcado.
+
+De acordo com o estudo e testes realizados, o sistema final conseguiu cumprir com sucesso a proposta e os objetivos que foram apresentados na fase inicial de projeto, tudo isto dentro do tempo disponível e seguindo o cronograma elaborado na mesma proposta.
+ 
+
+\section{Dificuldades encontradas}
+
+Ao longo do processo de desenvolvimento alguns entraves foram encontrados, porém alternativas para solução foram aplicadas com sucesso, permitindo a elaboração do sistema completo.
+
+A compra de componentes eletrônicos no mercado local foi um problema devido a ausência de alguns destes para venda, como é o caso de microcontroladores, módulo GPS e módulo GSM. A importação dos produtos foi a solução mais viável, mesmo que o custo financeiro tenha sido elevado.
+
+Conforme citado no capítulo 3, o fabricante do módulo GSM SM5100B não disponibiliza uma biblioteca para comunicação com Arduino, portanto houve a necessidade de se criar tal biblioteca, o que acarretou no investimento de tempo para tal atividade.
+
+A placa Arduino Uno possui uma quantidade de memória RAM bastante limitada, o que gerou a necessidade de diversos ciclos de desenvolvimento e testes (aumentando o tempo de projeto em relação ao estimado inicialmente) até que o firmware fosse otimizado para operar com tal quantidade de memória.
+
+No momento da integração com o veículo, a falta de documentação dos circuitos elétricos do mesmo dificultou a integração do protótipo. Após uma pesquisa em fóruns especializados em alarmes, foi possível localizar o cabeamento a ser alterado para devida integração com o módulo embarcado.
+
+Por fim, a falta de hospedagem gratuita para aplicações Java Web foi um empecilho inicial, superado com criação de um servidor próprio acessível externamente com auxílio da plataforma \textit{no-ip.org}.
+
+\section{Trabalhos futuros}
+
+Existem alguns pontos de melhoria que podem ser aplicados ao sistema atual, otimizando-o e até mesmo gerando um projeto de novo escopo. Como trabalhos futuros sugerem-se algumas propostas:
+
+\begin{itemize}
+	\item Desacomplamento da interface com o usuário do sistema Web deixando somente como serviço de \textit{backend}, permitindo a criação de um cliente mobile que consome dados deste seviço.
+	\item Registrar os pontos geográficos comuns do veículo, criando um túnel virtual. Caso o veículo se desvie deste túnel virtual um alarme será emitido.
+	\item Utilizar uma estratégia de comunicação assíncrona entre o módulo embarcado e o \textit{webservice}, como uso de Websockets na placa Arduino. Esta abordagem pode melhorar o tempo de resposta do sistema.
+	\item Criar um circuito de alimentação elétrica de \textit{backup}, mantendo o módulo embarcado funcionando caso haja desligamento da bateria do automóvel.
+	\item Monitoramento do acionamento do alarme com envio de SMS ou realização de chamada telefônica ao proprietário em caso de anomalias.
+	\item Comunicação direta com celular, possibilitando o bloqueio automático do veículo caso o proprietário leve o aparelho móvel consigo. 
+	\item Integração de uma câmera para capturar imagens do interior do veículo e enviá-las a aplicação Web, facilitando a identificação de criminosos.
+\end{itemize}
+
+\section{Disciplinas aplicadas}
+
+O desenvolvimento do projeto demandou aplicação do conhecimento de diversas disciplinas integrantes do curso de Engenharia de Computação, as principais foram:
+
+\begin{itemize}
+	\item Lógica e linguagem de programação
+	\item Circuitos elétricos
+	\item Eletrônica analógica e digital
+	\item Redes de computadores
+	\item Projeto de sistemas embarcados
+	\item Sistemas distribuídos
+	\item Interface entre usuários e sistemas computacionais
+	\item Engenharia de software
+	\item Banco de dados
+\end{itemize}

@@ -46,55 +46,6 @@ Procedeu-se a coleta de dados que foram armazenados em banco relacional. As seç
 	\label{fig:dadoscoletados}
 \end{figure}
 
-\section{Algoritmos Gerados}
-
-Um dois principais algoritmos gerados neste projeto foi o firmware do módulo veicular embarcado. Utilizando uma combinação de bibliotecas de interface com os shields e funções implementadas de acordo com os diagramas de atividades das figuras \ref{fig:seqsetup} e \ref{fig:seqloop} foi gerada a rotina embarcada.
-
-Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \ref{code:embedded4} apresentam o firmware em linguagem C/C++ gerado neste projeto.  
-
-\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
-\fontsize{9pt}{9pt}\selectfont
-      \begin{boxit}  % coloca o código dentro de um Box
-      \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded.cpp}
-   \end{boxit}
-   \caption{\it Código do Módulo Embarcado Parte 1}
-   \label{code:embedded1}
-\end{codigo}
-
-\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
-\fontsize{9pt}{9pt}\selectfont
-      \begin{boxit}  % coloca o código dentro de um Box
-      \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded2.cpp}
-   \end{boxit}
-   \caption{\it Código do Módulo Embarcado Parte 2}
-   \label{code:embedded2}
-\end{codigo}
-
-\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
-\fontsize{9pt}{9pt}\selectfont
-      \begin{boxit}  % coloca o código dentro de um Box
-      \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded3.cpp}
-   \end{boxit}
-   \caption{\it Código do Módulo Embarcado Parte 3}
-   \label{code:embedded3}
-\end{codigo}
-
-\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
-\fontsize{9pt}{9pt}\selectfont
-      \begin{boxit}  % coloca o código dentro de um Box
-      \vspace{2mm}
-      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded4.cpp}
-   \end{boxit}
-   \caption{\it Código do Módulo Embarcado Parte 4}
-   \label{code:embedded4}
-\end{codigo}
 
 \section{Resultados}
 
@@ -107,13 +58,12 @@ Os resultados gerados por este projeto incluem:
 	\Código fonte da aplicação Web que contempla o \textit{webservice}, lógica de negócio, banco de dados e interface com usuário. 
 \end{enumerate}
 
-Estes artefatos se encontram publicados na Internet com código aberto, possibilitando o desenvolvimento de novos projetos que possuam cenário de operação e requisitos similares.
+Estes artefatos se encontram em anexo no formato de mídia ótica, possibilitando o desenvolvimento de novos projetos que possuam cenário de operação e requisitos similares.
 
-O endereço de publicação é: \url{https://github.com/LM25TTD/autotrack} .
-
-Ao acessar o link, será exibida uma estrutura de diretórios, os principais artefatos seguem a localização descrita:
+Ao acessar a mídia, será exibida uma estrutura de diretórios em que os principais artefatos seguem a localização descrita:
 
 \begin{itemize}
+  \item DOC: contém esta monografia em formato digital.
 	\item DESIGN/ModelagemTCC.asta: este arquivo contém toda modelagem do sistema. Deve ser aberta com software Astah ou compatível.
 	\item SRC/Arduino SM5100B Lib/SM5100B\_GPRS: contém a classe de comunicação entre o Arduino e o módulo GSM SM5100B.
 	\item SRC/Embedded\_GPS\_RealTracking: possui o código fonte do firmware desenvolvido para o módulo veicular embarcado. Deve ser editado com o software IDE Arduino ou compatível. 

@@ -9,7 +9,7 @@
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-\topcaption{Caso de Uso Manter Usuário}
+\tablecaption{Caso de Uso Manter Usuário}
 \begin{supertabular}{|m{5.5680003cm}|m{9.325cm}|}
 \hline
 Nome do caso de uso &
@@ -19,7 +19,7 @@ Caso que descreve as etapas para manutenção de um usuário no sistema através
 Ator primário &
 Administrador\\\hline
 Atores secundários &
-Usuário\\\hline
+Usuário comum\\\hline
 Precondições &
 Usuário com CPF válido.\\\hline
 Fluxo Principal &
@@ -167,7 +167,7 @@ Descrição da associação entre o equipamento e seu dono (um usuário cadastra
 Ator primário &
 Administrador\\\hline
 Atores secundários &
-Usuário\\\hline
+Usuário comum\\\hline
 Precondições &
 Usuário e equipamentos envolvidos previamente cadastrados.\\\hline
 Fluxo Principal &
@@ -214,7 +214,7 @@ Atualizar Próprio Cadastro\\\hline
 Sumário &
 Caso que descreve a atualização dos próprios dados, feita por um usuário acessando o sistema.\\\hline
 Ator primário &
-Usuário, Administrador\\\hline
+Usuário comum, Administrador\\\hline
 Atores secundários &
 ~
 \\\hline
@@ -263,7 +263,7 @@ Manter Veículos\\\hline
 Sumário &
 Caso que descreve as etapas para manutenção de veículos do usuário no sistema, envolvendo as operações CRUD.\\\hline
 Ator primário &
-Usuário\\\hline
+Usuário comum\\\hline
 Atores secundários &
 ~
 \\\hline
@@ -379,3 +379,53 @@ Data &
 15/04/2013\\\hline
 \end{supertabular}
 \end{flushleft}
+
+\section{Algoritmos Gerados}
+
+Um dois principais algoritmos gerados neste projeto foi o firmware do módulo veicular embarcado. Utilizando uma combinação de bibliotecas de interface com os shields e funções implementadas de acordo com os diagramas de atividades das figuras \ref{fig:seqsetup} e \ref{fig:seqloop} foi gerada a rotina embarcada.
+
+Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \ref{code:embedded4} apresentam o firmware em linguagem C/C++ gerado neste projeto.  
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 1}
+   \label{code:embedded1}
+\end{codigo}
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded2.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 2}
+   \label{code:embedded2}
+\end{codigo}
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded3.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 3}
+   \label{code:embedded3}
+\end{codigo}
+
+\renewcommand{\baselinestretch}{0.5}  % distância entre linhas
+\begin{codigo}[htb]
+\fontsize{9pt}{9pt}\selectfont
+      \begin{boxit}  % coloca o código dentro de um Box
+      \vspace{2mm}
+      \VerbatimInput[xleftmargin=8mm,numbers=left,obeytabs=true]{sources/embedded4.cpp}
+   \end{boxit}
+   \caption{\it Código do Módulo Embarcado Parte 4}
+   \label{code:embedded4}
+\end{codigo}
