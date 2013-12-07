@@ -210,7 +210,7 @@ de comunicação. A Figura \ref{fig:arquitetura} mostra o diagrama de componente
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{figures/4_arquitetural.png}
-\caption{Diagrama de Arquitetura do Sistema de Seguran\c{c} Veicular com uso de GPS}
+\caption{Diagrama de Arquitetura do Sistema de Seguran\c{c}a} Veicular com uso de GPS}
 \label{fig:arquitetura}
 \end{figure}
 
@@ -232,7 +232,6 @@ O módulo nomeado WebManager realiza o gerenciamento e aplicação das regras de
 
 \begin{itemize}
 	\item REST API For Embedded: interface pela qual o módulo embarcado se comunica com o WebManager, é um webservice RESTful pronto para receber e responder às requisições dos módulos;
-	\item Builder Sessão: gerenciador de sessões web necessário para dados transientes;
 	\item Controller: componente que representa o conjunto de controllers (MVC) que atuam dentro do WebManager, manipulando requisições de módulos e usuários;
 	\item IDao: Interfaces para acesso aos DAOs, os controllers possuem instâncias dessas interfaces para obter acesso ao banco;
 	\item DAOs: Implementação dos DAOs que contém os scripts de consulta ao banco de dados;
@@ -531,11 +530,11 @@ Conforme descrito anteriormente, o firmware opera em duas funções principais, 
 \end{figure}
 
 \newpage
-Na figura \ref{fig:seqloop} as atividades durante o loop envolvem a obtenção dos dados GPS, montagem da requisição, conexão e envio de dados ao webservice. Nos pontos onde existe possibilidade de falha há um direcionamento para a função de setup, onde qualquer configuração falha será substituída por novos valores, retomando o funcionamento normal.
+Na figura \ref{fig:seqloop} as atividades durante o loop envolvem a obtenção dos dados GPS, montagem da requisição, conexão e envio de dados ao webservice, em caso de falha há um direcionamento para a função de setup, onde a configuração inicial é aplicada, retomando o funcionamento normal.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.99\textwidth]{figures/ModuloVeicular_Loop.png}
+	\includegraphics[width=1.1\textwidth, height=20cm]{figures/ModuloVeicular_Loop.png}
 	\caption{Atividades durante o loop}
 	\label{fig:seqloop}
 \end{figure}
@@ -558,17 +557,7 @@ A arquitetura da modelagem do WebManager foi baseada no padrão MVC que segundo 
 
 O modelo MVC permite o desacoplamento das camadas de software facilitando a manutenção e diminuindo a repetição de código, as vantagens de sua utilização ficam bastante claras quando existe a necessidade da alteração de código, por exemplo, caso haja mudança nas regras de negócio de algum cálculo do sistema, apenas é necessária atualização do conteúdo da camada Control.
 
-Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework), DAO, Factory Method descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura \ref{fig:classgeralwebman} mostra o diagrama de classes obtido.
-
-\begin{landscape}
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=20.00cm\textwidth]{figures/6_web_manager.png}
-	\caption{Modelo de classes do WebManager}
-	\label{fig:classgeralwebman}
-\end{figure}
-\end{landscape}
+Além do modelo arquitetural base, alguns padrões de projeto como Singleton (utilizado no Security Framework), DAO, Factory Method descritos por \textcite{Gamma:2000}, foram aplicados pois o uso de padrões de projeto fornece soluções arquiteturais otimizadas para problemas conhecidos na engenharia de software. A Figura \ref{fig:classgeralwebman} nos anexos mostra o diagrama de classes obtido.
 
 \subsection{Camada de modelo}
 
@@ -603,6 +592,29 @@ O diagrama da figura \ref{fig:webmanmodel} foi traduzido em uma base de dados co
 	\item tb\_veiculo, contém todos os veículos cadastrados no sistema.
 \end{enumerate}
 
+Compondo a camada de modelo existe uma implementação que aplica o padrão DAO(Data Access Object) descrito no capítulo 2. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura \ref{fig:webmandao}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\textwidth]{figures/dao_layer.png}
+	\caption{Classes DAO}
+	\label{fig:webmandao}
+\end{figure}
+
+O par de interface/classe respectivamente IGenericDAO/GenericDao, contém métodos para operações CRUD anotados com as respectivas configurações de transação. Os principais métodos da implementação genérica são:
+
+\begin{itemize}
+	\item save(object): Salva um objeto de uma classe definida como entidade no banco de dados.
+	\item delete(object): Remove do banco de dados o objeto passado como parâmetro.
+	\item update(object): Atualiza os atributos de um objeto previamente salvo no banco de dados.
+	\item getAll(class): Retorna uma lista contendo todos os objetos do tipo da classe passada como parâmetro que estejam salvos no banco de dados.
+\end{itemize}
+
+As classes especializadas VeiculoDAO, ModuloVeicularDAO e UsuarioDAO, além de suas respectivas interfaces, apenas estendem a implementação genérica com a inclusão de métodos de busca específicos, utilizados para alguns cenários.
+
+Cada controller contém como atributo uma interface para o DAOs correspondente a sua natureza, que sofre injeção de uma instância da classe correlata em tempo de execução. O uso de interface permite que, durante um teste unitário, a implementação real seja substituída por um mock, isolado a classe a ser testada de dependências externas.
+
+
 \subsection{Camada de controle}
 
 Nesta camada são definidos os controladores (controllers) do sistema, um controlador define o comportamento da aplicação, é ele que interpreta as ações do usuário e as mapeia para chamadas do modelo. Em um cliente de aplicações Web essas ações do usuário poderiam ser cliques de botões ou seleções de menus. As ações realizadas pelo modelo incluem ativar processos de negócio ou alterar o estado do modelo.
@@ -618,9 +630,8 @@ Na figura \ref{fig:webmancontrol} pode se observar que existe um controller para
 
 Os controladores são beans, componentes Java injetados na interface com o usuário permitindo acesso a serviços não apenas da camada de modelo, mas também serviços externos como no caso do Framework de mapas. Neste caso, o controlador ControllerVeiculo guarda uma instância de mapa que é atualizada conforme as informações do módulo veicular correspondente vão chegando, além disso o controlador atualiza a página web correspondente.
 
-Nesta camada também é feita a integração com o Spring Security, framework que gerencia o Login, Logout e acesso aos serviços de acordo com o perfil do usuário, não permitindo que alguém logado com certo privilégio aceçe servi'so que não correspondem à sua credencial.
+Nesta camada também é feita a integração com o Spring Security, framework que gerencia o Login, Logout e acesso aos serviços de acordo com o perfil do usuário, não permitindo que alguém logado com certo privilégio acesse serviço que não correspondem à sua credencial.
 
-\newpage
 
 \subsection {Webservice}
 
@@ -653,31 +664,6 @@ O funcionamento do webservice pode ser sintetizado em alguns passos onde existe 
 	\item De acordo com o estado de bloqueio, a resposta para o módulo veicular é diferente: caso exista um bloqueio, o webservice responde com status HTTP 200, caso contrário ele responderá com status HTTP 300.
 	\item O módulo veicular analisa o status de resposta e age caso necessário.
 \end{enumerate}
-
-
-\subsection{DAO}
-
-Conforme descrito no capítulo 2, Data Accs Object é um padrão de projeto que separa as regras de acesso ao banco de dados em uma nova camada. Neste trabalho a camada DAO implementa algumas classes que contém métodos definidos no framework Hibernate para operações CRUD, conforme a figura \ref{fig:webmandao}.
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=\textwidth]{figures/dao_layer.png}
-	\caption{Camada DAO}
-	\label{fig:webmandao}
-\end{figure}
-
-O par de interface/classe respectivamente IGenericDAO/GenericDao, contém métodos para operações CRUD anotados com as respectivas configurações de transação. Os principais métodos da implementação genérica são:
-
-\begin{itemize}
-	\item save(object): Salva um objeto de uma classe definida como entidade no banco de dados.
-	\item delete(object): Remove do banco de dados o objeto passado como parâmetro.
-	\item update(object): Atualiza os atributos de um objeto previamente salvo no banco de dados.
-	\item getAll(class): Retorna uma lista contendo todos os objetos do tipo da classe passada como parâmetro que estejam salvos no banco de dados.
-\end{itemize}
-
-As classes especializadas VeiculoDAO, ModuloVeicularDAO e UsuarioDAO, além de suas respectivas interfaces, apenas estendem a implementação genérica com a inclusão de métodos de busca específicos, utilizados para alguns cenários.
-
-Cada controller contém como atributo uma interface para o DAOs correspondente a sua natureza, que sofre injeção de uma instância da classe correlata em tempo de execução. O uso de interface permite que, durante um teste unitário, a implementação real seja substituída por um mock, isolado a classe a ser testada de dependências externas.
 
 \subsection{View}
 

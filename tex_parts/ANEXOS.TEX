@@ -380,14 +380,14 @@ Data &
 \end{supertabular}
 \end{flushleft}
 
-\section{Algoritmos Gerados}
+\section{Códigos, esquemas e diagramas}
 
 Um dois principais algoritmos gerados neste projeto foi o firmware do módulo veicular embarcado. Utilizando uma combinação de bibliotecas de interface com os shields e funções implementadas de acordo com os diagramas de atividades das figuras \ref{fig:seqsetup} e \ref{fig:seqloop} foi gerada a rotina embarcada.
 
-Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \ref{code:embedded4} apresentam o firmware em linguagem C/C++ gerado neste projeto.  
+Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \ref{code:embedded4} apresentam o firmware em linguagem C/C++ gerado neste projeto.
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
+\begin{codigo}[!htb]
 \fontsize{9pt}{9pt}\selectfont
       \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
@@ -398,7 +398,7 @@ Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \
 \end{codigo}
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
+\begin{codigo}[!htb]
 \fontsize{9pt}{9pt}\selectfont
       \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
@@ -409,7 +409,7 @@ Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \
 \end{codigo}
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
+\begin{codigo}[!htb]
 \fontsize{9pt}{9pt}\selectfont
       \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
@@ -420,7 +420,7 @@ Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \
 \end{codigo}
 
 \renewcommand{\baselinestretch}{0.5}  % distância entre linhas
-\begin{codigo}[htb]
+\begin{codigo}[!htb]
 \fontsize{9pt}{9pt}\selectfont
       \begin{boxit}  % coloca o código dentro de um Box
       \vspace{2mm}
@@ -429,3 +429,36 @@ Os códigos \ref{code:embedded1}, \ref{code:embedded2}, \ref{code:embedded3} e \
    \caption{\it Código do Módulo Embarcado Parte 4}
    \label{code:embedded4}
 \end{codigo}
+
+
+\afterpage{% Insert after the current page
+\clearpage
+\KOMAoptions{paper=A3,paper=landscape,pagesize}
+\recalctypearea
+
+\begin{figure}[p]
+   \includegraphics[width=1.0\textwidth]{figures/esquema_arduino.png}%
+   \caption{Esquema el\'{e}trico da placa Arduino Uno}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=1.1\textwidth]{figures/6_web_manager.png}
+	\caption{Modelo de classes do WebManager}
+	\label{fig:classgeralwebman}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[!htb]
+			\centering
+			\includegraphics[width=0.99\textwidth]{figures/schemaGPS.png}
+			\caption{Esquema elétrico do GPS Shield}
+			\label{fig:esquemagpdshield}
+\end{figure}
+\clearpage
+
+\recalctypearea
+}

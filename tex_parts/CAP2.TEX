@@ -42,7 +42,7 @@ Esta metodologia fornece uma abordagem que permite o desenvolvimento de ferramen
 
 Em um segundo artigo, \textcite{Martin:2002} propõe novas extensões UML que cobrem lacunas não atendidas pela linguagem, como suporte a modelagem de hardware baseada em VHDL.
 
-É claro que na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sistema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
+Na UML existem algumas limitações de análise de cenários com requisitos não funcionais, que no caso de embarcados têm prioridade igual a dos requisitos funcionais e de suma importância para a confiabilidade do sistema. Esta limitação é descrita por \textcite{Espinoza:2008} que propõem práticas complementares para analisar estes requisitos não funcionais, a fim de tornar os sistemas mais eficientes de confiáveis.
 
 \textcite{Wolf:2001} propõe uma abstração em alto nível dos principais passos no projeto de sistemas embarcados em uma abordagem \textit{top-down}, são estes:
 
@@ -177,8 +177,8 @@ Para realizar a implementação deste projeto, optou-se por utilizar uma placa A
 
 A placa Arduino Uno é baseada no microcontrolador ATmega328, possuindo 14 pinos de entrada/saída digitais (dos quais 6 podem ser utilizados como saída PWM), 6 entradas analógicas, cristal de cerâmica com 16 MHz de clock que define a frequência de operação do microcontrolador, conexão USB, pino de alimentação externa padrão barrel e botão de reset. A placa possui todos os circuitos auxiliares para o funcionamento do microcontrolador, bastando ao usuário conectá-la a um computador via cabo USB para começar a utilizá-la, além disso o processo de gravação de rotinas é facilitado por haver um \textit{bootloader}\footnote{\textit{Bootloader} é o gerenciador de inicialização do microcontrolador.} que automatiza este passo (\textcite{arduino_specs:2013}).
 
-A figura \ref{fig:arduinouno} exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. A placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S. Os pinos da placa são descritos com textos impressos na superfície.
-
+A figura \ref{fig:arduinouno} exibe uma tomada frontal da placa Arduino Uno onde é visível o microcontrolador ATmega328 em encapsulamento SMD. A placa possui um segundo controlador, um ATmega16U2 utilizado como conversor USB-serial o que permite sua programação via porta USB, além dos circuitos de controle de clock, alimentação, reset e conexão aos pinos de E/S. Os pinos da placa são descritos com textos impressos na superfície. O esquemático elétrico da placa está ilustrado na figura \ref{fig:esquemaarduinouno} nos anexos.
+ 
 \begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.6\textwidth]{figures/arduinoUnoFront.jpg}
@@ -346,15 +346,7 @@ Após realizar uma pesquisa de mercado, optou-se pelo uso do GPS Shield Retail K
 O kit é composto de dois elementos principais, são eles:
 
 \begin{itemize}
-	\item Shield (ou placa base): É uma placa de circuito impresso com laoyut padrão Arduino Uno contendo reguladores de tensão para 3.3 volts, leds indicadores, chave liga/desliga, botão reset e um conector padronizado para diversos modelos de módulos GPS. Esta placa é a peça chave para integração entre o Arduino Uno e o módulo GPS, pois isenta o projetista de realizar qualquer solda ou conexão adicional (salvo casos em que se faz necessário mudar os pinos de comunicação serial), permitindo que este adicione ou remova a funcionalidade GPS ao seu projeto com extrema facilidade. A figura \ref{fig:esquemagpdshield} ilustra o esquemático do GPS Shield.
-
-\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.8\textwidth]{figures/schemaGPS.png}
-			\caption{Esquema elétrico do GPS Shield}
-			\label{fig:esquemagpdshield}
-\end{figure}
-
+	\item Shield (ou placa base): É uma placa de circuito impresso com laoyut padrão Arduino Uno contendo reguladores de tensão para 3.3 volts, leds indicadores, chave liga/desliga, botão reset e um conector padronizado para diversos modelos de módulos GPS. Esta placa é a peça chave para integração entre o Arduino Uno e o módulo GPS, pois isenta o projetista de realizar qualquer solda ou conexão adicional (salvo casos em que se faz necessário mudar os pinos de comunicação serial), permitindo que este adicione ou remova a funcionalidade GPS ao seu projeto com extrema facilidade. A figura \ref{fig:esquemagpdshield} nos anexos ilustra o esquemático do GPS Shield.
 
 	\item Módulo receptor GPS USGlobalSat EM-406A: Realiza a função de captura das mensagens GPS e cálculo de posicionamento global. Possui todos os componentes integrados, inclusive antena, regulador de voltagem e LED de status. É conectado ao GPS Shield por meio de um cabo de 4 vias. A tabela 2.3 apresenta os dados operacionais do módulo EM-406A.	
 \end{itemize}
@@ -504,7 +496,7 @@ A figura \ref{fig:relay} mostra o circuito de acionamento via relê (também con
 
 \begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.4\textwidth]{figures/circRele.png}
+			\includegraphics[width=0.8\textwidth]{figures/circRele.png}
 			\caption{Circuito de controle de cargas com relê}
 			\label{fig:relay}
 \end{figure}
